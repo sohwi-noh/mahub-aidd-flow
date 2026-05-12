@@ -1,0 +1,17 @@
+.DS_Store
+
+node_modules/
+dist/
+coverage/
+.vite/
+.vitest/
+.eslintcache
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+.env
+.env.local
+.env.*.local
