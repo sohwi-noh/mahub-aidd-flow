@@ -5,8 +5,13 @@ import {
   Collapse,
   CssBaseline,
   Divider,
+  FormControl,
+  InputLabel,
+  Link as MuiLink,
   LinearProgress,
+  MenuItem,
   Paper,
+  Select,
   Stack,
   Table,
   TableBody,
@@ -18,12 +23,37 @@ import {
   Typography,
   createTheme,
 } from "@mui/material";
+import type { SelectChangeEvent } from "@mui/material/Select";
 import "./App.css";
 import snapshot from "./generated/artifact-dashboard.json";
-import type { ArtifactRef, DashboardIssue, DashboardSnapshot, LifecycleStage } from "./domain/dashboard";
+import linearProject from "./generated/linear-project.json";
+import type { ArtifactRef, DashboardIssue, DashboardSnapshot, LifecycleStage, PullRequestRef } from "./domain/dashboard";
 import { formatDateTime, formatTokenUsage } from "./domain/dashboard";
 
 const dashboardSnapshot = snapshot as DashboardSnapshot;
+
+type LinearMilestone = {
+  id: string;
+  name: string;
+  description?: string;
+  progress: number;
+  sortOrder: number;
+  targetDate?: string;
+};
+
+type LinearProjectSnapshot = {
+  schemaVersion: 1;
+  generatedBy: string;
+  generatedAt: string;
+  project: {
+    id: string;
+    name: string;
+  };
+  activeMilestoneName: string;
+  milestones: LinearMilestone[];
+};
+
+const linearProjectSnapshot = linearProject as LinearProjectSnapshot;
 
 const canonicalStages = [
   { stage: 0, nameKo: "이슈 발행" },
@@ -46,6 +76,44 @@ type Selection = {
   issueId: string;
   stage: number;
 };
+
+type BoardColumn =
+  | {
+      kind: "stage";
+      stage: StageDefinition;
+    }
+  | {
+      kind: "gate";
+      id: "test-plan-approval" | "pr-approval";
+      label: string;
+      eyebrow: string;
+      variant: "approval" | "additional-pr";
+    };
+
+type Filters = {
+  label: string;
+  milestone: string;
+};
+
+const activeProjectName = linearProjectSnapshot.project.name;
+const activeMilestoneName = linearProjectSnapshot.activeMilestoneName;
+
+const boardColumns: BoardColumn[] = [
+  { kind: "stage", stage: canonicalStages[0] },
+  { kind: "stage", stage: canonicalStages[1] },
+  { kind: "stage", stage: canonicalStages[2] },
+  { kind: "stage", stage: canonicalStages[3] },
+  { kind: "gate", id: "test-plan-approval", label: "테스트계획승인", eyebrow: "사람개입", variant: "approval" },
+  { kind: "stage", stage: canonicalStages[4] },
+  { kind: "stage", stage: canonicalStages[5] },
+  { kind: "stage", stage: canonicalStages[6] },
+  { kind: "stage", stage: canonicalStages[7] },
+  { kind: "stage", stage: canonicalStages[8] },
+  { kind: "stage", stage: canonicalStages[9] },
+  { kind: "stage", stage: canonicalStages[10] },
+  { kind: "gate", id: "pr-approval", label: "추가PR", eyebrow: "사람개입", variant: "additional-pr" },
+  { kind: "stage", stage: canonicalStages[11] },
+];
 
 const theme = createTheme({
   palette: {
@@ -80,7 +148,7 @@ function issueNumber(issueId: string): number {
 }
 
 function statusTone(status: string): "success" | "warning" | "error" | "default" {
-  if (status === "완료" || status === "PASS") {
+  if (status === "완료" || status === "PASS" || status === "Done") {
     return "success";
   }
   if (status === "실패" || status === "차단") {
@@ -98,6 +166,41 @@ function findStage(issue: DashboardIssue, stage: number): LifecycleStage | undef
 
 function progressValue(issue: DashboardIssue): number {
   return Math.round((issue.completedStageCount / issue.totalStageCount) * 100);
+}
+
+function issueMilestone(issue: DashboardIssue): string {
+  return issue.linearMilestone ?? activeMilestoneName;
+}
+
+function issueProject(issue: DashboardIssue): string {
+  return issue.linearProject ?? activeProjectName;
+}
+
+function milestoneSummary(milestoneName: string): string {
+  const milestone = linearProjectSnapshot.milestones.find((item) => item.name === milestoneName);
+  if (!milestone) {
+    return milestoneName;
+  }
+
+  const targetDate = milestone.targetDate ? ` · ${milestone.targetDate}` : "";
+  return `${milestone.name} · ${milestone.progress}%${targetDate}`;
+}
+
+function pullRequests(issue: DashboardIssue): PullRequestRef[] {
+  if (issue.pullRequests?.length) {
+    return issue.pullRequests;
+  }
+
+  const source = issue.artifacts.map((artifact) => `${artifact.path} ${artifact.summary ?? ""}`).join(" ");
+  const byUrl = new Map<string, PullRequestRef>();
+
+  for (const match of source.matchAll(/https:\/\/github\.com\/([^/\s]+)\/([^/\s]+)\/pull\/(\d+)\b/gi)) {
+    const [, owner, repo, number] = match;
+    const url = `https://github.com/${owner}/${repo}/pull/${number}`;
+    byUrl.set(url, { number: Number(number), repository: repo, url });
+  }
+
+  return Array.from(byUrl.values()).sort((left, right) => left.repository.localeCompare(right.repository) || left.number - right.number);
 }
 
 function relevantArtifacts(issue: DashboardIssue, selectedStage: LifecycleStage | undefined): ArtifactRef[] {
@@ -120,12 +223,53 @@ function relevantArtifacts(issue: DashboardIssue, selectedStage: LifecycleStage 
   return Array.from(byPath.values());
 }
 
-function SummaryBar({ issues }: { issues: DashboardIssue[] }) {
+function SummaryBar({
+  issues,
+  milestone,
+  milestones,
+  onMilestoneChange,
+}: {
+  issues: DashboardIssue[];
+  milestone: string;
+  milestones: LinearMilestone[];
+  onMilestoneChange: (value: string) => void;
+}) {
   const completed = issues.filter((issue) => issue.completedStageCount >= issue.totalStageCount).length;
   const active = issues.length - completed;
 
   return (
     <Paper component="section" className="summary-bar" variant="outlined">
+      <Stack className="summary-controls" direction={{ xs: "column", md: "row" }} spacing={1.5} sx={{ alignItems: { md: "center" } }}>
+        <Box className="project-anchor">
+          <Typography color="text.secondary" variant="caption">
+            프로젝트
+          </Typography>
+          <Typography sx={{ fontWeight: 900 }} variant="body1">
+            {activeProjectName}
+          </Typography>
+        </Box>
+        <FormControl size="small" sx={{ minWidth: 240 }}>
+          <InputLabel id="milestone-filter-label">마일스톤</InputLabel>
+          <Select
+            label="마일스톤"
+            labelId="milestone-filter-label"
+            renderValue={(value) => milestoneSummary(value)}
+            value={milestone}
+            onChange={(event: SelectChangeEvent) => onMilestoneChange(event.target.value)}
+          >
+            {milestones.map((item) => (
+              <MenuItem key={item.id} value={item.name}>
+                <Stack direction="row" sx={{ alignItems: "center", gap: 1, justifyContent: "space-between", width: "100%" }}>
+                  <Typography>{item.name}</Typography>
+                  <Typography color="text.secondary" variant="caption">
+                    {item.progress}%{item.targetDate ? ` · ${item.targetDate}` : ""}
+                  </Typography>
+                </Stack>
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Stack>
       <Typography color="primary" sx={{ fontWeight: 900 }} variant="overline">
         MAHUB AIDD
       </Typography>
@@ -137,6 +281,52 @@ function SummaryBar({ issues }: { issues: DashboardIssue[] }) {
         <Chip color="success" label={`완료 ${completed}`} variant="outlined" />
         <Chip color="warning" label={`진행 ${active}`} variant="outlined" />
         <Chip label="12-stage lifecycle" variant="outlined" />
+      </Stack>
+    </Paper>
+  );
+}
+
+function FilterBar({
+  filters,
+  labels,
+  totalCount,
+  visibleCount,
+  onChange,
+}: {
+  filters: Filters;
+  labels: string[];
+  totalCount: number;
+  visibleCount: number;
+  onChange: (next: Filters) => void;
+}) {
+  return (
+    <Paper aria-label="dashboard filters" className="filter-bar" component="section" variant="outlined">
+      <Stack direction={{ xs: "column", md: "row" }} spacing={1.5} sx={{ alignItems: { md: "center" } }}>
+        <Box aria-label="label filters" className="label-filter-group">
+          <Typography color="text.secondary" variant="caption">
+            Label
+          </Typography>
+          <Stack direction="row" sx={{ flexWrap: "wrap", gap: 0.75 }}>
+            <Chip
+              color={filters.label === "all" ? "primary" : "default"}
+              label="전체 label"
+              onClick={() => onChange({ ...filters, label: "all" })}
+              variant={filters.label === "all" ? "filled" : "outlined"}
+            />
+            {labels.map((label) => (
+              <Chip
+                key={label}
+                color={filters.label === label ? "primary" : "default"}
+                label={label}
+                onClick={() => onChange({ ...filters, label })}
+                variant={filters.label === label ? "filled" : "outlined"}
+              />
+            ))}
+          </Stack>
+        </Box>
+        <Typography aria-label="filter result count" color="text.secondary" variant="body2">
+          {visibleCount} / {totalCount} issues
+        </Typography>
       </Stack>
     </Paper>
   );
@@ -183,6 +373,34 @@ function StageCell({
   );
 }
 
+function GateCell({ column, issue }: { column: Extract<BoardColumn, { kind: "gate" }>; issue: DashboardIssue }) {
+  const prs = pullRequests(issue);
+
+  return (
+    <Box className={`gate-cell gate-cell-${column.variant}`}>
+      <Typography sx={{ fontWeight: 900 }} variant="caption">
+        {column.eyebrow}
+      </Typography>
+      <Typography color="text.secondary" variant="caption">
+        {column.label}
+      </Typography>
+      {column.variant === "additional-pr" ? (
+        <Stack direction="row" sx={{ flexWrap: "wrap", gap: 0.5, mt: 0.25 }}>
+          {prs.length > 0 ? (
+            prs.map((pr) => (
+              <MuiLink key={pr.url} href={pr.url} rel="noreferrer" target="_blank" underline="none">
+                <Chip label={`연결 PR #${pr.number} · ${pr.repository}`} size="small" variant="outlined" />
+              </MuiLink>
+            ))
+          ) : (
+            <Chip label="연결 PR 없음" size="small" variant="outlined" />
+          )}
+        </Stack>
+      ) : null}
+    </Box>
+  );
+}
+
 function IssueLifecycleBoard({
   issues,
   selected,
@@ -199,9 +417,12 @@ function IssueLifecycleBoard({
           <TableRow>
             <TableCell className="sticky-col issue-col">Issue</TableCell>
             <TableCell className="sticky-col status-col">Status / Labels</TableCell>
-            {canonicalStages.map((stage) => (
-              <TableCell key={stage.stage} className="stage-header">
-                {stage.stage} {stage.nameKo}
+            {boardColumns.map((column) => (
+              <TableCell
+                key={column.kind === "stage" ? column.stage.stage : column.id}
+                className={column.kind === "stage" ? "stage-header" : "stage-header gate-header"}
+              >
+                {column.kind === "stage" ? `${column.stage.stage} ${column.stage.nameKo}` : `${column.label} (${column.eyebrow})`}
               </TableCell>
             ))}
           </TableRow>
@@ -240,14 +461,21 @@ function IssueLifecycleBoard({
                     </Stack>
                   </Stack>
                 </TableCell>
-                {canonicalStages.map((stage) => (
-                  <TableCell key={stage.stage} className="stage-cell-wrap">
-                    <StageCell
-                      issue={issue}
-                      selected={selected.issueId === issue.issueId && selected.stage === stage.stage}
-                      stageDefinition={stage}
-                      onSelect={() => onSelect({ issueId: issue.issueId, stage: stage.stage })}
-                    />
+                {boardColumns.map((column) => (
+                  <TableCell
+                    key={column.kind === "stage" ? column.stage.stage : column.id}
+                    className={column.kind === "stage" ? "stage-cell-wrap" : "stage-cell-wrap gate-cell-wrap"}
+                  >
+                    {column.kind === "stage" ? (
+                      <StageCell
+                        issue={issue}
+                        selected={selected.issueId === issue.issueId && selected.stage === column.stage.stage}
+                        stageDefinition={column.stage}
+                        onSelect={() => onSelect({ issueId: issue.issueId, stage: column.stage.stage })}
+                      />
+                    ) : (
+                      <GateCell column={column} issue={issue} />
+                    )}
                   </TableCell>
                 ))}
               </TableRow>
@@ -303,12 +531,22 @@ function IssueDetailPanel({ issue, stage }: { issue: DashboardIssue; stage: Life
                   <Typography sx={{ fontWeight: 800 }}>{artifact.label}</Typography>
                   <Chip label={artifact.kind} size="small" variant="outlined" />
                 </Stack>
-                <Typography className="artifact-path" variant="body2">
-                  {artifact.path}
-                </Typography>
-                <Typography color="text.secondary" sx={{ mt: 0.75 }} variant="body2">
-                  {artifact.summary ?? "요약 없음"}
-                </Typography>
+                <Box className="artifact-meta-grid">
+                  <Box className="artifact-meta-block">
+                    <Typography color="text.secondary" variant="caption">
+                      위치
+                    </Typography>
+                    <Typography className="artifact-path" variant="body2">
+                      {artifact.path}
+                    </Typography>
+                  </Box>
+                  <Box className="artifact-meta-block">
+                    <Typography color="text.secondary" variant="caption">
+                      요약내용
+                    </Typography>
+                    <Typography variant="body2">{artifact.summary ?? "요약 없음"}</Typography>
+                  </Box>
+                </Box>
               </Box>
             ))}
           </Stack>
@@ -323,19 +561,52 @@ export function App() {
     () => [...dashboardSnapshot.issues].sort((left, right) => issueNumber(right.issueId) - issueNumber(left.issueId)),
     [],
   );
+  const [filters, setFilters] = useState<Filters>({ label: "all", milestone: activeMilestoneName });
+  const labels = useMemo(() => Array.from(new Set(issues.flatMap((issue) => issue.labels))).sort(), [issues]);
+  const milestones = useMemo(() => [...linearProjectSnapshot.milestones].sort((left, right) => left.sortOrder - right.sortOrder), []);
+  const visibleIssues = useMemo(
+    () =>
+      issues.filter((issue) => {
+        const labelMatch = filters.label === "all" || issue.labels.includes(filters.label);
+        const milestoneMatch = issueMilestone(issue) === filters.milestone;
+        return issueProject(issue) === activeProjectName && labelMatch && milestoneMatch;
+      }),
+    [filters, issues],
+  );
   const [selected, setSelected] = useState<Selection>({
     issueId: issues[0]?.issueId ?? "",
     stage: issues[0]?.currentStage ?? 0,
   });
-  const selectedIssue = issues.find((issue) => issue.issueId === selected.issueId) ?? issues[0];
+  const selectedIssue = visibleIssues.find((issue) => issue.issueId === selected.issueId) ?? visibleIssues[0];
   const selectedStage = selectedIssue ? findStage(selectedIssue, selected.stage) : undefined;
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box component="main" className="dashboard-shell">
-        <SummaryBar issues={issues} />
-        <IssueLifecycleBoard issues={issues} selected={selected} onSelect={setSelected} />
+        <SummaryBar
+          issues={issues}
+          milestone={filters.milestone}
+          milestones={milestones}
+          onMilestoneChange={(milestone) => setFilters({ ...filters, milestone })}
+        />
+        <FilterBar
+          filters={filters}
+          labels={labels}
+          totalCount={issues.length}
+          visibleCount={visibleIssues.length}
+          onChange={setFilters}
+        />
+        {visibleIssues.length > 0 ? (
+          <IssueLifecycleBoard issues={visibleIssues} selected={selected} onSelect={setSelected} />
+        ) : (
+          <Paper className="empty-state" variant="outlined">
+            <Typography sx={{ fontWeight: 900 }}>필터 결과 없음</Typography>
+            <Typography color="text.secondary" variant="body2">
+              다른 label 또는 milestone을 선택해줘.
+            </Typography>
+          </Paper>
+        )}
         {selectedIssue ? <IssueDetailPanel issue={selectedIssue} stage={selectedStage} /> : null}
       </Box>
     </ThemeProvider>
