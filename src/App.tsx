@@ -1,151 +1,237 @@
+import { useState } from "react";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Chip,
+  Collapse,
+  CssBaseline,
+  Divider,
+  LinearProgress,
+  Paper,
+  Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  ThemeProvider,
+  Typography,
+  createTheme,
+} from "@mui/material";
 import "./App.css";
+import snapshot from "./generated/artifact-dashboard.json";
+import type { DashboardIssue, DashboardSnapshot } from "./domain/dashboard";
+import { formatDateTime, formatTokenUsage } from "./domain/dashboard";
 
-type StageStatus = "완료" | "진행 중" | "대기";
+const dashboardSnapshot = snapshot as DashboardSnapshot;
 
-type StageRow = {
-  id: number;
-  name: string;
-  status: StageStatus;
-};
-
-type SubagentRun = {
-  stage: number;
-  role: string;
-  model: string;
-  reasoning: string;
-  status: string;
-  artifactPath: string;
-  evidencePath: string;
-};
-
-const stages: StageRow[] = [
-  { id: 0, name: "이슈 발행", status: "완료" },
-  { id: 1, name: "요구사항 정리", status: "완료" },
-  { id: 2, name: "아키텍처 정리", status: "완료" },
-  { id: 3, name: "TDD 계획", status: "완료" },
-  { id: 4, name: "테스트 명세", status: "완료" },
-  { id: 5, name: "Red 실패 증거", status: "완료" },
-  { id: 6, name: "구현 착수 검토 루프", status: "완료" },
-  { id: 7, name: "최소 구현", status: "진행 중" },
-  { id: 8, name: "Green 통과 증거", status: "대기" },
-  { id: 9, name: "리팩터링", status: "대기" },
-  { id: 10, name: "검증/리뷰", status: "대기" },
-  { id: 11, name: "MR/Wiki/Graph 환류", status: "대기" },
-];
-
-const subagentRuns: SubagentRun[] = [
-  {
-    stage: 2,
-    role: "architect",
-    model: "gpt-5.5",
-    reasoning: "high",
-    status: "완료",
-    artifactPath: "run-002/subagents/02-architect.md",
-    evidencePath: "run-002/evidence/path-correction.md",
+const theme = createTheme({
+  palette: {
+    mode: "light",
+    background: {
+      default: "#f4f7fb",
+      paper: "#ffffff",
+    },
+    primary: {
+      main: "#0f766e",
+    },
+    secondary: {
+      main: "#2563eb",
+    },
+    text: {
+      primary: "#172033",
+      secondary: "#58708c",
+    },
   },
-  {
-    stage: 3,
-    role: "planner",
-    model: "gpt-5.5",
-    reasoning: "medium",
-    status: "완료",
-    artifactPath: "run-002/subagents/03-tdd-plan.md",
-    evidencePath: "run-002/evidence/red.md",
+  shape: {
+    borderRadius: 8,
   },
-  {
-    stage: 4,
-    role: "test-engineer",
-    model: "gpt-5.5",
-    reasoning: "medium",
-    status: "완료",
-    artifactPath: "run-002/subagents/04-test-spec-red.md",
-    evidencePath: "run-002/evidence/red.md",
+  typography: {
+    fontFamily:
+      'ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif',
   },
-  {
-    stage: 6,
-    role: "verifier",
-    model: "gpt-5.5",
-    reasoning: "high",
-    status: "PASS",
-    artifactPath: "run-002/subagents/06-path-correction-verifier.md",
-    evidencePath: "run-002/evidence/test-first-red.md",
-  },
-];
+});
 
-const completedStages = stages.filter((stage) => stage.status === "완료").length + 1;
+function IssueCard({ issue, selected, onSelect }: { issue: DashboardIssue; selected: boolean; onSelect: () => void }) {
+  const progress = Math.round((issue.completedStageCount / issue.totalStageCount) * 100);
+
+  return (
+    <Card variant="outlined" sx={{ borderColor: selected ? "primary.main" : "divider" }}>
+      <CardContent>
+        <Stack spacing={1.5}>
+          <Stack direction="row" sx={{ gap: 1, justifyContent: "space-between" }}>
+            <Typography variant="h6">{issue.issueId}</Typography>
+            <Chip color="primary" label={issue.status} size="small" />
+          </Stack>
+          <Typography color="text.secondary" variant="body2">
+            {issue.title}
+          </Typography>
+          <Stack direction="row" sx={{ flexWrap: "wrap", gap: 1 }}>
+            {issue.labels.map((label) => (
+              <Chip key={label} label={label} size="small" variant="outlined" />
+            ))}
+          </Stack>
+          <Box>
+            <Stack direction="row" sx={{ alignItems: "center", justifyContent: "space-between" }}>
+              <Typography color="text.secondary" variant="caption">
+                {issue.currentStageName}
+              </Typography>
+              <Typography aria-label={`${issue.issueId} stage progress`} variant="body2" sx={{ fontWeight: 800 }}>
+                {issue.completedStageCount} / {issue.totalStageCount}
+              </Typography>
+            </Stack>
+            <LinearProgress sx={{ mt: 1 }} variant="determinate" value={progress} />
+          </Box>
+          <Button
+            aria-expanded={selected}
+            aria-label={`${issue.issueId} 상세 ${selected ? "닫기" : "열기"}`}
+            onClick={onSelect}
+            size="small"
+            variant={selected ? "contained" : "outlined"}
+          >
+            상세 {selected ? "닫기" : "열기"}
+          </Button>
+        </Stack>
+      </CardContent>
+    </Card>
+  );
+}
+
+function StageTable({ issue }: { issue: DashboardIssue }) {
+  return (
+    <TableContainer component={Paper} variant="outlined">
+      <Table aria-label={`${issue.issueId} lifecycle stages`} size="small">
+        <TableHead>
+          <TableRow>
+            <TableCell>Stage</TableCell>
+            <TableCell>Agent</TableCell>
+            <TableCell>Model</TableCell>
+            <TableCell>Reasoning</TableCell>
+            <TableCell>Token</TableCell>
+            <TableCell>Started</TableCell>
+            <TableCell>Completed</TableCell>
+            <TableCell>Status</TableCell>
+            <TableCell>Artifact</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {issue.stages.map((stage) => (
+            <TableRow key={`${stage.stage}-${stage.agent}`}>
+              <TableCell>{stage.nameKo}</TableCell>
+              <TableCell>{stage.agent}</TableCell>
+              <TableCell>{stage.model}</TableCell>
+              <TableCell>{stage.reasoning}</TableCell>
+              <TableCell>{formatTokenUsage(stage.tokenUsage)}</TableCell>
+              <TableCell>{formatDateTime(stage.startedAt)}</TableCell>
+              <TableCell>{formatDateTime(stage.completedAt)}</TableCell>
+              <TableCell>{stage.status}</TableCell>
+              <TableCell sx={{ maxWidth: 260, wordBreak: "break-word" }}>{stage.artifactPath}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}
+
+function ArtifactDetails({ issue, open }: { issue: DashboardIssue; open: boolean }) {
+  return (
+    <Collapse in={open} timeout={180} unmountOnExit>
+      <Paper
+        aria-label={`${issue.issueId} artifact details`}
+        component="section"
+        role="region"
+        sx={{ mt: 2, p: 2.5 }}
+        variant="outlined"
+      >
+        <Stack divider={<Divider flexItem />} spacing={2}>
+          {issue.artifacts.map((artifact) => (
+            <Box key={artifact.path}>
+              <Stack direction="row" sx={{ alignItems: "center", gap: 2, justifyContent: "space-between" }}>
+                <Typography sx={{ fontWeight: 800 }}>{artifact.label}</Typography>
+                <Chip label={artifact.kind} size="small" variant="outlined" />
+              </Stack>
+              <Typography sx={{ mt: 1, wordBreak: "break-word" }} variant="body2">
+                {artifact.path}
+              </Typography>
+              <Typography color="text.secondary" sx={{ mt: 1 }} variant="body2">
+                {artifact.summary ?? "요약 없음"}
+              </Typography>
+            </Box>
+          ))}
+        </Stack>
+      </Paper>
+    </Collapse>
+  );
+}
 
 export function App() {
+  const issues = dashboardSnapshot.issues;
+  const [selectedIssueId, setSelectedIssueId] = useState(issues[0]?.issueId ?? "");
+  const [expandedIssueId, setExpandedIssueId] = useState<string | null>(null);
+  const selectedIssue = issues.find((issue) => issue.issueId === selectedIssueId) ?? issues[0];
+  const isSelectedExpanded = expandedIssueId === selectedIssue.issueId;
+
   return (
-    <main className="dashboard">
-      <aside className="issue-rail" aria-label="issue 목록">
-        <p className="eyebrow">MAHUB Control Plane</p>
-        <h1>AIDD workflow 관제</h1>
-        <button className="issue-button" type="button" aria-current="true">
-          <strong>KTD-10</strong>
-          <span>AIDD workflow 관제 프론트 baseline 구축</span>
-        </button>
-      </aside>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Box component="main" className="dashboard-shell">
+        <Box component="aside" className="issue-panel" aria-label="dashboard issue 목록">
+          <Typography color="primary" sx={{ fontWeight: 900 }} variant="overline">
+            MAHUB AIDD
+          </Typography>
+          <Typography component="h1" sx={{ fontWeight: 900 }} variant="h4">
+            AIDD workflow dashboard
+          </Typography>
+          <Typography color="text.secondary" variant="body2">
+            Linear issue별 stage, agent, model, token, timing, artifact evidence를 추적한다.
+          </Typography>
+          <Stack spacing={1.5} sx={{ mt: 3 }}>
+            {issues.map((issue) => (
+              <IssueCard
+                key={issue.issueId}
+                issue={issue}
+                selected={issue.issueId === selectedIssue.issueId && expandedIssueId === issue.issueId}
+                onSelect={() => {
+                  setSelectedIssueId(issue.issueId);
+                  setExpandedIssueId((current) => (current === issue.issueId ? null : issue.issueId));
+                }}
+              />
+            ))}
+          </Stack>
+        </Box>
 
-      <section className="content" aria-label="선택된 이슈 상세">
-        <header className="summary">
-          <div>
-            <p className="eyebrow">선택된 이슈</p>
-            <h2>KTD-10</h2>
-            <p>AIDD workflow 관제 프론트 baseline 구축</p>
-          </div>
-          <div className="summary-metric">
-            <span>현재 단계: 최소 구현</span>
-            <strong aria-label="stage-progress">{completedStages} / {stages.length}</strong>
-          </div>
-          <div className="summary-metric">
-            <span>토큰</span>
-            <strong>토큰: 도구 미노출</strong>
-          </div>
-        </header>
+        <Box component="section" className="work-panel" aria-label="선택된 dashboard issue lifecycle">
+          <Stack spacing={2.5}>
+            <Paper sx={{ p: 2.5 }} variant="outlined">
+              <Stack direction={{ xs: "column", md: "row" }} spacing={2} sx={{ justifyContent: "space-between" }}>
+                <Box>
+                  <Typography color="text.secondary" variant="overline">
+                    선택된 이슈
+                  </Typography>
+                  <Typography component="h2" sx={{ fontWeight: 900 }} variant="h5">
+                    {selectedIssue.issueId}
+                  </Typography>
+                  <Typography color="text.secondary">{selectedIssue.title}</Typography>
+                </Box>
+                <Stack direction="row" sx={{ alignItems: "center", flexWrap: "wrap", gap: 1 }}>
+                  {selectedIssue.labels.map((label) => (
+                    <Chip key={label} label={label} color={label === "dashboard" ? "primary" : "default"} />
+                  ))}
+                  <Chip label={`시작 ${formatDateTime(selectedIssue.startedAt)}`} variant="outlined" />
+                  <Chip label={`종료 ${formatDateTime(selectedIssue.completedAt)}`} variant="outlined" />
+                </Stack>
+              </Stack>
+            </Paper>
 
-        <section className="stage-strip" aria-label="stage 진행률">
-          {stages.map((stage) => (
-            <article className={`stage stage-${stage.status.replaceAll(" ", "-")}`} key={stage.id}>
-              <span>{stage.id}</span>
-              <strong>{stage.name}</strong>
-              <em>{stage.status}</em>
-            </article>
-          ))}
-        </section>
-
-        <section className="run-panel" aria-label="subagent 실행 상세">
-          <div className="panel-heading">
-            <h2>Subagent 실행 이력</h2>
-            <p>stage-index는 schema-only, 실제 실행 증거는 run-local artifact에서 집계한다.</p>
-          </div>
-          <table aria-label="subagent 실행 이력">
-            <thead>
-              <tr>
-                <th>Stage</th>
-                <th>Subagent</th>
-                <th>Model</th>
-                <th>Reasoning</th>
-                <th>Status</th>
-                <th>Artifact</th>
-                <th>Evidence</th>
-              </tr>
-            </thead>
-            <tbody>
-              {subagentRuns.map((run) => (
-                <tr key={`${run.stage}-${run.role}`}>
-                  <td>{run.stage}</td>
-                  <td>{run.role}</td>
-                  <td>{run.model}</td>
-                  <td>{run.reasoning}</td>
-                  <td>{run.status}</td>
-                  <td>{run.artifactPath}</td>
-                  <td>{run.evidencePath}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </section>
-      </section>
-    </main>
+            <StageTable issue={selectedIssue} />
+            <ArtifactDetails issue={selectedIssue} open={isSelectedExpanded} />
+          </Stack>
+        </Box>
+      </Box>
+    </ThemeProvider>
   );
 }
