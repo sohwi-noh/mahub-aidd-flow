@@ -211,6 +211,20 @@ body {
   background: #edf8f5;
 }
 
+.stage-cell-status-row {
+  min-width: 0;
+}
+
+.stage-cell-index {
+  flex: 0 0 auto;
+}
+
+.stage-cell-status-chip {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: calc(100% - 30px);
+}
+
 .stage-cell-agent {
   display: block;
   min-height: 1.15rem;

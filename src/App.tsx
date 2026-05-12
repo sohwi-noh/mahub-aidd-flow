@@ -20,6 +20,7 @@ import {
   TableHead,
   TableRow,
   ThemeProvider,
+  Tooltip,
   Typography,
   createTheme,
 } from "@mui/material";
@@ -234,7 +235,7 @@ function SummaryBar({
   milestones: LinearMilestone[];
   onMilestoneChange: (value: string) => void;
 }) {
-  const completed = issues.filter((issue) => issue.completedStageCount >= issue.totalStageCount).length;
+  const completed = issues.filter((issue) => issue.status === "Done" || issue.completedStageCount >= issue.totalStageCount).length;
   const active = issues.length - completed;
 
   return (
@@ -356,15 +357,25 @@ function StageCell({
       type="button"
     >
       <Stack spacing={0.5}>
-        <Stack direction="row" sx={{ alignItems: "center", justifyContent: "space-between", gap: 0.5 }}>
-          <Typography variant="caption" sx={{ fontWeight: 800 }}>
+        <Stack className="stage-cell-status-row" direction="row" sx={{ alignItems: "center", justifyContent: "space-between", gap: 0.5 }}>
+          <Typography className="stage-cell-index" variant="caption" sx={{ fontWeight: 800 }}>
             {stageDefinition.stage}
           </Typography>
-          <Chip color={statusTone(status)} label={status} size="small" variant={status === "미기록" ? "outlined" : "filled"} />
+          <Tooltip arrow describeChild title={status}>
+            <Chip
+              className="stage-cell-status-chip"
+              color={statusTone(status)}
+              label={status}
+              size="small"
+              variant={status === "미기록" ? "outlined" : "filled"}
+            />
+          </Tooltip>
         </Stack>
-        <Typography className="stage-cell-agent" variant="caption">
-          {agent}
-        </Typography>
+        <Tooltip arrow describeChild title={agent}>
+          <Typography className="stage-cell-agent" variant="caption">
+            {agent}
+          </Typography>
+        </Tooltip>
         <Typography color="text.secondary" variant="caption">
           {formatTokenUsage(stage?.tokenUsage ?? { availability: "unavailable", reportedTotalTokens: null })}
         </Typography>
@@ -387,19 +398,17 @@ function GateCell({ column, issue }: { column: Extract<BoardColumn, { kind: "gat
       {column.variant === "additional-pr" ? (
         <Box aria-label={`${issue.issueId} 연결 PR 목록`} className="gate-pr-list">
           {prs.length > 0 ? (
-            prs.map((pr) => (
-              <MuiLink
-                key={pr.url}
-                className="gate-pr-link"
-                href={pr.url}
-                rel="noreferrer"
-                target="_blank"
-                title={`연결 PR #${pr.number} · ${pr.repository}`}
-                underline="none"
-              >
-                연결 PR #{pr.number} · {pr.repository}
-              </MuiLink>
-            ))
+            prs.map((pr) => {
+              const label = `연결 PR #${pr.number} [${pr.repository}]`;
+
+              return (
+                <Tooltip key={pr.url} arrow describeChild title={label}>
+                  <MuiLink className="gate-pr-link" href={pr.url} rel="noreferrer" target="_blank" underline="none">
+                    {label}
+                  </MuiLink>
+                </Tooltip>
+              );
+            })
           ) : (
             <Typography className="gate-pr-empty" variant="caption">
               연결 PR 없음
@@ -463,10 +472,14 @@ function IssueLifecycleBoard({
                 </TableCell>
                 <TableCell className="sticky-col status-col">
                   <Stack spacing={0.75}>
-                    <Chip color={statusTone(issue.status)} label={issue.status} size="small" />
+                    <Tooltip arrow describeChild title={issue.status}>
+                      <Chip color={statusTone(issue.status)} label={issue.status} size="small" />
+                    </Tooltip>
                     <Stack direction="row" sx={{ flexWrap: "wrap", gap: 0.5 }}>
                       {issue.labels.map((label) => (
-                        <Chip key={label} color={label === "dashboard" ? "primary" : "default"} label={label} size="small" variant="outlined" />
+                        <Tooltip key={label} arrow describeChild title={label}>
+                          <Chip color={label === "dashboard" ? "primary" : "default"} label={label} size="small" variant="outlined" />
+                        </Tooltip>
                       ))}
                     </Stack>
                   </Stack>

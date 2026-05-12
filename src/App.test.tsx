@@ -24,7 +24,11 @@ describe("AIDD workflow dashboard", () => {
     expect(screen.getAllByText("KTD-11").length).toBeGreaterThan(0);
     expect(screen.getAllByText("KTD-10").length).toBeGreaterThan(0);
     expect(screen.getAllByText("KTD-9").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("KTD-15").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("KTD-14").length).toBeGreaterThan(0);
     expect(screen.getAllByText("AIDD dashboard issue lifecycle 상세 관제 화면 구현").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("AIDD dashboard stage 상태 Chip 셀 밖 넘침 수정").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("AIDD dashboard 추가PR 열 반응형 깨짐 수정").length).toBeGreaterThan(0);
     expect(screen.getByText("AIDD workflow 관제 프론트 baseline 구축")).toBeInTheDocument();
     expect(screen.getByText("개발환경 및 SW 아키텍처 기준선 셋업: Java 21 LTS + React 최신 스택")).toBeInTheDocument();
     expect(screen.getByLabelText("KTD-11 stage progress")).toHaveTextContent("12 / 12");
@@ -68,7 +72,7 @@ describe("AIDD workflow dashboard", () => {
     expect(within(ktd11Row).getAllByText("사람개입")).toHaveLength(2);
     expect(within(ktd11Row).getByText("테스트계획승인")).toBeInTheDocument();
     expect(within(ktd11Row).getByText("추가PR")).toBeInTheDocument();
-    expect(within(ktd11Row).getByRole("link", { name: /연결 PR #2 · mahub-aidd-flow/ })).toHaveAttribute(
+    expect(within(ktd11Row).getByRole("link", { name: /연결 PR #2 \[mahub-aidd-flow\]/ })).toHaveAttribute(
       "href",
       "https://github.com/sohwi-noh/mahub-aidd-flow/pull/2",
     );
@@ -80,9 +84,24 @@ describe("AIDD workflow dashboard", () => {
 
     fireEvent.click(screen.getByRole("button", { name: "dashboard" }));
 
-    expect(screen.getByLabelText("filter result count")).toHaveTextContent("2 / 3 issues");
+    expect(screen.getByLabelText("filter result count")).toHaveTextContent("4 / 5 issues");
+    expect(screen.getAllByText("KTD-15").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("KTD-14").length).toBeGreaterThan(0);
     expect(screen.getAllByText("KTD-11").length).toBeGreaterThan(0);
     expect(screen.getAllByText("KTD-10").length).toBeGreaterThan(0);
+    expect(screen.queryByText("KTD-9")).not.toBeInTheDocument();
+  });
+
+  it("filters bug issues by label chip", () => {
+    render(<App />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Bug" }));
+
+    expect(screen.getByLabelText("filter result count")).toHaveTextContent("2 / 5 issues");
+    expect(screen.getAllByText("KTD-15").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("KTD-14").length).toBeGreaterThan(0);
+    expect(screen.queryByText("KTD-11")).not.toBeInTheDocument();
+    expect(screen.queryByText("KTD-10")).not.toBeInTheDocument();
     expect(screen.queryByText("KTD-9")).not.toBeInTheDocument();
   });
 
@@ -97,7 +116,7 @@ describe("AIDD workflow dashboard", () => {
 
     fireEvent.click(screen.getByRole("option", { name: /분석\/설계/ }));
 
-    expect(screen.getByLabelText("filter result count")).toHaveTextContent("0 / 3 issues");
+    expect(screen.getByLabelText("filter result count")).toHaveTextContent("0 / 5 issues");
     expect(screen.getByText("필터 결과 없음")).toBeInTheDocument();
   });
 
