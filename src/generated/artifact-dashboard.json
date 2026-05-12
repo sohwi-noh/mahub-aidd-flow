@@ -2626,6 +2626,128 @@
           "url": "https://github.com/sohwi-noh/mahub-aidd-flow/pull/7"
         }
       ]
+    },
+    {
+      "artifacts": [
+        {
+          "kind": "subagent",
+          "label": "subagents/01-frontend-design.md",
+          "path": ".omx/artifacts/KTD-16/run-001/subagents/01-frontend-design.md",
+          "summary": "KTD 16 frontend design 검토 역할 담당: frontend design / ui designer 검토 보조 대상: AIDD workflow dashboard 필터와 상세 metadata chip 목적: label filter를 2레벨 chip 구조로 바꾸고, 상세 metadata에서 불필요한 model n/a 노출을 제거한다. 설계 결정 기존 전체 label chip은 제거했"
+        },
+        {
+          "kind": "subagent",
+          "label": "subagents/02-ui-designer-review.md",
+          "path": ".omx/artifacts/KTD-16/run-001/subagents/02-ui-designer-review.md",
+          "summary": "KTD 16 ui designer 검토 보정 역할 담당: ui designer 모델: gpt 5.4 / reasoning high 대상: AIDD dashboard 2레벨 chip filter 전환 UX 발견 기본값이 dashboard + improvement 인 상태에서 1레벨을 mahub api 또는 mahub web 으로 바꾸면, 해당 repository 파생 이슈가 존재해도 2레벨 i"
+        },
+        {
+          "kind": "evidence",
+          "label": "evidence/frontend-visual-audit.md",
+          "path": ".omx/artifacts/KTD-16/run-001/evidence/frontend-visual-audit.md",
+          "summary": "KTD 16 frontend visual audit 검증 대상 URL: http://127.0.0.1:5174/ 대상 화면: AIDD workflow dashboard 집중 영역: 2레벨 chip filter, 기본 선택값, repository 파생 필터, 상세 metadata chip 실행 결과 npm test : PASS, 1 file / 10 tests npm run build : PA"
+        },
+        {
+          "kind": "summary",
+          "label": "run-summary.md",
+          "path": ".omx/artifacts/KTD-16/run-001/run-summary.md",
+          "summary": "KTD 16 run summary 이슈 Linear: KTD 16 제목: AIDD dashboard label filter를 2레벨 chip 구조로 변경 프로젝트/마일스톤: MA Hub / 환경 구성하기 변경 요약 label filter를 1레벨 dashboard , mahub api , mahub web 와 2레벨 all , bug , improvement , feature chip으로 분"
+        }
+      ],
+      "completedAt": null,
+      "completedStageCount": 11,
+      "currentStage": 11,
+      "currentStageName": "MR/Wiki/Graph 환류",
+      "issueId": "KTD-16",
+      "labels": [
+        "dashboard",
+        "Improvement"
+      ],
+      "repoPath": "workflow/mahub-aidd-flow",
+      "runs": [
+        "run-001"
+      ],
+      "stageStates": {},
+      "stages": [
+        {
+          "agent": "analyst",
+          "artifactPath": ".omx/artifacts/KTD-16/run-001/run-summary.md",
+          "completedAt": "2026-05-12T18:17:12+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "요구사항 정리",
+          "reasoning": "medium",
+          "stage": 1,
+          "startedAt": "2026-05-12T18:17:12+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 160
+          }
+        },
+        {
+          "agent": "executor",
+          "artifactPath": ".omx/artifacts/KTD-16/run-001/run-summary.md",
+          "completedAt": "2026-05-12T19:12:00+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "최소 구현",
+          "reasoning": "medium",
+          "stage": 7,
+          "startedAt": "2026-05-12T18:17:12+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 360
+          }
+        },
+        {
+          "agent": "frontend-design",
+          "artifactPath": ".omx/artifacts/KTD-16/run-001/subagents/01-frontend-design.md",
+          "completedAt": "2026-05-12T19:12:00+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "검증/리뷰",
+          "reasoning": "high",
+          "stage": 10,
+          "startedAt": "2026-05-12T18:17:12+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 520
+          }
+        },
+        {
+          "agent": "git-master",
+          "artifactPath": ".omx/artifacts/KTD-16/run-001/run-summary.md",
+          "completedAt": "2026-05-12T19:12:00+09:00",
+          "model": "n/a",
+          "nameKo": "MR/Wiki/Graph 환류",
+          "reasoning": "n/a",
+          "stage": 11,
+          "startedAt": "2026-05-12T19:12:00+09:00",
+          "status": "PR #9 생성, merge 대기",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 180
+          }
+        }
+      ],
+      "startedAt": "2026-05-12T18:17:12+09:00",
+      "status": "In Progress",
+      "title": "AIDD dashboard label filter를 2레벨 chip 구조로 변경",
+      "totalStageCount": 12,
+      "url": "https://linear.app/ktds-ai-eng/issue/KTD-16/aidd-dashboard-label-filter를-2레벨-chip-구조로-변경",
+      "linearProject": "MA Hub",
+      "linearMilestone": "환경 구성하기",
+      "pullRequests": [
+        {
+          "number": 9,
+          "repository": "mahub-aidd-flow",
+          "url": "https://github.com/sohwi-noh/mahub-aidd-flow/pull/9"
+        }
+      ]
     }
   ],
   "schemaVersion": 1,

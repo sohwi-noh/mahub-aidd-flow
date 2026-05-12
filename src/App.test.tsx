@@ -19,20 +19,25 @@ const expectedBoardHeaders = [
 ];
 
 describe("AIDD workflow dashboard", () => {
-  it("renders multiple issue swimlanes", () => {
+  it("renders the dashboard improvement lane by default", () => {
     render(<App />);
 
     expect(screen.getByRole("heading", { name: "AIDD workflow dashboard" })).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: /Understand와 Quality 결과가 asset으로 고정되고 Understand Wiki로 환류되는 도식/ })).toBeInTheDocument();
+    expect(screen.queryByText("issue-to-mr-lifecycle")).not.toBeInTheDocument();
+    expect(screen.queryByText("docs/issue-to-mr-lifecycle.svg")).not.toBeInTheDocument();
+    expect(screen.getAllByText("KTD-16").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("AIDD dashboard label filter를 2레벨 chip 구조로 변경").length).toBeGreaterThan(0);
     expect(screen.getAllByText("KTD-11").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("KTD-10").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("KTD-9").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("KTD-15").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("KTD-14").length).toBeGreaterThan(0);
     expect(screen.getAllByText("AIDD dashboard issue lifecycle 상세 관제 화면 구현").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("AIDD dashboard stage 상태 Chip 셀 밖 넘침 수정").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("AIDD dashboard 추가PR 열 반응형 깨짐 수정").length).toBeGreaterThan(0);
-    expect(screen.getByText("AIDD workflow 관제 프론트 baseline 구축")).toBeInTheDocument();
-    expect(screen.getByText("개발환경 및 SW 아키텍처 기준선 셋업: Java 21 LTS + React 최신 스택")).toBeInTheDocument();
+    expect(screen.queryByText("KTD-10")).not.toBeInTheDocument();
+    expect(screen.queryByText("KTD-9")).not.toBeInTheDocument();
+    expect(screen.queryByText("KTD-15")).not.toBeInTheDocument();
+    expect(screen.queryByText("KTD-14")).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "전체 label" })).not.toBeInTheDocument();
+    expect(screen.getByText("1레벨")).toBeInTheDocument();
+    expect(screen.getByText("2레벨")).toBeInTheDocument();
+    expect(screen.getByLabelText("filter result count")).toHaveTextContent("2 / 6 이슈");
     expect(screen.getByLabelText("KTD-11 stage progress")).toHaveTextContent("12 / 12");
     expect(screen.getByLabelText("KTD-11 estimated token sum")).toHaveTextContent(/^예측 [\d,]+ tokens$/);
   });
@@ -76,12 +81,13 @@ describe("AIDD workflow dashboard", () => {
     expect(screen.getByLabelText("KTD-11 stage progress")).toHaveTextContent("12 / 12");
   });
 
-  it("filters issues by label chip", () => {
+  it("filters dashboard issues by type chip", () => {
     render(<App />);
 
-    fireEvent.click(screen.getByRole("button", { name: "dashboard" }));
+    fireEvent.click(screen.getByRole("button", { name: "all" }));
 
-    expect(screen.getByLabelText("filter result count")).toHaveTextContent("4 / 5 issues");
+    expect(screen.getByLabelText("filter result count")).toHaveTextContent("5 / 6 이슈");
+    expect(screen.getAllByText("KTD-16").length).toBeGreaterThan(0);
     expect(screen.getAllByText("KTD-15").length).toBeGreaterThan(0);
     expect(screen.getAllByText("KTD-14").length).toBeGreaterThan(0);
     expect(screen.getAllByText("KTD-11").length).toBeGreaterThan(0);
@@ -89,17 +95,37 @@ describe("AIDD workflow dashboard", () => {
     expect(screen.queryByText("KTD-9")).not.toBeInTheDocument();
   });
 
-  it("filters bug issues by label chip", () => {
+  it("filters bug issues by second-level chip", () => {
     render(<App />);
 
-    fireEvent.click(screen.getByRole("button", { name: "Bug" }));
+    fireEvent.click(screen.getByRole("button", { name: "bug" }));
 
-    expect(screen.getByLabelText("filter result count")).toHaveTextContent("2 / 5 issues");
+    expect(screen.getByLabelText("filter result count")).toHaveTextContent("2 / 6 이슈");
     expect(screen.getAllByText("KTD-15").length).toBeGreaterThan(0);
     expect(screen.getAllByText("KTD-14").length).toBeGreaterThan(0);
     expect(screen.queryByText("KTD-11")).not.toBeInTheDocument();
     expect(screen.queryByText("KTD-10")).not.toBeInTheDocument();
     expect(screen.queryByText("KTD-9")).not.toBeInTheDocument();
+  });
+
+  it("derives mahub-api and mahub-web first-level filters from connected PR repositories", () => {
+    render(<App />);
+
+    fireEvent.click(screen.getByRole("button", { name: "mahub-api" }));
+    expect(screen.getByLabelText("filter result count")).toHaveTextContent("1 / 6 이슈");
+    expect(screen.getByText("KTD-9")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /연결 PR #1 \[mahub-api\]/ })).toHaveAttribute(
+      "href",
+      "https://github.com/sohwi-noh/mahub-api/pull/1",
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "mahub-web" }));
+    expect(screen.getByLabelText("filter result count")).toHaveTextContent("1 / 6 이슈");
+    expect(screen.getByText("KTD-9")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /연결 PR #1 \[mahub-web\]/ })).toHaveAttribute(
+      "href",
+      "https://github.com/sohwi-noh/mahub-web/pull/1",
+    );
   });
 
   it("filters issues by milestone selection", () => {
@@ -113,7 +139,7 @@ describe("AIDD workflow dashboard", () => {
 
     fireEvent.click(screen.getByRole("option", { name: /분석\/설계/ }));
 
-    expect(screen.getByLabelText("filter result count")).toHaveTextContent("0 / 5 issues");
+    expect(screen.getByLabelText("filter result count")).toHaveTextContent("0 / 6 이슈");
     expect(screen.getByText("필터 결과 없음")).toBeInTheDocument();
   });
 
@@ -126,6 +152,7 @@ describe("AIDD workflow dashboard", () => {
     expect(within(details).getByRole("heading", { name: "KTD-11 · MR/Wiki/Graph 환류" })).toBeInTheDocument();
     expect(within(details).getByText(/model gpt-5.5/)).toBeInTheDocument();
     expect(within(details).getByText(/token 예측/)).toBeInTheDocument();
+    expect(within(details).getByText(/시작 2026-05-12 12:51 · 종료 2026-05-12 12:55 \(4분 45초 소요\)/)).toBeInTheDocument();
     expect(within(details).getByRole("heading", { name: "증거" })).toBeInTheDocument();
     expect(within(details).getByRole("heading", { name: "계획" })).toBeInTheDocument();
     expect(within(details).getByRole("heading", { name: "결과" })).toBeInTheDocument();
@@ -135,5 +162,17 @@ describe("AIDD workflow dashboard", () => {
     expect(
       within(details).getByText(/요약 생성 기준은 markdown 제목과 본문 앞부분을 deterministic하게 추출한다/),
     ).toBeInTheDocument();
+  });
+
+  it("hides n/a model metadata and combines start/end timing in one chip", () => {
+    render(<App />);
+
+    fireEvent.click(screen.getByRole("button", { name: "bug" }));
+    fireEvent.click(screen.getByRole("button", { name: "KTD-15 MR/Wiki/Graph 환류 상세 열기" }));
+
+    const details = screen.getByRole("region", { name: "KTD-15 artifact details" });
+    expect(within(details).queryByText(/model n\/a/)).not.toBeInTheDocument();
+    expect(within(details).getByText(/agent git-master/)).toBeInTheDocument();
+    expect(within(details).getByText(/시작 .* · 종료 .* \(\d+분 \d+초 소요\)/)).toBeInTheDocument();
   });
 });
