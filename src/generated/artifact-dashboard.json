@@ -165,7 +165,10 @@
       "currentStage": 11,
       "currentStageName": "MR/Wiki/Graph 환류",
       "issueId": "KTD-10",
-      "labels": [],
+      "labels": [
+        "dashboard",
+        "Feature"
+      ],
       "repoPath": "workflow/mahub-aidd-flow",
       "runs": [
         {
@@ -596,8 +599,9 @@
           "startedAt": null,
           "status": "완료",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 2380
           }
         },
         {
@@ -611,8 +615,9 @@
           "startedAt": null,
           "status": "완료",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 1406
           }
         },
         {
@@ -626,8 +631,9 @@
           "startedAt": null,
           "status": "완료",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 1514
           }
         },
         {
@@ -641,8 +647,9 @@
           "startedAt": null,
           "status": "완료",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 529
           }
         },
         {
@@ -656,8 +663,9 @@
           "startedAt": null,
           "status": "완료, PASS",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 1556
           }
         },
         {
@@ -686,8 +694,9 @@
           "startedAt": null,
           "status": "완료",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 205
           }
         },
         {
@@ -701,8 +710,9 @@
           "startedAt": null,
           "status": "완료, 변경 불필요",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 744
           }
         },
         {
@@ -716,8 +726,9 @@
           "startedAt": null,
           "status": "완료",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 355
           }
         },
         {
@@ -731,16 +742,26 @@
           "startedAt": null,
           "status": "PR merge 완료, post-merge 검증 통과, Wiki 환류 완료, Graph 보류 사유 기록, Linear Done 완료, stage-index 동기화 확인",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 437
           }
         }
       ],
       "startedAt": "2026-05-12T10:28:06+09:00",
-      "status": "unknown",
-      "title": "KTD-10",
+      "status": "Done",
+      "title": "AIDD workflow 관제 프론트 baseline 구축",
       "totalStageCount": 12,
-      "url": ""
+      "url": "",
+      "linearProject": "MA Hub",
+      "linearMilestone": "환경 구성하기",
+      "pullRequests": [
+        {
+          "number": 1,
+          "repository": "mahub-aidd-flow",
+          "url": "https://github.com/sohwi-noh/mahub-aidd-flow/pull/1"
+        }
+      ]
     },
     {
       "artifacts": [
@@ -1522,8 +1543,9 @@
           "startedAt": "2026-05-12T11:43:00+09:00",
           "status": "완료",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 549
           }
         },
         {
@@ -1537,8 +1559,9 @@
           "startedAt": "2026-05-12T11:43:00+09:00",
           "status": "완료",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 410
           }
         },
         {
@@ -1552,8 +1575,9 @@
           "startedAt": "2026-05-12T11:43:00+09:00",
           "status": "완료",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 349
           }
         },
         {
@@ -1567,8 +1591,9 @@
           "startedAt": "2026-05-12T11:43:00+09:00",
           "status": "완료",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 304
           }
         },
         {
@@ -1582,8 +1607,9 @@
           "startedAt": "2026-05-12T11:46:00+09:00",
           "status": "완료",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 203
           }
         },
         {
@@ -1597,8 +1623,9 @@
           "startedAt": null,
           "status": "완료",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 412
           }
         },
         {
@@ -1612,8 +1639,9 @@
           "startedAt": "2026-05-12T11:53:00+09:00",
           "status": "완료",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 437
           }
         },
         {
@@ -1627,8 +1655,9 @@
           "startedAt": "2026-05-12T12:11:00+09:00",
           "status": "완료",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 268
           }
         },
         {
@@ -1642,8 +1671,9 @@
           "startedAt": "2026-05-12T12:15:00+09:00",
           "status": "완료",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 313
           }
         },
         {
@@ -1657,8 +1687,9 @@
           "startedAt": "2026-05-12T12:15:00+09:00",
           "status": "완료",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 137
           }
         },
         {
@@ -1672,16 +1703,31 @@
           "startedAt": "2026-05-12T12:51:00+09:00",
           "status": "완료",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 181
           }
         }
       ],
       "startedAt": "2026-05-12T11:41:00+09:00",
-      "status": "완료",
+      "status": "Done",
       "title": "AIDD dashboard issue lifecycle 상세 관제 화면 구현",
       "totalStageCount": 12,
-      "url": "https://linear.app/ktds-ai-eng/issue/KTD-11/aidd-dashboard-issue-lifecycle-상세-관제-화면-구현"
+      "url": "https://linear.app/ktds-ai-eng/issue/KTD-11/aidd-dashboard-issue-lifecycle-상세-관제-화면-구현",
+      "linearProject": "MA Hub",
+      "linearMilestone": "환경 구성하기",
+      "pullRequests": [
+        {
+          "number": 2,
+          "repository": "mahub-aidd-flow",
+          "url": "https://github.com/sohwi-noh/mahub-aidd-flow/pull/2"
+        },
+        {
+          "number": 3,
+          "repository": "mahub-aidd-flow",
+          "url": "https://github.com/sohwi-noh/mahub-aidd-flow/pull/3"
+        }
+      ]
     },
     {
       "artifacts": [
@@ -1793,7 +1839,9 @@
       "currentStage": 11,
       "currentStageName": "MR/Wiki/Graph 환류",
       "issueId": "KTD-9",
-      "labels": [],
+      "labels": [
+        "Feature"
+      ],
       "repoPath": "workflow/mahub-aidd-flow",
       "runs": [
         {
@@ -2162,8 +2210,9 @@
           "startedAt": null,
           "status": "완료",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 811
           }
         },
         {
@@ -2192,8 +2241,9 @@
           "startedAt": null,
           "status": "완료",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 1560
           }
         },
         {
@@ -2207,8 +2257,9 @@
           "startedAt": null,
           "status": "완료",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 1560
           }
         },
         {
@@ -2222,8 +2273,9 @@
           "startedAt": null,
           "status": "완료",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 257
           }
         },
         {
@@ -2237,8 +2289,9 @@
           "startedAt": null,
           "status": "완료, leader 대리",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 429
           }
         },
         {
@@ -2252,8 +2305,9 @@
           "startedAt": null,
           "status": "완료",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 521
           }
         },
         {
@@ -2267,8 +2321,9 @@
           "startedAt": null,
           "status": "완료",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 144
           }
         },
         {
@@ -2282,8 +2337,9 @@
           "startedAt": null,
           "status": "완료",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 584
           }
         },
         {
@@ -2297,8 +2353,9 @@
           "startedAt": null,
           "status": "완료",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 204
           }
         },
         {
@@ -2312,16 +2369,31 @@
           "startedAt": null,
           "status": "PR 완료, Linear Done 반영, graph 보류",
           "tokenUsage": {
-            "availability": "unavailable",
-            "reportedTotalTokens": null
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 259
           }
         }
       ],
       "startedAt": "2026-05-12T00:31:00+09:00",
-      "status": "unknown",
-      "title": "KTD-9",
+      "status": "Done",
+      "title": "개발환경 및 SW 아키텍처 기준선 셋업: Java 21 LTS + React 최신 스택",
       "totalStageCount": 12,
-      "url": ""
+      "url": "",
+      "linearProject": "MA Hub",
+      "linearMilestone": "환경 구성하기",
+      "pullRequests": [
+        {
+          "number": 1,
+          "repository": "mahub-api",
+          "url": "https://github.com/sohwi-noh/mahub-api/pull/1"
+        },
+        {
+          "number": 1,
+          "repository": "mahub-web",
+          "url": "https://github.com/sohwi-noh/mahub-web/pull/1"
+        }
+      ]
     }
   ],
   "schemaVersion": 1,

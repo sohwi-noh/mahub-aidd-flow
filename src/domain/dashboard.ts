@@ -1,6 +1,7 @@
 export type TokenUsage = {
   reportedTotalTokens: number | null;
-  availability: "reported" | "unavailable";
+  estimatedVisibleTokens?: number | null;
+  availability: "reported" | "estimated" | "unavailable";
 };
 
 export type ArtifactRef = {
@@ -23,9 +24,18 @@ export type LifecycleStage = {
   artifactPath: string;
 };
 
+export type PullRequestRef = {
+  number: number;
+  repository: string;
+  url: string;
+};
+
 export type DashboardIssue = {
   issueId: string;
   title: string;
+  linearProject?: string;
+  linearMilestone?: string;
+  pullRequests?: PullRequestRef[];
   labels: string[];
   status: string;
   currentStage: number | null;
@@ -47,6 +57,10 @@ export type DashboardSnapshot = {
 export function formatTokenUsage(tokenUsage: TokenUsage): string {
   if (tokenUsage.availability === "reported" && tokenUsage.reportedTotalTokens !== null) {
     return `${tokenUsage.reportedTotalTokens.toLocaleString()} tokens`;
+  }
+
+  if (tokenUsage.availability === "estimated" && tokenUsage.estimatedVisibleTokens !== null && tokenUsage.estimatedVisibleTokens !== undefined) {
+    return `예측 ${tokenUsage.estimatedVisibleTokens.toLocaleString()} tokens`;
   }
 
   return "unavailable";

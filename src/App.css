@@ -24,6 +24,7 @@ body {
 }
 
 .summary-bar,
+.filter-bar,
 .detail-panel {
   padding: 18px;
 }
@@ -33,13 +34,33 @@ body {
   gap: 10px;
 }
 
+.summary-controls {
+  padding-bottom: 2px;
+}
+
+.project-anchor {
+  display: grid;
+  min-width: 180px;
+  gap: 2px;
+  border: 1px solid #d8e2ee;
+  border-radius: 8px;
+  padding: 8px 12px;
+  background: #fbfdff;
+}
+
+.label-filter-group {
+  display: grid;
+  min-width: 260px;
+  gap: 6px;
+}
+
 .board-scroll {
   max-width: calc(100vw - 48px);
   overflow-x: auto;
 }
 
 .lifecycle-board {
-  min-width: 2260px;
+  min-width: 2560px;
   table-layout: fixed;
 }
 
@@ -76,6 +97,16 @@ body {
   white-space: normal;
 }
 
+.gate-header {
+  background: #fff7ed;
+  color: #9a3412;
+}
+
+.gate-header-content {
+  display: grid;
+  gap: 2px;
+}
+
 .stage-cell-wrap {
   width: 150px;
   min-width: 150px;
@@ -91,6 +122,26 @@ body {
   font: inherit;
   text-align: left;
   cursor: pointer;
+}
+
+.gate-cell-wrap {
+  background: #fffaf0;
+}
+
+.gate-cell {
+  display: grid;
+  min-height: 92px;
+  align-content: center;
+  gap: 6px;
+  border: 1px dashed #f59e0b;
+  border-radius: 8px;
+  padding: 8px;
+  background: #fffbeb;
+  color: #9a3412;
+}
+
+.gate-cell-additional-pr {
+  align-content: start;
 }
 
 .issue-button {
@@ -142,9 +193,28 @@ body {
   background: #fbfdff;
 }
 
+.artifact-meta-grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.85fr) minmax(260px, 1.4fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.artifact-meta-block {
+  display: grid;
+  gap: 4px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px;
+  background: #ffffff;
+}
+
 .artifact-path {
-  margin-top: 6px;
   overflow-wrap: anywhere;
+}
+
+.empty-state {
+  padding: 18px;
 }
 
 @media (max-width: 760px) {
@@ -154,5 +224,9 @@ body {
 
   .board-scroll {
     max-width: calc(100vw - 28px);
+  }
+
+  .artifact-meta-grid {
+    grid-template-columns: 1fr;
   }
 }
