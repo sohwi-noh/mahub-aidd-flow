@@ -2398,13 +2398,13 @@
     {
       "artifacts": [
         {
-          "kind": "unknown",
+          "kind": "subagent",
           "label": "subagents/01-frontend-design.md",
           "path": ".omx/artifacts/KTD-14/run-001/subagents/01-frontend-design.md",
           "summary": "KTD 14 frontend design 검토 역할 담당: frontend design 목적: AIDD dashboard 좌→우 lifecycle 화면의 추가PR 열 깨짐을 수정하고, 배포/PR 전 반응형 검증 규칙을 고정한다. 판단 원인: 추가PR 셀 안에서 MUI Chip 이 내부 label nowrap과 고정 content width를 유지해, 긴 연결 PR n · repository "
         },
         {
-          "kind": "unknown",
+          "kind": "evidence",
           "label": "evidence/frontend-visual-audit.md",
           "path": ".omx/artifacts/KTD-14/run-001/evidence/frontend-visual-audit.md",
           "summary": "KTD 14 frontend visual audit 검증 대상 URL: http://127.0.0.1:5174/ 대상 화면: AIDD workflow dashboard 좌→우 lifecycle board 집중 영역: 추가PR (사람개입) 열의 연결 PR 링크와 11 MR/Wiki/Graph 환류 열 사이의 겹침 실행 결과 npm test : PASS, 1 file / 7 tests npm r"
@@ -2514,16 +2514,16 @@
     {
       "artifacts": [
         {
-          "kind": "unknown",
+          "kind": "subagent",
           "label": "subagents/01-frontend-design.md",
           "path": ".omx/artifacts/KTD-15/run-001/subagents/01-frontend-design.md",
           "summary": "KTD 15 frontend design 검토 역할 담당: frontend design 목적: AIDD dashboard lifecycle stage 카드에서 상태 Chip이 카드 밖으로 넘치는 화면 깨짐을 수정한다. 원인 stage 카드 상단 행은 단계 번호와 상태 Chip을 같은 flex row에 배치한다. 기존 CSS는 .stage cell .MuiChip root { max width"
         },
         {
-          "kind": "unknown",
+          "kind": "evidence",
           "label": "evidence/frontend-visual-audit.md",
           "path": ".omx/artifacts/KTD-15/run-001/evidence/frontend-visual-audit.md",
-          "summary": "KTD 15 frontend visual audit 검증 대상 URL: http://127.0.0.1:5174/ 대상 화면: AIDD workflow dashboard 좌→우 lifecycle board 집중 영역: stage 카드 상단 상태 Chip containment 실행 결과 npm test : PASS, 1 file / 7 tests npm run build : PASS Playwr"
+          "summary": "KTD 15 frontend visual audit 검증 대상 URL: http://127.0.0.1:5174/ 대상 화면: AIDD workflow dashboard 좌→우 lifecycle board 집중 영역: stage 카드 상단 상태 Chip containment, PR link label, Tooltip, Bug label filter, 0~11 stage 한눈 보기, 상세 패널 "
         },
         {
           "kind": "summary",
@@ -2532,8 +2532,8 @@
           "summary": "KTD 15 run summary 이슈 Linear: KTD 15 제목: AIDD dashboard stage 상태 Chip 셀 밖 넘침 수정 프로젝트/마일스톤: MA Hub / 환경 구성하기 변경 요약 stage 카드 상단 행에 전용 클래스와 flex 제약을 추가했다. 단계 번호는 고정폭, 상태 Chip은 남은 폭 안에서만 줄어드는 구조로 변경했다. 긴 상태명은 카드 내부에서 말줄임 처리되"
         }
       ],
-      "completedAt": null,
-      "completedStageCount": 3,
+      "completedAt": "2026-05-12T17:08:00+09:00",
+      "completedStageCount": 12,
       "currentStage": 11,
       "currentStageName": "MR/Wiki/Graph 환류",
       "issueId": "KTD-15",
@@ -2566,7 +2566,7 @@
         {
           "agent": "executor",
           "artifactPath": ".omx/artifacts/KTD-15/run-001/run-summary.md",
-          "completedAt": null,
+          "completedAt": "2026-05-12T17:08:00+09:00",
           "model": "n/a",
           "nameKo": "최소 구현",
           "reasoning": "n/a",
@@ -2582,7 +2582,7 @@
         {
           "agent": "frontend-design",
           "artifactPath": ".omx/artifacts/KTD-15/run-001/subagents/01-frontend-design.md",
-          "completedAt": null,
+          "completedAt": "2026-05-12T17:08:00+09:00",
           "model": "gpt-5.5",
           "nameKo": "검증/리뷰",
           "reasoning": "high",
@@ -2598,13 +2598,13 @@
         {
           "agent": "git-master",
           "artifactPath": ".omx/artifacts/KTD-15/run-001/run-summary.md",
-          "completedAt": null,
+          "completedAt": "2026-05-12T17:08:00+09:00",
           "model": "n/a",
           "nameKo": "MR/Wiki/Graph 환류",
           "reasoning": "n/a",
           "stage": 11,
-          "startedAt": null,
-          "status": "PR 생성 전",
+          "startedAt": "2026-05-12T17:08:00+09:00",
+          "status": "PR #7 생성, merge 대기",
           "tokenUsage": {
             "availability": "estimated",
             "reportedTotalTokens": null,
@@ -2613,13 +2613,19 @@
         }
       ],
       "startedAt": "2026-05-12T14:24:12+09:00",
-      "status": "In Progress",
+      "status": "Done",
       "title": "AIDD dashboard stage 상태 Chip 셀 밖 넘침 수정",
       "totalStageCount": 12,
       "url": "https://linear.app/ktds-ai-eng/issue/KTD-15/aidd-dashboard-stage-상태-chip-셀-밖-넘침-수정",
       "linearProject": "MA Hub",
       "linearMilestone": "환경 구성하기",
-      "pullRequests": []
+      "pullRequests": [
+        {
+          "number": 7,
+          "repository": "mahub-aidd-flow",
+          "url": "https://github.com/sohwi-noh/mahub-aidd-flow/pull/7"
+        }
+      ]
     }
   ],
   "schemaVersion": 1,
