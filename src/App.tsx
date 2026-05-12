@@ -32,6 +32,7 @@ import type { ArtifactRef, DashboardIssue, DashboardSnapshot, LifecycleStage, Pu
 import { formatDateTime, formatTokenUsage } from "./domain/dashboard";
 
 const dashboardSnapshot = snapshot as DashboardSnapshot;
+const issueToMrLifecycleUrl = new URL("../../../docs/issue-to-mr-lifecycle.svg", import.meta.url).href;
 
 type LinearMilestone = {
   id: string;
@@ -92,12 +93,15 @@ type BoardColumn =
     };
 
 type Filters = {
-  label: string;
+  area: "dashboard" | "mahub-api" | "mahub-web";
+  type: "all" | "bug" | "improvement" | "feature";
   milestone: string;
 };
 
 const activeProjectName = linearProjectSnapshot.project.name;
 const activeMilestoneName = linearProjectSnapshot.activeMilestoneName;
+const areaFilterOptions: Filters["area"][] = ["dashboard", "mahub-api", "mahub-web"];
+const typeFilterOptions: Filters["type"][] = ["all", "bug", "improvement", "feature"];
 
 const boardColumns: BoardColumn[] = [
   { kind: "stage", stage: canonicalStages[0] },
@@ -187,6 +191,33 @@ function formatIssueTokenSum(issue: DashboardIssue): string {
   return tokenSum > 0 ? `예측 ${tokenSum.toLocaleString()} tokens` : "token unavailable";
 }
 
+function isKnownValue(value: string | null | undefined): value is string {
+  return Boolean(value && value !== "n/a");
+}
+
+function formatDuration(startedAt: string | null | undefined, completedAt: string | null | undefined): string | null {
+  if (!startedAt || !completedAt) {
+    return null;
+  }
+
+  const started = new Date(startedAt).getTime();
+  const completed = new Date(completedAt).getTime();
+  if (Number.isNaN(started) || Number.isNaN(completed) || completed < started) {
+    return null;
+  }
+
+  const totalSeconds = Math.floor((completed - started) / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return `${minutes}분 ${seconds}초`;
+}
+
+function formatStageTiming(startedAt: string | null | undefined, completedAt: string | null | undefined): string {
+  const duration = formatDuration(startedAt, completedAt);
+  const durationText = duration ? ` (${duration} 소요)` : "";
+  return `시작 ${formatDateTime(startedAt ?? null)} · 종료 ${formatDateTime(completedAt ?? null)}${durationText}`;
+}
+
 function issueMilestone(issue: DashboardIssue): string {
   return issue.linearMilestone ?? activeMilestoneName;
 }
@@ -220,6 +251,40 @@ function pullRequests(issue: DashboardIssue): PullRequestRef[] {
   }
 
   return Array.from(byUrl.values()).sort((left, right) => left.repository.localeCompare(right.repository) || left.number - right.number);
+}
+
+function normalizedLabels(issue: DashboardIssue): string[] {
+  return issue.labels.map((label) => label.toLowerCase());
+}
+
+function issueAreas(issue: DashboardIssue): Filters["area"][] {
+  const values = new Set<Filters["area"]>();
+  const labels = normalizedLabels(issue);
+  const repositories = pullRequests(issue).map((pr) => pr.repository.toLowerCase());
+
+  if (labels.includes("dashboard") || repositories.includes("mahub-aidd-flow")) {
+    values.add("dashboard");
+  }
+  if (labels.includes("mahub-api") || repositories.includes("mahub-api")) {
+    values.add("mahub-api");
+  }
+  if (labels.includes("mahub-web") || repositories.includes("mahub-web")) {
+    values.add("mahub-web");
+  }
+
+  return Array.from(values);
+}
+
+function issueTypes(issue: DashboardIssue): Exclude<Filters["type"], "all">[] {
+  const labels = normalizedLabels(issue);
+  return typeFilterOptions.filter((type): type is Exclude<Filters["type"], "all"> => type !== "all" && labels.includes(type));
+}
+
+function issueMatchesFilters(issue: DashboardIssue, filters: Filters): boolean {
+  const areaMatch = issueAreas(issue).includes(filters.area);
+  const typeMatch = filters.type === "all" || issueTypes(issue).includes(filters.type);
+  const milestoneMatch = issueMilestone(issue) === filters.milestone;
+  return issueProject(issue) === activeProjectName && areaMatch && typeMatch && milestoneMatch;
 }
 
 function relevantArtifacts(issue: DashboardIssue, selectedStage: LifecycleStage | undefined): ArtifactRef[] {
@@ -320,6 +385,14 @@ function SummaryBar({
       <Typography component="h1" sx={{ fontWeight: 900 }} variant="h4">
         AIDD workflow dashboard
       </Typography>
+      <Box aria-label="issue to MR lifecycle figure" className="lifecycle-figure">
+        <Box
+          alt="Issue to MR lifecycle: Understand와 Quality 결과가 asset으로 고정되고 Understand Wiki로 환류되는 도식"
+          className="lifecycle-figure-image"
+          component="img"
+          src={issueToMrLifecycleUrl}
+        />
+      </Box>
       <Stack direction="row" sx={{ flexWrap: "wrap", gap: 1.25 }}>
         <Chip label={`이슈 ${issues.length}`} />
         <Chip color="success" label={`완료 ${completed}`} variant="outlined" />
@@ -332,44 +405,54 @@ function SummaryBar({
 
 function FilterBar({
   filters,
-  labels,
   totalCount,
   visibleCount,
-  onChange,
+  onAreaChange,
+  onTypeChange,
 }: {
   filters: Filters;
-  labels: string[];
   totalCount: number;
   visibleCount: number;
-  onChange: (next: Filters) => void;
+  onAreaChange: (area: Filters["area"]) => void;
+  onTypeChange: (type: Filters["type"]) => void;
 }) {
   return (
     <Paper aria-label="dashboard filters" className="filter-bar" component="section" variant="outlined">
-      <Stack direction={{ xs: "column", md: "row" }} spacing={1.5} sx={{ alignItems: { md: "center" } }}>
+      <Stack direction={{ xs: "column", lg: "row" }} spacing={1.5} sx={{ alignItems: { lg: "center" } }}>
         <Box aria-label="label filters" className="label-filter-group">
           <Typography color="text.secondary" variant="caption">
-            Label
+            1레벨
           </Typography>
           <Stack direction="row" sx={{ flexWrap: "wrap", gap: 0.75 }}>
-            <Chip
-              color={filters.label === "all" ? "primary" : "default"}
-              label="전체 label"
-              onClick={() => onChange({ ...filters, label: "all" })}
-              variant={filters.label === "all" ? "filled" : "outlined"}
-            />
-            {labels.map((label) => (
+            {areaFilterOptions.map((area) => (
               <Chip
-                key={label}
-                color={filters.label === label ? "primary" : "default"}
-                label={label}
-                onClick={() => onChange({ ...filters, label })}
-                variant={filters.label === label ? "filled" : "outlined"}
+                key={area}
+                color={filters.area === area ? "primary" : "default"}
+                label={area}
+                onClick={() => onAreaChange(area)}
+                variant={filters.area === area ? "filled" : "outlined"}
+              />
+            ))}
+          </Stack>
+        </Box>
+        <Box aria-label="type filters" className="label-filter-group">
+          <Typography color="text.secondary" variant="caption">
+            2레벨
+          </Typography>
+          <Stack direction="row" sx={{ flexWrap: "wrap", gap: 0.75 }}>
+            {typeFilterOptions.map((type) => (
+              <Chip
+                key={type}
+                color={filters.type === type ? "primary" : "default"}
+                label={type}
+                onClick={() => onTypeChange(type)}
+                variant={filters.type === type ? "filled" : "outlined"}
               />
             ))}
           </Stack>
         </Box>
         <Typography aria-label="filter result count" color="text.secondary" variant="body2">
-          {visibleCount} / {totalCount} issues
+          {visibleCount} / {totalCount} 이슈
         </Typography>
       </Stack>
     </Paper>
@@ -580,6 +663,11 @@ function IssueLifecycleBoard({
 function IssueDetailPanel({ issue, stage }: { issue: DashboardIssue; stage: LifecycleStage | undefined }) {
   const artifacts = relevantArtifacts(issue, stage);
   const groups = artifactGroups(artifacts);
+  const detailAgent = stage?.agent ?? "n/a";
+  const detailModel = stage?.model ?? "n/a";
+  const shouldShowModel = isKnownValue(detailAgent) && isKnownValue(detailModel);
+  const detailStartedAt = stage?.startedAt ?? issue.startedAt;
+  const detailCompletedAt = stage?.completedAt ?? issue.completedAt;
 
   return (
     <Collapse in timeout={180}>
@@ -605,11 +693,10 @@ function IssueDetailPanel({ issue, stage }: { issue: DashboardIssue; stage: Life
               </Typography>
             </Box>
             <Stack direction="row" sx={{ alignItems: "center", flexWrap: "wrap", gap: 1 }}>
-              <Chip label={`agent ${stage?.agent ?? "n/a"}`} />
-              <Chip label={`model ${stage?.model ?? "n/a"}`} variant="outlined" />
+              <Chip label={`agent ${detailAgent}`} />
+              {shouldShowModel ? <Chip label={`model ${detailModel}`} variant="outlined" /> : null}
               <Chip label={`token ${formatTokenUsage(stage?.tokenUsage ?? { availability: "unavailable", reportedTotalTokens: null })}`} variant="outlined" />
-              <Chip label={`시작 ${formatDateTime(stage?.startedAt ?? issue.startedAt)}`} variant="outlined" />
-              <Chip label={`종료 ${formatDateTime(stage?.completedAt ?? issue.completedAt)}`} variant="outlined" />
+              <Chip label={formatStageTiming(detailStartedAt, detailCompletedAt)} variant="outlined" />
             </Stack>
           </Stack>
 
@@ -678,18 +765,17 @@ export function App() {
     () => [...dashboardSnapshot.issues].sort((left, right) => issueNumber(right.issueId) - issueNumber(left.issueId)),
     [],
   );
-  const [filters, setFilters] = useState<Filters>({ label: "all", milestone: activeMilestoneName });
-  const labels = useMemo(() => Array.from(new Set(issues.flatMap((issue) => issue.labels))).sort(), [issues]);
+  const [filters, setFilters] = useState<Filters>({ area: "dashboard", type: "improvement", milestone: activeMilestoneName });
   const milestones = useMemo(() => [...linearProjectSnapshot.milestones].sort((left, right) => left.sortOrder - right.sortOrder), []);
-  const visibleIssues = useMemo(
-    () =>
-      issues.filter((issue) => {
-        const labelMatch = filters.label === "all" || issue.labels.includes(filters.label);
-        const milestoneMatch = issueMilestone(issue) === filters.milestone;
-        return issueProject(issue) === activeProjectName && labelMatch && milestoneMatch;
-      }),
-    [filters, issues],
-  );
+  const visibleIssues = useMemo(() => issues.filter((issue) => issueMatchesFilters(issue, filters)), [filters, issues]);
+  const handleAreaChange = (area: Filters["area"]) => {
+    setFilters((current) => {
+      const next = { ...current, area };
+      const hasCurrentTypeMatch = issues.some((issue) => issueMatchesFilters(issue, next));
+      return hasCurrentTypeMatch ? next : { ...next, type: "all" };
+    });
+  };
+  const handleTypeChange = (type: Filters["type"]) => setFilters({ ...filters, type });
   const [selected, setSelected] = useState<Selection>({
     issueId: issues[0]?.issueId ?? "",
     stage: issues[0]?.currentStage ?? 0,
@@ -709,10 +795,10 @@ export function App() {
         />
         <FilterBar
           filters={filters}
-          labels={labels}
           totalCount={issues.length}
           visibleCount={visibleIssues.length}
-          onChange={setFilters}
+          onAreaChange={handleAreaChange}
+          onTypeChange={handleTypeChange}
         />
         {visibleIssues.length > 0 ? (
           <IssueLifecycleBoard issues={visibleIssues} selected={selected} onSelect={setSelected} />
@@ -720,7 +806,7 @@ export function App() {
           <Paper className="empty-state" variant="outlined">
             <Typography sx={{ fontWeight: 900 }}>필터 결과 없음</Typography>
             <Typography color="text.secondary" variant="body2">
-              다른 label 또는 milestone을 선택해줘.
+              현재 조합에 해당하는 이슈가 없어. 2레벨을 all로 바꾸거나 다른 1레벨, milestone을 선택해줘.
             </Typography>
           </Paper>
         )}
