@@ -1,29 +1,45 @@
-import { render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { App } from "./App";
 
 describe("AIDD workflow dashboard", () => {
-  it("shows the dashboard title and selected issue progress", () => {
+  it("shows dashboard-labeled issues and lifecycle progress", () => {
     render(<App />);
 
     expect(
-      screen.getByRole("heading", { name: "AIDD workflow 관제" }),
+      screen.getByRole("heading", { name: "AIDD workflow dashboard" }),
     ).toBeInTheDocument();
-    expect(screen.getAllByText("KTD-10")).toHaveLength(2);
-    expect(screen.getByText("현재 단계: 최소 구현")).toBeInTheDocument();
-    expect(screen.getByLabelText("stage-progress")).toHaveTextContent("8 / 12");
+    expect(screen.getAllByText("KTD-11").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("dashboard").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("완료").length).toBeGreaterThan(0);
+    expect(screen.getByLabelText("KTD-11 stage progress")).toHaveTextContent("11 / 12");
   });
 
-  it("shows subagent model, reasoning, artifact, evidence, and token status", () => {
+  it("shows stage agent, model, token, timing, and status", () => {
     render(<App />);
 
-    const table = screen.getByRole("table", { name: "subagent 실행 이력" });
-    expect(within(table).getByText("test-engineer")).toBeInTheDocument();
+    const table = screen.getByRole("table", { name: "KTD-11 lifecycle stages" });
+    expect(within(table).getAllByText("test-engineer").length).toBeGreaterThan(0);
     expect(within(table).getAllByText("gpt-5.5").length).toBeGreaterThan(0);
-    expect(within(table).getAllByText("medium")).toHaveLength(2);
+    expect(within(table).getAllByText("unavailable").length).toBeGreaterThan(0);
+    expect(within(table).getAllByText("2026-05-12 11:41").length).toBeGreaterThan(0);
+    expect(within(table).getAllByText("완료").length).toBeGreaterThan(0);
+  });
+
+  it("expands issue details with markdown paths and generated summaries", () => {
+    render(<App />);
+
+    fireEvent.click(screen.getByRole("button", { name: "KTD-11 상세 열기" }));
+
+    const details = screen.getByRole("region", { name: "KTD-11 artifact details" });
+    expect(within(details).getByText("계획")).toBeInTheDocument();
     expect(
-      within(table).getByText("run-002/subagents/04-test-spec-red.md"),
+      within(details).getByText(".omx/artifacts/KTD-11/run-001/subagents/03-tdd-plan.md"),
     ).toBeInTheDocument();
-    expect(within(table).getAllByText("run-002/evidence/red.md")).toHaveLength(2);
-    expect(screen.getByText("토큰: 도구 미노출")).toBeInTheDocument();
+    expect(
+      within(details).getByText(".omx/artifacts/KTD-11/run-001/evidence/red-component-test.md"),
+    ).toBeInTheDocument();
+    expect(
+      within(details).getByText(/요약 생성 기준은 markdown 제목과 본문 앞부분을 deterministic하게 추출한다/),
+    ).toBeInTheDocument();
   });
 });

@@ -1,0 +1,808 @@
+{
+  "generatedBy": "aidd-artifact-summary",
+  "issues": [
+    {
+      "artifacts": [
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-11/run-001/subagents/01-requirements.md",
+          "summary": "KTD 11 요구사항 정리 요구사항 Dashboard 라벨이 붙은 Linear issue를 화면에서 조회할 수 있어야 한다. 각 Linear issue별 lifecycle 실행 정보를 확인할 수 있어야 한다. stage agent model token 사용량 startedAt"
+        },
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-11/run-001/subagents/02-architecture.md",
+          "summary": "KTD 11은 mahub aidd flow를 기존 hardcoded baseline에서 실제 OMX artifact snapshot 기반의 MUI dashboard로 확장한다. 브라우저가 로컬 filesystem을 직접 읽을 수 없으므로 .omx/artifacts를 build time deterministic JSON으로"
+        },
+        {
+          "kind": "plan",
+          "label": "계획",
+          "path": ".omx/artifacts/KTD-11/run-001/subagents/03-tdd-plan.md",
+          "summary": "Red, Green, Refactor 순서와 검증 명령을 고정했다. 요약 생성 기준은 markdown 제목과 본문 앞부분을 deterministic하게 추출한다."
+        },
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-11/run-001/subagents/04-test-spec-red.md",
+          "summary": "KTD 11 테스트 명세 / Red 기준 실패해야 할 테스트 dashboard label issue 표시 KTD 11 issue가 표시된다. dashboard label이 표시된다. status와 stage progress가 표시된다. stage agent/model/token/timing/status 표시"
+        },
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-11/run-001/subagents/07-implementation.md",
+          "summary": "KTD 11 Stage 7 최소 구현 결과 변경 파일 목록 package.json package lock.json src/App.tsx src/App.css src/App.test.tsx src/domain/dashboard.ts src/generated/artifact dashboard.json"
+        },
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-11/run-001/subagents/08-green-verification.md",
+          "summary": "KTD 11 Stage 8 Green 통과 증거 범위 Workspace: /Users/so2/workspace so2/foundary App repo: /Users/so2/workspace so2/foundary/workflow/mahub aidd flow 산출물 역할: Green 단계 검증 결과 기록"
+        },
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-11/run-001/subagents/09-refactor.md",
+          "summary": "KTD 11 Stage 9 리팩터링 판단 Findings MUI 기반 dashboard 구현은 완료된 상태다. domain formatter가 화면 구현에서 분리되어 표시 로직의 책임 경계가 정리되었다. 테스트는 generated artifact snapshot을 사용해 dashboard 입력 데이터를 고정한다."
+        },
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-11/run-001/subagents/10-review.md",
+          "summary": "KTD 11 Stage 10 검증/리뷰 Findings 중대 findings 없음. 검토 근거 MUI dashboard 구현 완료 확인 App.test.tsx component tests 3개 작성 확인 npm test 통과 npm run typecheck 통과 npm run build 통과"
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-11/run-001/evidence/dependency-install.md",
+          "summary": "MUI 단일 디자인 프레임워크 적용을 위해 @mui/material, @emotion/react, @emotion/styled를 추가했다."
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-11/run-001/evidence/green.md",
+          "summary": "KTD 11 dashboard 구현 후 component test, TypeScript check, production build가 모두 통과했다. 중간에 artifact summary generator 재생성 후 stage 0 timing 누락으로 npm test가 1회 실패했으며, evidence/snapshot re"
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-11/run-001/evidence/red-component-test.md",
+          "summary": "exit code: 1 Test Files: 1 failed (1) Tests: 3 failed (3)"
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-11/run-001/evidence/refactor-review.md",
+          "summary": "리팩터링 subagent와 코드리뷰 subagent가 모두 PR 진행 가능 판정을 남겼다."
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-11/run-001/evidence/snapshot-regeneration-failure.md",
+          "summary": "artifact summary skill로 src/generated/artifact dashboard.json을 재생성한 뒤 npm test가 1회 실패했다."
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-11/run-001/evidence/typecheck-failure.md",
+          "summary": "Green 단계 중 npm run typecheck 1차 실행이 실패했고, 원인은 MUI Typography에 직접 전달한 fontWeight prop type mismatch였다."
+        },
+        {
+          "kind": "result",
+          "label": "결과",
+          "path": ".omx/artifacts/KTD-11/run-001/run-summary.md",
+          "summary": "Linear label dashboard, mahub를 생성했다. Linear issue KTD 11을 dashboard label과 In Progress 상태로 생성했다. 요구사항/아키텍처/TDD 계획/테스트 명세 subagent artifact를 남겼다. component test를 먼저 수정하고 npm test Re"
+        },
+        {
+          "kind": "ledger",
+          "label": "단계 원장",
+          "path": ".omx/artifacts/KTD-11/run-001/stage-ledger.md",
+          "summary": "KTD 11 run 001 단계 원장 단계 한글 단계명 담당 산출물/증거 상태 : 0 이슈 발행 사람, leader raw linear.md, 00 intake.md 완료 1 요구사항 정리 analyst subagents/01 requirements.md 완료"
+        },
+        {
+          "kind": "token",
+          "label": "토큰 기록",
+          "path": ".omx/artifacts/KTD-11/run-001/token-usage.md",
+          "summary": "KTD 11 run 001 토큰 사용 기록 도구 노출 한계 Codex native subagent별 실제 token 사용량은 현재 도구 응답에 노출되지 않을 수 있다. Subagent별 기록 산출물 역할 모델/추론 노력 reportedTotalTokens : 01 requirements.md analyst gpt 5.5/"
+        },
+        {
+          "kind": "timeline",
+          "label": "타임라인",
+          "path": ".omx/artifacts/KTD-11/run-001/timeline.md",
+          "summary": "KTD 11 run 001 timeline 시각(KST) 이벤트 2026 05 12 11:41 Linear label dashboard, mahub 생성 2026 05 12 11:41 Linear KTD 11 생성 및 In Progress 시작 2026 05 12 11:43 요구사항/아키텍처/TDD/테스트 subagent"
+        }
+      ],
+      "completedAt": null,
+      "completedStageCount": 11,
+      "currentStage": 11,
+      "currentStageName": "MR/Wiki/Graph 환류",
+      "issueId": "KTD-11",
+      "labels": [
+        "dashboard",
+        "Feature"
+      ],
+      "repoPath": "workflow/mahub-aidd-flow",
+      "runs": [
+        {
+          "artifacts": [
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-11/run-001/subagents/01-requirements.md",
+              "summary": "KTD 11 요구사항 정리 요구사항 Dashboard 라벨이 붙은 Linear issue를 화면에서 조회할 수 있어야 한다. 각 Linear issue별 lifecycle 실행 정보를 확인할 수 있어야 한다. stage agent model token 사용량 startedAt"
+            },
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-11/run-001/subagents/02-architecture.md",
+              "summary": "KTD 11은 mahub aidd flow를 기존 hardcoded baseline에서 실제 OMX artifact snapshot 기반의 MUI dashboard로 확장한다. 브라우저가 로컬 filesystem을 직접 읽을 수 없으므로 .omx/artifacts를 build time deterministic JSON으로"
+            },
+            {
+              "kind": "plan",
+              "label": "계획",
+              "path": ".omx/artifacts/KTD-11/run-001/subagents/03-tdd-plan.md",
+              "summary": "Red, Green, Refactor 순서와 검증 명령을 고정했다. 요약 생성 기준은 markdown 제목과 본문 앞부분을 deterministic하게 추출한다."
+            },
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-11/run-001/subagents/04-test-spec-red.md",
+              "summary": "KTD 11 테스트 명세 / Red 기준 실패해야 할 테스트 dashboard label issue 표시 KTD 11 issue가 표시된다. dashboard label이 표시된다. status와 stage progress가 표시된다. stage agent/model/token/timing/status 표시"
+            },
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-11/run-001/subagents/07-implementation.md",
+              "summary": "KTD 11 Stage 7 최소 구현 결과 변경 파일 목록 package.json package lock.json src/App.tsx src/App.css src/App.test.tsx src/domain/dashboard.ts src/generated/artifact dashboard.json"
+            },
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-11/run-001/subagents/08-green-verification.md",
+              "summary": "KTD 11 Stage 8 Green 통과 증거 범위 Workspace: /Users/so2/workspace so2/foundary App repo: /Users/so2/workspace so2/foundary/workflow/mahub aidd flow 산출물 역할: Green 단계 검증 결과 기록"
+            },
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-11/run-001/subagents/09-refactor.md",
+              "summary": "KTD 11 Stage 9 리팩터링 판단 Findings MUI 기반 dashboard 구현은 완료된 상태다. domain formatter가 화면 구현에서 분리되어 표시 로직의 책임 경계가 정리되었다. 테스트는 generated artifact snapshot을 사용해 dashboard 입력 데이터를 고정한다."
+            },
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-11/run-001/subagents/10-review.md",
+              "summary": "KTD 11 Stage 10 검증/리뷰 Findings 중대 findings 없음. 검토 근거 MUI dashboard 구현 완료 확인 App.test.tsx component tests 3개 작성 확인 npm test 통과 npm run typecheck 통과 npm run build 통과"
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-11/run-001/evidence/dependency-install.md",
+              "summary": "MUI 단일 디자인 프레임워크 적용을 위해 @mui/material, @emotion/react, @emotion/styled를 추가했다."
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-11/run-001/evidence/green.md",
+              "summary": "KTD 11 dashboard 구현 후 component test, TypeScript check, production build가 모두 통과했다. 중간에 artifact summary generator 재생성 후 stage 0 timing 누락으로 npm test가 1회 실패했으며, evidence/snapshot re"
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-11/run-001/evidence/red-component-test.md",
+              "summary": "exit code: 1 Test Files: 1 failed (1) Tests: 3 failed (3)"
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-11/run-001/evidence/refactor-review.md",
+              "summary": "리팩터링 subagent와 코드리뷰 subagent가 모두 PR 진행 가능 판정을 남겼다."
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-11/run-001/evidence/snapshot-regeneration-failure.md",
+              "summary": "artifact summary skill로 src/generated/artifact dashboard.json을 재생성한 뒤 npm test가 1회 실패했다."
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-11/run-001/evidence/typecheck-failure.md",
+              "summary": "Green 단계 중 npm run typecheck 1차 실행이 실패했고, 원인은 MUI Typography에 직접 전달한 fontWeight prop type mismatch였다."
+            },
+            {
+              "kind": "result",
+              "label": "결과",
+              "path": ".omx/artifacts/KTD-11/run-001/run-summary.md",
+              "summary": "Linear label dashboard, mahub를 생성했다. Linear issue KTD 11을 dashboard label과 In Progress 상태로 생성했다. 요구사항/아키텍처/TDD 계획/테스트 명세 subagent artifact를 남겼다. component test를 먼저 수정하고 npm test Re"
+            },
+            {
+              "kind": "ledger",
+              "label": "단계 원장",
+              "path": ".omx/artifacts/KTD-11/run-001/stage-ledger.md",
+              "summary": "KTD 11 run 001 단계 원장 단계 한글 단계명 담당 산출물/증거 상태 : 0 이슈 발행 사람, leader raw linear.md, 00 intake.md 완료 1 요구사항 정리 analyst subagents/01 requirements.md 완료"
+            },
+            {
+              "kind": "token",
+              "label": "토큰 기록",
+              "path": ".omx/artifacts/KTD-11/run-001/token-usage.md",
+              "summary": "KTD 11 run 001 토큰 사용 기록 도구 노출 한계 Codex native subagent별 실제 token 사용량은 현재 도구 응답에 노출되지 않을 수 있다. Subagent별 기록 산출물 역할 모델/추론 노력 reportedTotalTokens : 01 requirements.md analyst gpt 5.5/"
+            },
+            {
+              "kind": "timeline",
+              "label": "타임라인",
+              "path": ".omx/artifacts/KTD-11/run-001/timeline.md",
+              "summary": "KTD 11 run 001 timeline 시각(KST) 이벤트 2026 05 12 11:41 Linear label dashboard, mahub 생성 2026 05 12 11:41 Linear KTD 11 생성 및 In Progress 시작 2026 05 12 11:43 요구사항/아키텍처/TDD/테스트 subagent"
+            }
+          ],
+          "endedAt": "2026-05-12T12:22:43+09:00",
+          "runId": "run-001",
+          "startedAt": "2026-05-12T11:41:00+09:00",
+          "status": "running",
+          "subagents": [
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-11/run-001/subagents/01-requirements.md",
+                "summary": "KTD 11 요구사항 정리 요구사항 Dashboard 라벨이 붙은 Linear issue를 화면에서 조회할 수 있어야 한다. 각 Linear issue별 lifecycle 실행 정보를 확인할 수 있어야 한다. stage agent model token 사용량 startedAt"
+              },
+              "completedAt": "2026-05-12T11:44:00+09:00",
+              "id": "subagents/01-requirements.md",
+              "model": "gpt-5.5",
+              "reasoning": "medium",
+              "role": "analyst",
+              "stage": 1,
+              "startedAt": "2026-05-12T11:43:00+09:00",
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-11/run-001/subagents/02-architecture.md",
+                "summary": "KTD 11은 mahub aidd flow를 기존 hardcoded baseline에서 실제 OMX artifact snapshot 기반의 MUI dashboard로 확장한다. 브라우저가 로컬 filesystem을 직접 읽을 수 없으므로 .omx/artifacts를 build time deterministic JSON으로"
+              },
+              "completedAt": "2026-05-12T11:48:00+09:00",
+              "id": "subagents/02-architecture.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "architect",
+              "stage": 2,
+              "startedAt": "2026-05-12T11:43:00+09:00",
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "plan",
+                "label": "계획",
+                "path": ".omx/artifacts/KTD-11/run-001/subagents/03-tdd-plan.md",
+                "summary": "Red, Green, Refactor 순서와 검증 명령을 고정했다. 요약 생성 기준은 markdown 제목과 본문 앞부분을 deterministic하게 추출한다."
+              },
+              "completedAt": "2026-05-12T11:45:00+09:00",
+              "id": "subagents/03-tdd-plan.md",
+              "model": "gpt-5.5",
+              "reasoning": "medium",
+              "role": "planner",
+              "stage": 3,
+              "startedAt": "2026-05-12T11:43:00+09:00",
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-11/run-001/subagents/04-test-spec-red.md",
+                "summary": "KTD 11 테스트 명세 / Red 기준 실패해야 할 테스트 dashboard label issue 표시 KTD 11 issue가 표시된다. dashboard label이 표시된다. status와 stage progress가 표시된다. stage agent/model/token/timing/status 표시"
+              },
+              "completedAt": "2026-05-12T11:45:00+09:00",
+              "id": "subagents/04-test-spec-red.md",
+              "model": "gpt-5.5",
+              "reasoning": "medium",
+              "role": "test-engineer",
+              "stage": 4,
+              "startedAt": "2026-05-12T11:43:00+09:00",
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "ledger",
+                "label": "단계 원장",
+                "path": ".omx/artifacts/KTD-11/run-001/stage-ledger.md",
+                "summary": "KTD 11 run 001 단계 원장 단계 한글 단계명 담당 산출물/증거 상태 : 0 이슈 발행 사람, leader raw linear.md, 00 intake.md 완료 1 요구사항 정리 analyst subagents/01 requirements.md 완료"
+              },
+              "completedAt": null,
+              "id": "stage-ledger.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "verifier",
+              "stage": 6,
+              "startedAt": null,
+              "status": "unknown",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "evidence",
+                "label": "증거",
+                "path": ".omx/artifacts/KTD-11/run-001/evidence/dependency-install.md",
+                "summary": "MUI 단일 디자인 프레임워크 적용을 위해 @mui/material, @emotion/react, @emotion/styled를 추가했다."
+              },
+              "completedAt": "2026-05-12T11:50:00+09:00",
+              "id": "evidence/dependency-install.md",
+              "model": "gpt-5.5",
+              "reasoning": "medium",
+              "role": "executor",
+              "stage": 7,
+              "startedAt": null,
+              "status": "failed",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-11/run-001/subagents/07-implementation.md",
+                "summary": "KTD 11 Stage 7 최소 구현 결과 변경 파일 목록 package.json package lock.json src/App.tsx src/App.css src/App.test.tsx src/domain/dashboard.ts src/generated/artifact dashboard.json"
+              },
+              "completedAt": "2026-05-12T11:58:00+09:00",
+              "id": "subagents/07-implementation.md",
+              "model": "gpt-5.5",
+              "reasoning": "medium",
+              "role": "executor",
+              "stage": 7,
+              "startedAt": "2026-05-12T11:53:00+09:00",
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "evidence",
+                "label": "증거",
+                "path": ".omx/artifacts/KTD-11/run-001/evidence/typecheck-failure.md",
+                "summary": "Green 단계 중 npm run typecheck 1차 실행이 실패했고, 원인은 MUI Typography에 직접 전달한 fontWeight prop type mismatch였다."
+              },
+              "completedAt": "2026-05-12T11:59:00+09:00",
+              "id": "evidence/typecheck-failure.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "verifier",
+              "stage": 8,
+              "startedAt": null,
+              "status": "failed",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-11/run-001/subagents/08-green-verification.md",
+                "summary": "KTD 11 Stage 8 Green 통과 증거 범위 Workspace: /Users/so2/workspace so2/foundary App repo: /Users/so2/workspace so2/foundary/workflow/mahub aidd flow 산출물 역할: Green 단계 검증 결과 기록"
+              },
+              "completedAt": "2026-05-12T12:14:10+09:00",
+              "id": "subagents/08-green-verification.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "verifier",
+              "stage": 8,
+              "startedAt": "2026-05-12T12:11:00+09:00",
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "evidence",
+                "label": "증거",
+                "path": ".omx/artifacts/KTD-11/run-001/evidence/green.md",
+                "summary": "KTD 11 dashboard 구현 후 component test, TypeScript check, production build가 모두 통과했다. 중간에 artifact summary generator 재생성 후 stage 0 timing 누락으로 npm test가 1회 실패했으며, evidence/snapshot re"
+              },
+              "completedAt": null,
+              "id": "evidence/green.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "verifier",
+              "stage": 8,
+              "startedAt": null,
+              "status": "unknown",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "evidence",
+                "label": "증거",
+                "path": ".omx/artifacts/KTD-11/run-001/evidence/snapshot-regeneration-failure.md",
+                "summary": "artifact summary skill로 src/generated/artifact dashboard.json을 재생성한 뒤 npm test가 1회 실패했다."
+              },
+              "completedAt": "2026-05-12T12:21:55+09:00",
+              "id": "evidence/snapshot-regeneration-failure.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "verifier",
+              "stage": 8,
+              "startedAt": null,
+              "status": "failed",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-11/run-001/subagents/09-refactor.md",
+                "summary": "KTD 11 Stage 9 리팩터링 판단 Findings MUI 기반 dashboard 구현은 완료된 상태다. domain formatter가 화면 구현에서 분리되어 표시 로직의 책임 경계가 정리되었다. 테스트는 generated artifact snapshot을 사용해 dashboard 입력 데이터를 고정한다."
+              },
+              "completedAt": "2026-05-12T12:18:00+09:00",
+              "id": "subagents/09-refactor.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "code-simplifier",
+              "stage": 9,
+              "startedAt": "2026-05-12T12:15:00+09:00",
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-11/run-001/subagents/10-review.md",
+                "summary": "KTD 11 Stage 10 검증/리뷰 Findings 중대 findings 없음. 검토 근거 MUI dashboard 구현 완료 확인 App.test.tsx component tests 3개 작성 확인 npm test 통과 npm run typecheck 통과 npm run build 통과"
+              },
+              "completedAt": "2026-05-12T12:18:00+09:00",
+              "id": "subagents/10-review.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "code-reviewer",
+              "stage": 10,
+              "startedAt": "2026-05-12T12:15:00+09:00",
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            }
+          ]
+        }
+      ],
+      "stageStates": [
+        {
+          "nameKo": "이슈 발행",
+          "ownerRoles": [],
+          "stage": 0,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "요구사항 정리",
+          "ownerRoles": [
+            "analyst"
+          ],
+          "stage": 1,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "아키텍처 정리",
+          "ownerRoles": [
+            "architect"
+          ],
+          "stage": 2,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "TDD 계획",
+          "ownerRoles": [
+            "planner"
+          ],
+          "stage": 3,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "테스트 명세",
+          "ownerRoles": [
+            "test-engineer"
+          ],
+          "stage": 4,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "Red 실패 증거",
+          "ownerRoles": [
+            "test-engineer"
+          ],
+          "stage": 5,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "구현 착수 검토 루프",
+          "ownerRoles": [
+            "architect",
+            "test-engineer",
+            "planner"
+          ],
+          "stage": 6,
+          "status": "PASS",
+          "summary": "PASS"
+        },
+        {
+          "nameKo": "최소 구현",
+          "ownerRoles": [
+            "executor"
+          ],
+          "stage": 7,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "Green 통과 증거",
+          "ownerRoles": [
+            "verifier"
+          ],
+          "stage": 8,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "리팩터링",
+          "ownerRoles": [
+            "code-simplifier"
+          ],
+          "stage": 9,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "검증/리뷰",
+          "ownerRoles": [
+            "code-reviewer",
+            "verifier"
+          ],
+          "stage": 10,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "MR/Wiki/Graph 환류",
+          "ownerRoles": [
+            "git-master",
+            "writer"
+          ],
+          "stage": 11,
+          "status": "진행 중",
+          "summary": "진행 중"
+        }
+      ],
+      "stages": [
+        {
+          "agent": "사람, leader",
+          "artifactPath": ".omx/artifacts/KTD-11/run-001/raw-linear.md",
+          "completedAt": "2026-05-12T11:41:46+09:00",
+          "model": "n/a",
+          "nameKo": "이슈 발행",
+          "reasoning": "n/a",
+          "stage": 0,
+          "startedAt": "2026-05-12T11:41:46+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "unavailable",
+            "reportedTotalTokens": null
+          }
+        },
+        {
+          "agent": "analyst",
+          "artifactPath": ".omx/artifacts/KTD-11/run-001/subagents/01-requirements.md",
+          "completedAt": "2026-05-12T11:44:00+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "요구사항 정리",
+          "reasoning": "medium",
+          "stage": 1,
+          "startedAt": "2026-05-12T11:43:00+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "unavailable",
+            "reportedTotalTokens": null
+          }
+        },
+        {
+          "agent": "architect",
+          "artifactPath": ".omx/artifacts/KTD-11/run-001/subagents/02-architecture.md",
+          "completedAt": "2026-05-12T11:48:00+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "아키텍처 정리",
+          "reasoning": "high",
+          "stage": 2,
+          "startedAt": "2026-05-12T11:43:00+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "unavailable",
+            "reportedTotalTokens": null
+          }
+        },
+        {
+          "agent": "planner",
+          "artifactPath": ".omx/artifacts/KTD-11/run-001/subagents/03-tdd-plan.md",
+          "completedAt": "2026-05-12T11:45:00+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "TDD 계획",
+          "reasoning": "medium",
+          "stage": 3,
+          "startedAt": "2026-05-12T11:43:00+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "unavailable",
+            "reportedTotalTokens": null
+          }
+        },
+        {
+          "agent": "test-engineer",
+          "artifactPath": ".omx/artifacts/KTD-11/run-001/subagents/04-test-spec-red.md",
+          "completedAt": "2026-05-12T11:45:00+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "테스트 명세",
+          "reasoning": "medium",
+          "stage": 4,
+          "startedAt": "2026-05-12T11:43:00+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "unavailable",
+            "reportedTotalTokens": null
+          }
+        },
+        {
+          "agent": "test-engineer",
+          "artifactPath": ".omx/artifacts/KTD-11/run-001/evidence/red-component-test.md",
+          "completedAt": "2026-05-12T11:46:00+09:00",
+          "model": "n/a",
+          "nameKo": "Red 실패 증거",
+          "reasoning": "n/a",
+          "stage": 5,
+          "startedAt": "2026-05-12T11:46:00+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "unavailable",
+            "reportedTotalTokens": null
+          }
+        },
+        {
+          "agent": "verifier",
+          "artifactPath": ".omx/artifacts/KTD-11/run-001/stage-ledger.md",
+          "completedAt": "2026-05-12T11:49:00+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "구현 착수 검토 루프",
+          "reasoning": "high",
+          "stage": 6,
+          "startedAt": null,
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "unavailable",
+            "reportedTotalTokens": null
+          }
+        },
+        {
+          "agent": "executor",
+          "artifactPath": ".omx/artifacts/KTD-11/run-001/subagents/07-implementation.md",
+          "completedAt": "2026-05-12T11:58:00+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "최소 구현",
+          "reasoning": "medium",
+          "stage": 7,
+          "startedAt": "2026-05-12T11:53:00+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "unavailable",
+            "reportedTotalTokens": null
+          }
+        },
+        {
+          "agent": "verifier",
+          "artifactPath": ".omx/artifacts/KTD-11/run-001/evidence/green.md",
+          "completedAt": "2026-05-12T12:22:43+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "Green 통과 증거",
+          "reasoning": "high",
+          "stage": 8,
+          "startedAt": "2026-05-12T12:11:00+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "unavailable",
+            "reportedTotalTokens": null
+          }
+        },
+        {
+          "agent": "code-simplifier",
+          "artifactPath": ".omx/artifacts/KTD-11/run-001/subagents/09-refactor.md",
+          "completedAt": "2026-05-12T12:18:00+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "리팩터링",
+          "reasoning": "high",
+          "stage": 9,
+          "startedAt": "2026-05-12T12:15:00+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "unavailable",
+            "reportedTotalTokens": null
+          }
+        },
+        {
+          "agent": "code-reviewer",
+          "artifactPath": ".omx/artifacts/KTD-11/run-001/subagents/10-review.md",
+          "completedAt": "2026-05-12T12:18:00+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "검증/리뷰",
+          "reasoning": "high",
+          "stage": 10,
+          "startedAt": "2026-05-12T12:15:00+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "unavailable",
+            "reportedTotalTokens": null
+          }
+        },
+        {
+          "agent": "git-master, writer",
+          "artifactPath": ".omx/artifacts/KTD-11/run-001/evidence/pr-merge.md",
+          "completedAt": null,
+          "model": "n/a",
+          "nameKo": "MR/Wiki/Graph 환류",
+          "reasoning": "n/a",
+          "stage": 11,
+          "startedAt": null,
+          "status": "진행 중",
+          "tokenUsage": {
+            "availability": "unavailable",
+            "reportedTotalTokens": null
+          }
+        }
+      ],
+      "startedAt": "2026-05-12T11:41:00+09:00",
+      "status": "진행 중",
+      "title": "AIDD dashboard issue lifecycle 상세 관제 화면 구현",
+      "totalStageCount": 12,
+      "url": "https://linear.app/ktds-ai-eng/issue/KTD-11/aidd-dashboard-issue-lifecycle-상세-관제-화면-구현"
+    }
+  ],
+  "schemaVersion": 1,
+  "sourceRoot": ".omx/artifacts"
+}
