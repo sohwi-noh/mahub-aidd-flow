@@ -2532,7 +2532,7 @@
           "summary": "KTD 15 run summary 이슈 Linear: KTD 15 제목: AIDD dashboard stage 상태 Chip 셀 밖 넘침 수정 프로젝트/마일스톤: MA Hub / 환경 구성하기 변경 요약 stage 카드 상단 행에 전용 클래스와 flex 제약을 추가했다. 단계 번호는 고정폭, 상태 Chip은 남은 폭 안에서만 줄어드는 구조로 변경했다. 긴 상태명은 카드 내부에서 말줄임 처리되"
         }
       ],
-      "completedAt": "2026-05-12T17:08:00+09:00",
+      "completedAt": "2026-05-12T17:29:01+09:00",
       "completedStageCount": 12,
       "currentStage": 11,
       "currentStageName": "MR/Wiki/Graph 환류",
@@ -2566,7 +2566,7 @@
         {
           "agent": "executor",
           "artifactPath": ".omx/artifacts/KTD-15/run-001/run-summary.md",
-          "completedAt": "2026-05-12T17:08:00+09:00",
+          "completedAt": "2026-05-12T17:29:01+09:00",
           "model": "n/a",
           "nameKo": "최소 구현",
           "reasoning": "n/a",
@@ -2582,7 +2582,7 @@
         {
           "agent": "frontend-design",
           "artifactPath": ".omx/artifacts/KTD-15/run-001/subagents/01-frontend-design.md",
-          "completedAt": "2026-05-12T17:08:00+09:00",
+          "completedAt": "2026-05-12T17:29:01+09:00",
           "model": "gpt-5.5",
           "nameKo": "검증/리뷰",
           "reasoning": "high",
@@ -2598,13 +2598,13 @@
         {
           "agent": "git-master",
           "artifactPath": ".omx/artifacts/KTD-15/run-001/run-summary.md",
-          "completedAt": "2026-05-12T17:08:00+09:00",
+          "completedAt": "2026-05-12T17:29:01+09:00",
           "model": "n/a",
           "nameKo": "MR/Wiki/Graph 환류",
           "reasoning": "n/a",
           "stage": 11,
-          "startedAt": "2026-05-12T17:08:00+09:00",
-          "status": "PR #7 생성, merge 대기",
+          "startedAt": "2026-05-12T17:29:01+09:00",
+          "status": "PR #7 merge 완료, Linear Done 반영, responsive audit 증거 기록",
           "tokenUsage": {
             "availability": "estimated",
             "reportedTotalTokens": null,
