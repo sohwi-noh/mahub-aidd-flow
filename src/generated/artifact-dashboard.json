@@ -2654,8 +2654,8 @@
           "summary": "KTD 16 run summary 이슈 Linear: KTD 16 제목: AIDD dashboard label filter를 2레벨 chip 구조로 변경 프로젝트/마일스톤: MA Hub / 환경 구성하기 변경 요약 label filter를 1레벨 dashboard , mahub api , mahub web 와 2레벨 all , bug , improvement , feature chip으로 분"
         }
       ],
-      "completedAt": null,
-      "completedStageCount": 11,
+      "completedAt": "2026-05-12T19:15:30+09:00",
+      "completedStageCount": 12,
       "currentStage": 11,
       "currentStageName": "MR/Wiki/Graph 환류",
       "issueId": "KTD-16",
@@ -2688,7 +2688,7 @@
         {
           "agent": "executor",
           "artifactPath": ".omx/artifacts/KTD-16/run-001/run-summary.md",
-          "completedAt": "2026-05-12T19:12:00+09:00",
+          "completedAt": "2026-05-12T19:15:30+09:00",
           "model": "gpt-5.5",
           "nameKo": "최소 구현",
           "reasoning": "medium",
@@ -2704,7 +2704,7 @@
         {
           "agent": "frontend-design",
           "artifactPath": ".omx/artifacts/KTD-16/run-001/subagents/01-frontend-design.md",
-          "completedAt": "2026-05-12T19:12:00+09:00",
+          "completedAt": "2026-05-12T19:15:30+09:00",
           "model": "gpt-5.5",
           "nameKo": "검증/리뷰",
           "reasoning": "high",
@@ -2720,13 +2720,13 @@
         {
           "agent": "git-master",
           "artifactPath": ".omx/artifacts/KTD-16/run-001/run-summary.md",
-          "completedAt": "2026-05-12T19:12:00+09:00",
+          "completedAt": "2026-05-12T19:15:30+09:00",
           "model": "n/a",
           "nameKo": "MR/Wiki/Graph 환류",
           "reasoning": "n/a",
           "stage": 11,
-          "startedAt": "2026-05-12T19:12:00+09:00",
-          "status": "PR #9 생성, merge 대기",
+          "startedAt": "2026-05-12T19:15:30+09:00",
+          "status": "PR #9 merge 완료, Linear Done 반영, filter/detail audit 증거 기록",
           "tokenUsage": {
             "availability": "estimated",
             "reportedTotalTokens": null,
@@ -2735,7 +2735,7 @@
         }
       ],
       "startedAt": "2026-05-12T18:17:12+09:00",
-      "status": "In Progress",
+      "status": "Done",
       "title": "AIDD dashboard label filter를 2레벨 chip 구조로 변경",
       "totalStageCount": 12,
       "url": "https://linear.app/ktds-ai-eng/issue/KTD-16/aidd-dashboard-label-filter를-2레벨-chip-구조로-변경",
