@@ -385,17 +385,27 @@ function GateCell({ column, issue }: { column: Extract<BoardColumn, { kind: "gat
         {column.label}
       </Typography>
       {column.variant === "additional-pr" ? (
-        <Stack direction="row" sx={{ flexWrap: "wrap", gap: 0.5, mt: 0.25 }}>
+        <Box aria-label={`${issue.issueId} 연결 PR 목록`} className="gate-pr-list">
           {prs.length > 0 ? (
             prs.map((pr) => (
-              <MuiLink key={pr.url} href={pr.url} rel="noreferrer" target="_blank" underline="none">
-                <Chip label={`연결 PR #${pr.number} · ${pr.repository}`} size="small" variant="outlined" />
+              <MuiLink
+                key={pr.url}
+                className="gate-pr-link"
+                href={pr.url}
+                rel="noreferrer"
+                target="_blank"
+                title={`연결 PR #${pr.number} · ${pr.repository}`}
+                underline="none"
+              >
+                연결 PR #{pr.number} · {pr.repository}
               </MuiLink>
             ))
           ) : (
-            <Chip label="연결 PR 없음" size="small" variant="outlined" />
+            <Typography className="gate-pr-empty" variant="caption">
+              연결 PR 없음
+            </Typography>
           )}
-        </Stack>
+        </Box>
       ) : null}
     </Box>
   );
