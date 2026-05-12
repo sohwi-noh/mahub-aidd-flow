@@ -19,7 +19,10 @@ body {
 .dashboard-shell {
   display: grid;
   gap: 18px;
+  width: 100%;
+  max-width: 100vw;
   min-height: 100vh;
+  overflow-x: hidden;
   padding: 24px;
 }
 
@@ -55,12 +58,14 @@ body {
 }
 
 .board-scroll {
-  max-width: calc(100vw - 48px);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   overflow-x: auto;
 }
 
 .lifecycle-board {
-  min-width: 2560px;
+  min-width: 1852px;
   table-layout: fixed;
 }
 
@@ -78,26 +83,41 @@ body {
 
 .issue-col {
   left: 0;
-  width: 240px;
-  min-width: 240px;
-}
-
-.status-col {
-  left: 240px;
-  width: 180px;
-  min-width: 180px;
+  width: 300px;
+  min-width: 300px;
 }
 
 .stage-header {
-  width: 150px;
-  min-width: 150px;
+  width: 108px;
+  min-width: 108px;
   color: #58708c;
   font-size: 0.75rem;
   font-weight: 800;
   white-space: normal;
 }
 
+.stage-header-content {
+  display: grid;
+  min-width: 0;
+  gap: 1px;
+  line-height: 1.15;
+}
+
+.stage-header-number {
+  color: #172033;
+  font-weight: 900;
+}
+
+.stage-header-name,
+.stage-header-eyebrow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .gate-header {
+  width: 128px;
+  min-width: 128px;
   background: #fff7ed;
   color: #9a3412;
 }
@@ -108,10 +128,15 @@ body {
 }
 
 .stage-cell-wrap {
-  width: 150px;
-  min-width: 150px;
+  width: 108px;
+  min-width: 108px;
   padding: 6px;
   overflow: hidden;
+}
+
+.gate-cell-wrap {
+  width: 128px;
+  min-width: 128px;
 }
 
 .issue-button,
@@ -185,6 +210,22 @@ body {
   gap: 4px;
 }
 
+.issue-meta-row {
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.issue-token-sum {
+  min-width: 0;
+  overflow: hidden;
+  color: #0f766e;
+  font-weight: 800;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .stage-cell {
   min-width: 0;
   min-height: 92px;
@@ -211,6 +252,20 @@ body {
   background: #edf8f5;
 }
 
+.stage-cell-status-row {
+  min-width: 0;
+}
+
+.stage-cell-index {
+  flex: 0 0 auto;
+}
+
+.stage-cell-status-chip {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: calc(100% - 30px);
+}
+
 .stage-cell-agent {
   display: block;
   min-height: 1.15rem;
@@ -220,12 +275,12 @@ body {
 }
 
 .stage-cell .MuiChip-root,
-.status-col .MuiChip-root {
+.issue-col .MuiChip-root {
   max-width: 100%;
 }
 
 .stage-cell .MuiChip-label,
-.status-col .MuiChip-label {
+.issue-col .MuiChip-label {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -236,30 +291,79 @@ body {
 }
 
 .artifact-row {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
   border: 1px solid #d8e2ee;
   border-radius: 8px;
-  padding: 12px;
+  padding: 10px;
   background: #fbfdff;
 }
 
-.artifact-meta-grid {
+.artifact-column-grid {
   display: grid;
-  grid-template-columns: minmax(220px, 0.85fr) minmax(260px, 1.4fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 12px;
+}
+
+.artifact-column {
+  display: grid;
+  align-content: start;
   gap: 10px;
-  margin-top: 10px;
+  min-width: 0;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+  background: #ffffff;
+}
+
+.artifact-column-evidence {
+  border-top: 3px solid #2563eb;
+}
+
+.artifact-column-plan {
+  border-top: 3px solid #0f766e;
+}
+
+.artifact-column-result {
+  border-top: 3px solid #f59e0b;
 }
 
 .artifact-meta-block {
   display: grid;
   gap: 4px;
+  min-width: 0;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
   padding: 10px;
   background: #ffffff;
 }
 
+.artifact-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .artifact-path {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.artifact-summary {
+  min-width: 0;
   overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.artifact-empty {
+  border: 1px dashed #d8e2ee;
+  border-radius: 8px;
+  padding: 12px;
+  background: #fbfdff;
 }
 
 .empty-state {
@@ -272,10 +376,10 @@ body {
   }
 
   .board-scroll {
-    max-width: calc(100vw - 28px);
+    max-width: 100%;
   }
 
-  .artifact-meta-grid {
+  .artifact-column-grid {
     grid-template-columns: 1fr;
   }
 }

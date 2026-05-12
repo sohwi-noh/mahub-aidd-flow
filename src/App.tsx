@@ -20,6 +20,7 @@ import {
   TableHead,
   TableRow,
   ThemeProvider,
+  Tooltip,
   Typography,
   createTheme,
 } from "@mui/material";
@@ -56,18 +57,18 @@ type LinearProjectSnapshot = {
 const linearProjectSnapshot = linearProject as LinearProjectSnapshot;
 
 const canonicalStages = [
-  { stage: 0, nameKo: "이슈 발행" },
-  { stage: 1, nameKo: "요구사항 정리" },
-  { stage: 2, nameKo: "아키텍처 정리" },
-  { stage: 3, nameKo: "TDD 계획" },
-  { stage: 4, nameKo: "테스트 명세" },
-  { stage: 5, nameKo: "Red 실패 증거" },
-  { stage: 6, nameKo: "구현 착수 검토 루프" },
-  { stage: 7, nameKo: "최소 구현" },
-  { stage: 8, nameKo: "Green 통과 증거" },
-  { stage: 9, nameKo: "리팩터링" },
-  { stage: 10, nameKo: "검증/리뷰" },
-  { stage: 11, nameKo: "MR/Wiki/Graph 환류" },
+  { stage: 0, nameKo: "이슈 발행", shortKo: "이슈" },
+  { stage: 1, nameKo: "요구사항 정리", shortKo: "요구사항" },
+  { stage: 2, nameKo: "아키텍처 정리", shortKo: "아키텍처" },
+  { stage: 3, nameKo: "TDD 계획", shortKo: "TDD" },
+  { stage: 4, nameKo: "테스트 명세", shortKo: "테스트명세" },
+  { stage: 5, nameKo: "Red 실패 증거", shortKo: "Red" },
+  { stage: 6, nameKo: "구현 착수 검토 루프", shortKo: "구현검토" },
+  { stage: 7, nameKo: "최소 구현", shortKo: "구현" },
+  { stage: 8, nameKo: "Green 통과 증거", shortKo: "Green" },
+  { stage: 9, nameKo: "리팩터링", shortKo: "리팩터링" },
+  { stage: 10, nameKo: "검증/리뷰", shortKo: "검증" },
+  { stage: 11, nameKo: "MR/Wiki/Graph 환류", shortKo: "MR/Wiki" },
 ] as const;
 
 type StageDefinition = (typeof canonicalStages)[number];
@@ -168,6 +169,24 @@ function progressValue(issue: DashboardIssue): number {
   return Math.round((issue.completedStageCount / issue.totalStageCount) * 100);
 }
 
+function issueEstimatedTokenSum(issue: DashboardIssue): number {
+  return issue.stages.reduce((total, stage) => {
+    const tokenUsage = stage.tokenUsage;
+    if (tokenUsage.availability === "estimated" && typeof tokenUsage.estimatedVisibleTokens === "number") {
+      return total + tokenUsage.estimatedVisibleTokens;
+    }
+    if (tokenUsage.availability === "reported" && typeof tokenUsage.reportedTotalTokens === "number") {
+      return total + tokenUsage.reportedTotalTokens;
+    }
+    return total;
+  }, 0);
+}
+
+function formatIssueTokenSum(issue: DashboardIssue): string {
+  const tokenSum = issueEstimatedTokenSum(issue);
+  return tokenSum > 0 ? `예측 ${tokenSum.toLocaleString()} tokens` : "token unavailable";
+}
+
 function issueMilestone(issue: DashboardIssue): string {
   return issue.linearMilestone ?? activeMilestoneName;
 }
@@ -215,12 +234,37 @@ function relevantArtifacts(issue: DashboardIssue, selectedStage: LifecycleStage 
     add(issue.artifacts.find((artifact) => artifact.path === selectedStage.artifactPath));
   }
 
-  issue.artifacts
-    .filter((artifact) => artifact.kind === "plan" || artifact.kind === "evidence" || artifact.kind === "result")
-    .slice(0, 8)
-    .forEach(add);
+  issue.artifacts.slice(0, 18).forEach(add);
 
   return Array.from(byPath.values());
+}
+
+type ArtifactGroup = {
+  id: "evidence" | "plan" | "result";
+  title: "증거" | "계획" | "결과";
+  artifacts: ArtifactRef[];
+};
+
+function artifactGroupId(artifact: ArtifactRef): ArtifactGroup["id"] {
+  const source = `${artifact.kind} ${artifact.label} ${artifact.path}`.toLowerCase();
+  if (artifact.kind === "evidence" || source.includes("/evidence/") || source.includes("audit") || source.includes("검증")) {
+    return "evidence";
+  }
+  if (artifact.kind === "plan" || source.includes("plan") || source.includes("requirements") || source.includes("architecture") || source.includes("spec")) {
+    return "plan";
+  }
+  return "result";
+}
+
+function artifactGroups(artifacts: ArtifactRef[]): ArtifactGroup[] {
+  const groups: ArtifactGroup[] = [
+    { id: "evidence", title: "증거", artifacts: [] },
+    { id: "plan", title: "계획", artifacts: [] },
+    { id: "result", title: "결과", artifacts: [] },
+  ];
+  const byId = new Map(groups.map((group) => [group.id, group]));
+  artifacts.forEach((artifact) => byId.get(artifactGroupId(artifact))?.artifacts.push(artifact));
+  return groups;
 }
 
 function SummaryBar({
@@ -234,7 +278,7 @@ function SummaryBar({
   milestones: LinearMilestone[];
   onMilestoneChange: (value: string) => void;
 }) {
-  const completed = issues.filter((issue) => issue.completedStageCount >= issue.totalStageCount).length;
+  const completed = issues.filter((issue) => issue.status === "Done" || issue.completedStageCount >= issue.totalStageCount).length;
   const active = issues.length - completed;
 
   return (
@@ -356,15 +400,25 @@ function StageCell({
       type="button"
     >
       <Stack spacing={0.5}>
-        <Stack direction="row" sx={{ alignItems: "center", justifyContent: "space-between", gap: 0.5 }}>
-          <Typography variant="caption" sx={{ fontWeight: 800 }}>
+        <Stack className="stage-cell-status-row" direction="row" sx={{ alignItems: "center", justifyContent: "space-between", gap: 0.5 }}>
+          <Typography className="stage-cell-index" variant="caption" sx={{ fontWeight: 800 }}>
             {stageDefinition.stage}
           </Typography>
-          <Chip color={statusTone(status)} label={status} size="small" variant={status === "미기록" ? "outlined" : "filled"} />
+          <Tooltip arrow describeChild title={status}>
+            <Chip
+              className="stage-cell-status-chip"
+              color={statusTone(status)}
+              label={status}
+              size="small"
+              variant={status === "미기록" ? "outlined" : "filled"}
+            />
+          </Tooltip>
         </Stack>
-        <Typography className="stage-cell-agent" variant="caption">
-          {agent}
-        </Typography>
+        <Tooltip arrow describeChild title={agent}>
+          <Typography className="stage-cell-agent" variant="caption">
+            {agent}
+          </Typography>
+        </Tooltip>
         <Typography color="text.secondary" variant="caption">
           {formatTokenUsage(stage?.tokenUsage ?? { availability: "unavailable", reportedTotalTokens: null })}
         </Typography>
@@ -387,19 +441,17 @@ function GateCell({ column, issue }: { column: Extract<BoardColumn, { kind: "gat
       {column.variant === "additional-pr" ? (
         <Box aria-label={`${issue.issueId} 연결 PR 목록`} className="gate-pr-list">
           {prs.length > 0 ? (
-            prs.map((pr) => (
-              <MuiLink
-                key={pr.url}
-                className="gate-pr-link"
-                href={pr.url}
-                rel="noreferrer"
-                target="_blank"
-                title={`연결 PR #${pr.number} · ${pr.repository}`}
-                underline="none"
-              >
-                연결 PR #{pr.number} · {pr.repository}
-              </MuiLink>
-            ))
+            prs.map((pr) => {
+              const label = `연결 PR #${pr.number} [${pr.repository}]`;
+
+              return (
+                <Tooltip key={pr.url} arrow describeChild title={label}>
+                  <MuiLink className="gate-pr-link" href={pr.url} rel="noreferrer" target="_blank" underline="none">
+                    {label}
+                  </MuiLink>
+                </Tooltip>
+              );
+            })
           ) : (
             <Typography className="gate-pr-empty" variant="caption">
               연결 PR 없음
@@ -426,13 +478,34 @@ function IssueLifecycleBoard({
         <TableHead>
           <TableRow>
             <TableCell className="sticky-col issue-col">Issue</TableCell>
-            <TableCell className="sticky-col status-col">Status / Labels</TableCell>
             {boardColumns.map((column) => (
               <TableCell
                 key={column.kind === "stage" ? column.stage.stage : column.id}
                 className={column.kind === "stage" ? "stage-header" : "stage-header gate-header"}
               >
-                {column.kind === "stage" ? `${column.stage.stage} ${column.stage.nameKo}` : `${column.label} (${column.eyebrow})`}
+                {column.kind === "stage" ? (
+                  <Tooltip arrow describeChild title={`${column.stage.stage} ${column.stage.nameKo}`}>
+                    <Box className="stage-header-content">
+                      <Typography className="stage-header-number" variant="caption">
+                        {column.stage.stage}
+                      </Typography>
+                      <Typography className="stage-header-name" variant="caption">
+                        {column.stage.shortKo}
+                      </Typography>
+                    </Box>
+                  </Tooltip>
+                ) : (
+                  <Tooltip arrow describeChild title={`${column.label} (${column.eyebrow})`}>
+                    <Box className="stage-header-content gate-header-content">
+                      <Typography className="stage-header-name" variant="caption">
+                        {column.label}
+                      </Typography>
+                      <Typography className="stage-header-eyebrow" variant="caption">
+                        {column.eyebrow}
+                      </Typography>
+                    </Box>
+                  </Tooltip>
+                )}
               </TableCell>
             ))}
           </TableRow>
@@ -455,21 +528,28 @@ function IssueLifecycleBoard({
                     <Typography color="text.secondary" variant="caption">
                       {issue.title}
                     </Typography>
-                    <LinearProgress sx={{ mt: 1 }} variant="determinate" value={progressValue(issue)} />
-                    <Typography aria-label={`${issue.issueId} stage progress`} variant="caption" sx={{ fontWeight: 800 }}>
-                      {issue.completedStageCount} / {issue.totalStageCount}
-                    </Typography>
-                  </Box>
-                </TableCell>
-                <TableCell className="sticky-col status-col">
-                  <Stack spacing={0.75}>
-                    <Chip color={statusTone(issue.status)} label={issue.status} size="small" />
-                    <Stack direction="row" sx={{ flexWrap: "wrap", gap: 0.5 }}>
+                    <Stack className="issue-meta-row" direction="row">
+                      <Tooltip arrow describeChild title={issue.status}>
+                        <Chip color={statusTone(issue.status)} label={issue.status} size="small" />
+                      </Tooltip>
                       {issue.labels.map((label) => (
-                        <Chip key={label} color={label === "dashboard" ? "primary" : "default"} label={label} size="small" variant="outlined" />
+                        <Tooltip key={label} arrow describeChild title={label}>
+                          <Chip color={label === "dashboard" ? "primary" : "default"} label={label} size="small" variant="outlined" />
+                        </Tooltip>
                       ))}
                     </Stack>
-                  </Stack>
+                    <LinearProgress sx={{ mt: 1 }} variant="determinate" value={progressValue(issue)} />
+                    <Stack direction="row" sx={{ alignItems: "center", justifyContent: "space-between", gap: 1 }}>
+                      <Typography aria-label={`${issue.issueId} stage progress`} variant="caption" sx={{ fontWeight: 800 }}>
+                        {issue.completedStageCount} / {issue.totalStageCount}
+                      </Typography>
+                      <Tooltip arrow describeChild title={formatIssueTokenSum(issue)}>
+                        <Typography aria-label={`${issue.issueId} estimated token sum`} className="issue-token-sum" variant="caption">
+                          {formatIssueTokenSum(issue)}
+                        </Typography>
+                      </Tooltip>
+                    </Stack>
+                  </Box>
                 </TableCell>
                 {boardColumns.map((column) => (
                   <TableCell
@@ -499,6 +579,7 @@ function IssueLifecycleBoard({
 
 function IssueDetailPanel({ issue, stage }: { issue: DashboardIssue; stage: LifecycleStage | undefined }) {
   const artifacts = relevantArtifacts(issue, stage);
+  const groups = artifactGroups(artifacts);
 
   return (
     <Collapse in timeout={180}>
@@ -534,32 +615,58 @@ function IssueDetailPanel({ issue, stage }: { issue: DashboardIssue; stage: Life
 
           <Divider />
 
-          <Stack spacing={1.5}>
-            {artifacts.map((artifact) => (
-              <Box key={artifact.path} className="artifact-row">
-                <Stack direction="row" sx={{ alignItems: "center", gap: 1, justifyContent: "space-between" }}>
-                  <Typography sx={{ fontWeight: 800 }}>{artifact.label}</Typography>
-                  <Chip label={artifact.kind} size="small" variant="outlined" />
+          <Box className="artifact-column-grid">
+            {groups.map((group) => (
+              <Box key={group.id} className={`artifact-column artifact-column-${group.id}`}>
+                <Stack direction="row" sx={{ alignItems: "center", justifyContent: "space-between", gap: 1 }}>
+                  <Typography component="h3" sx={{ fontWeight: 900 }} variant="subtitle2">
+                    {group.title}
+                  </Typography>
+                  <Chip label={`${group.artifacts.length}`} size="small" variant="outlined" />
                 </Stack>
-                <Box className="artifact-meta-grid">
-                  <Box className="artifact-meta-block">
-                    <Typography color="text.secondary" variant="caption">
-                      위치
-                    </Typography>
-                    <Typography className="artifact-path" variant="body2">
-                      {artifact.path}
-                    </Typography>
-                  </Box>
-                  <Box className="artifact-meta-block">
-                    <Typography color="text.secondary" variant="caption">
-                      요약내용
-                    </Typography>
-                    <Typography variant="body2">{artifact.summary ?? "요약 없음"}</Typography>
-                  </Box>
-                </Box>
+                <Stack spacing={1}>
+                  {group.artifacts.length > 0 ? (
+                    group.artifacts.map((artifact) => (
+                      <Box key={artifact.path} className="artifact-row">
+                        <Stack direction="row" sx={{ alignItems: "center", gap: 1, justifyContent: "space-between" }}>
+                          <Tooltip arrow describeChild title={artifact.label}>
+                            <Typography className="artifact-label" sx={{ fontWeight: 800 }} variant="body2">
+                              {artifact.label}
+                            </Typography>
+                          </Tooltip>
+                          <Chip label={artifact.kind} size="small" variant="outlined" />
+                        </Stack>
+                        <Box className="artifact-meta-block">
+                          <Typography color="text.secondary" variant="caption">
+                            위치
+                          </Typography>
+                          <Tooltip arrow describeChild title={artifact.path}>
+                            <Typography className="artifact-path" variant="body2">
+                              {artifact.path}
+                            </Typography>
+                          </Tooltip>
+                        </Box>
+                        <Box className="artifact-meta-block">
+                          <Typography color="text.secondary" variant="caption">
+                            요약내용
+                          </Typography>
+                          <Typography className="artifact-summary" variant="body2">
+                            {artifact.summary ?? "요약 없음"}
+                          </Typography>
+                        </Box>
+                      </Box>
+                    ))
+                  ) : (
+                    <Box className="artifact-empty">
+                      <Typography color="text.secondary" variant="body2">
+                        연결된 항목 없음
+                      </Typography>
+                    </Box>
+                  )}
+                </Stack>
               </Box>
             ))}
-          </Stack>
+          </Box>
         </Stack>
       </Paper>
     </Collapse>
