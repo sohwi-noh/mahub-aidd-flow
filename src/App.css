@@ -18,32 +18,141 @@ body {
 
 .dashboard-shell {
   display: grid;
-  grid-template-columns: minmax(300px, 360px) minmax(0, 1fr);
+  gap: 18px;
   min-height: 100vh;
+  padding: 24px;
 }
 
-.issue-panel {
-  border-right: 1px solid #dbe5ef;
-  background: #f9fbfd;
-  padding: 28px;
+.summary-bar,
+.detail-panel {
+  padding: 18px;
 }
 
-.work-panel {
-  min-width: 0;
-  padding: 28px;
+.summary-bar {
+  display: grid;
+  gap: 10px;
 }
 
-@media (max-width: 980px) {
+.board-scroll {
+  max-width: calc(100vw - 48px);
+  overflow-x: auto;
+}
+
+.lifecycle-board {
+  min-width: 2260px;
+  table-layout: fixed;
+}
+
+.lifecycle-board th,
+.lifecycle-board td {
+  border-right: 1px solid #e2e8f0;
+  vertical-align: top;
+}
+
+.sticky-col {
+  position: sticky;
+  z-index: 2;
+  background: #ffffff;
+}
+
+.issue-col {
+  left: 0;
+  width: 240px;
+  min-width: 240px;
+}
+
+.status-col {
+  left: 240px;
+  width: 180px;
+  min-width: 180px;
+}
+
+.stage-header {
+  width: 150px;
+  min-width: 150px;
+  color: #58708c;
+  font-size: 0.75rem;
+  font-weight: 800;
+  white-space: normal;
+}
+
+.stage-cell-wrap {
+  width: 150px;
+  min-width: 150px;
+  padding: 6px;
+}
+
+.issue-button,
+.stage-cell {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.issue-button {
+  display: grid;
+  gap: 4px;
+}
+
+.stage-cell {
+  min-height: 92px;
+  border: 1px solid #d8e2ee;
+  border-radius: 8px;
+  padding: 8px;
+  background: #fbfdff;
+}
+
+.stage-cell:hover,
+.issue-button:hover {
+  background: #f1f7fb;
+}
+
+.stage-cell:focus-visible,
+.issue-button:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.28);
+  outline-offset: 2px;
+}
+
+.stage-cell-selected {
+  border-color: #0f766e;
+  box-shadow: inset 0 0 0 1px #0f766e;
+  background: #edf8f5;
+}
+
+.stage-cell-agent {
+  display: block;
+  min-height: 1.15rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.selected-row .sticky-col {
+  background: #edf8f5;
+}
+
+.artifact-row {
+  border: 1px solid #d8e2ee;
+  border-radius: 8px;
+  padding: 12px;
+  background: #fbfdff;
+}
+
+.artifact-path {
+  margin-top: 6px;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 760px) {
   .dashboard-shell {
-    grid-template-columns: 1fr;
+    padding: 14px;
   }
 
-  .issue-panel {
-    border-right: 0;
-    border-bottom: 1px solid #dbe5ef;
-  }
-
-  .work-panel {
-    padding: 18px;
+  .board-scroll {
+    max-width: calc(100vw - 28px);
   }
 }

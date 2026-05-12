@@ -5,7 +5,7 @@ export type TokenUsage = {
 
 export type ArtifactRef = {
   path: string;
-  kind: "plan" | "evidence" | "result" | "subagent" | "summary" | "unknown";
+  kind: "plan" | "evidence" | "result" | "subagent" | "ledger" | "token" | "timeline" | "summary" | "unknown";
   label: string;
   summary: string | null;
 };
@@ -28,10 +28,11 @@ export type DashboardIssue = {
   title: string;
   labels: string[];
   status: string;
+  currentStage: number | null;
   currentStageName: string;
   completedStageCount: number;
   totalStageCount: number;
-  startedAt: string;
+  startedAt: string | null;
   completedAt: string | null;
   stages: LifecycleStage[];
   artifacts: ArtifactRef[];
