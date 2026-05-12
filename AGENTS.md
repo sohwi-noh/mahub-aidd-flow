@@ -15,6 +15,7 @@
 
 - React + Vite + TypeScript를 기본 frontend stack으로 사용한다.
 - 테스트는 Vitest/Testing Library를 기본으로 둔다.
+- dashboard 화면을 배포/PR하기 전에는 `frontend-design` 관점으로 desktop/tablet/mobile 폭을 확인하고, 텍스트/Chip/link/테이블 셀이 서로 겹치거나 부모 밖으로 넘치지 않는다는 증거를 남긴다.
 - E2E 테스트 코드, E2E 시나리오 정의, E2E 전용 fixture/mock/helper는 사용자 명시 승인 없이 agent가 단독 수정하지 않는다.
 - 사용자 명시 승인 전에는 E2E 실패 증거와 제안만 남긴다.
 
@@ -30,5 +31,6 @@
 
 - 실행한 명령과 결과
 - 실패한 명령이 있으면 exit code, 요약, 원인 분류, 다음 조치
+- frontend 변경이면 반응형 깨짐/overflow/overlap 확인 결과
 - 변경 파일 목록
 - stage/subagent/run artifact와 연결되는 근거

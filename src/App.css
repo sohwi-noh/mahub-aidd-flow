@@ -111,6 +111,7 @@ body {
   width: 150px;
   min-width: 150px;
   padding: 6px;
+  overflow: hidden;
 }
 
 .issue-button,
@@ -130,6 +131,7 @@ body {
 
 .gate-cell {
   display: grid;
+  min-width: 0;
   min-height: 92px;
   align-content: center;
   gap: 6px;
@@ -144,12 +146,47 @@ body {
   align-content: start;
 }
 
+.gate-pr-list {
+  display: grid;
+  min-width: 0;
+  max-width: 100%;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.gate-pr-link,
+.gate-pr-empty {
+  display: block;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #fed7aa;
+  border-radius: 999px;
+  padding: 3px 8px;
+  background: #ffffff;
+  color: #172033;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gate-pr-link:hover {
+  border-color: #fb923c;
+  background: #fff7ed;
+}
+
+.gate-pr-empty {
+  color: #58708c;
+}
+
 .issue-button {
   display: grid;
   gap: 4px;
 }
 
 .stage-cell {
+  min-width: 0;
   min-height: 92px;
   border: 1px solid #d8e2ee;
   border-radius: 8px;
@@ -177,6 +214,18 @@ body {
 .stage-cell-agent {
   display: block;
   min-height: 1.15rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stage-cell .MuiChip-root,
+.status-col .MuiChip-root {
+  max-width: 100%;
+}
+
+.stage-cell .MuiChip-label,
+.status-col .MuiChip-label {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
