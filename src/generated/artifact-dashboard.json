@@ -52,6 +52,18 @@
           "summary": "KTD 11 Stage 10 검증/리뷰 Findings 중대 findings 없음. 검토 근거 MUI dashboard 구현 완료 확인 App.test.tsx component tests 3개 작성 확인 npm test 통과 npm run typecheck 통과 npm run build 통과"
         },
         {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-11/run-001/subagents/11-git-master.md",
+          "summary": "KTD 11 AIDD dashboard lifecycle 작업은 sohwi noh/mahub aidd flow 저장소 PR로 환류됐고, merge 완료 후 Linear KTD 11 상태가 Done으로 정리됐다."
+        },
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-11/run-001/subagents/11-wiki-graph.md",
+          "summary": "KTD 11 Stage 11 Wiki/Graph 환류 Knowledge summary AIDD dashboard KTD 11 구현은 완료됐고 GitHub PR 2가 merge됐다. PR 2 merge 결과는 .omx/artifacts/KTD 11/run 001/evidence/pr merge.md에 기록했다."
+        },
+        {
           "kind": "evidence",
           "label": "증거",
           "path": ".omx/artifacts/KTD-11/run-001/evidence/dependency-install.md",
@@ -62,6 +74,12 @@
           "label": "증거",
           "path": ".omx/artifacts/KTD-11/run-001/evidence/green.md",
           "summary": "KTD 11 dashboard 구현 후 component test, TypeScript check, production build가 모두 통과했다. 중간에 artifact summary generator 재생성 후 stage 0 timing 누락으로 npm test가 1회 실패했으며, evidence/snapshot re"
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-11/run-001/evidence/pr-merge.md",
+          "summary": "KTD 11 dashboard 구현 PR을 생성하고 즉시 merge했다."
         },
         {
           "kind": "evidence",
@@ -88,6 +106,12 @@
           "summary": "Green 단계 중 npm run typecheck 1차 실행이 실패했고, 원인은 MUI Typography에 직접 전달한 fontWeight prop type mismatch였다."
         },
         {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-11/run-001/evidence/wiki-graph.md",
+          "summary": "KTD 11의 실행 계획, 증거, 결과는 .omx/artifacts/KTD 11/run 001/ 아래에 run local artifact로 남겼다."
+        },
+        {
           "kind": "result",
           "label": "결과",
           "path": ".omx/artifacts/KTD-11/run-001/run-summary.md",
@@ -112,14 +136,14 @@
           "summary": "KTD 11 run 001 timeline 시각(KST) 이벤트 2026 05 12 11:41 Linear label dashboard, mahub 생성 2026 05 12 11:41 Linear KTD 11 생성 및 In Progress 시작 2026 05 12 11:43 요구사항/아키텍처/TDD/테스트 subagent"
         }
       ],
-      "completedAt": null,
-      "completedStageCount": 11,
+      "completedAt": "2026-05-12T12:52:00+09:00",
+      "completedStageCount": 12,
       "currentStage": 11,
       "currentStageName": "MR/Wiki/Graph 환류",
       "issueId": "KTD-11",
       "labels": [
         "dashboard",
-        "Feature"
+        "Improvement"
       ],
       "repoPath": "workflow/mahub-aidd-flow",
       "runs": [
@@ -174,6 +198,18 @@
               "summary": "KTD 11 Stage 10 검증/리뷰 Findings 중대 findings 없음. 검토 근거 MUI dashboard 구현 완료 확인 App.test.tsx component tests 3개 작성 확인 npm test 통과 npm run typecheck 통과 npm run build 통과"
             },
             {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-11/run-001/subagents/11-git-master.md",
+              "summary": "KTD 11 AIDD dashboard lifecycle 작업은 sohwi noh/mahub aidd flow 저장소 PR로 환류됐고, merge 완료 후 Linear KTD 11 상태가 Done으로 정리됐다."
+            },
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-11/run-001/subagents/11-wiki-graph.md",
+              "summary": "KTD 11 Stage 11 Wiki/Graph 환류 Knowledge summary AIDD dashboard KTD 11 구현은 완료됐고 GitHub PR 2가 merge됐다. PR 2 merge 결과는 .omx/artifacts/KTD 11/run 001/evidence/pr merge.md에 기록했다."
+            },
+            {
               "kind": "evidence",
               "label": "증거",
               "path": ".omx/artifacts/KTD-11/run-001/evidence/dependency-install.md",
@@ -184,6 +220,12 @@
               "label": "증거",
               "path": ".omx/artifacts/KTD-11/run-001/evidence/green.md",
               "summary": "KTD 11 dashboard 구현 후 component test, TypeScript check, production build가 모두 통과했다. 중간에 artifact summary generator 재생성 후 stage 0 timing 누락으로 npm test가 1회 실패했으며, evidence/snapshot re"
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-11/run-001/evidence/pr-merge.md",
+              "summary": "KTD 11 dashboard 구현 PR을 생성하고 즉시 merge했다."
             },
             {
               "kind": "evidence",
@@ -210,6 +252,12 @@
               "summary": "Green 단계 중 npm run typecheck 1차 실행이 실패했고, 원인은 MUI Typography에 직접 전달한 fontWeight prop type mismatch였다."
             },
             {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-11/run-001/evidence/wiki-graph.md",
+              "summary": "KTD 11의 실행 계획, 증거, 결과는 .omx/artifacts/KTD 11/run 001/ 아래에 run local artifact로 남겼다."
+            },
+            {
               "kind": "result",
               "label": "결과",
               "path": ".omx/artifacts/KTD-11/run-001/run-summary.md",
@@ -234,10 +282,10 @@
               "summary": "KTD 11 run 001 timeline 시각(KST) 이벤트 2026 05 12 11:41 Linear label dashboard, mahub 생성 2026 05 12 11:41 Linear KTD 11 생성 및 In Progress 시작 2026 05 12 11:43 요구사항/아키텍처/TDD/테스트 subagent"
             }
           ],
-          "endedAt": "2026-05-12T12:22:43+09:00",
+          "endedAt": "2026-05-12T12:52:00+09:00",
           "runId": "run-001",
           "startedAt": "2026-05-12T11:41:00+09:00",
-          "status": "running",
+          "status": "done",
           "subagents": [
             {
               "artifact": {
@@ -498,6 +546,66 @@
                 "availability": "unavailable",
                 "reportedTotalTokens": null
               }
+            },
+            {
+              "artifact": {
+                "kind": "evidence",
+                "label": "증거",
+                "path": ".omx/artifacts/KTD-11/run-001/evidence/pr-merge.md",
+                "summary": "KTD 11 dashboard 구현 PR을 생성하고 즉시 merge했다."
+              },
+              "completedAt": null,
+              "id": "evidence/pr-merge.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "git-master",
+              "stage": 11,
+              "startedAt": null,
+              "status": "unknown",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-11/run-001/subagents/11-git-master.md",
+                "summary": "KTD 11 AIDD dashboard lifecycle 작업은 sohwi noh/mahub aidd flow 저장소 PR로 환류됐고, merge 완료 후 Linear KTD 11 상태가 Done으로 정리됐다."
+              },
+              "completedAt": "2026-05-12T12:52:00+09:00",
+              "id": "subagents/11-git-master.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "git-master",
+              "stage": 11,
+              "startedAt": "2026-05-12T12:51:00+09:00",
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-11/run-001/subagents/11-wiki-graph.md",
+                "summary": "KTD 11 Stage 11 Wiki/Graph 환류 Knowledge summary AIDD dashboard KTD 11 구현은 완료됐고 GitHub PR 2가 merge됐다. PR 2 merge 결과는 .omx/artifacts/KTD 11/run 001/evidence/pr merge.md에 기록했다."
+              },
+              "completedAt": "2026-05-12T12:52:00+09:00",
+              "id": "subagents/11-wiki-graph.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "writer",
+              "stage": 11,
+              "startedAt": "2026-05-12T12:51:00+09:00",
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
             }
           ]
         }
@@ -610,8 +718,8 @@
             "writer"
           ],
           "stage": 11,
-          "status": "진행 중",
-          "summary": "진행 중"
+          "status": "완료",
+          "summary": "완료"
         }
       ],
       "stages": [
@@ -781,15 +889,15 @@
           }
         },
         {
-          "agent": "git-master, writer",
-          "artifactPath": ".omx/artifacts/KTD-11/run-001/evidence/pr-merge.md",
-          "completedAt": null,
-          "model": "n/a",
+          "agent": "writer",
+          "artifactPath": ".omx/artifacts/KTD-11/run-001/subagents/11-wiki-graph.md",
+          "completedAt": "2026-05-12T12:52:00+09:00",
+          "model": "gpt-5.5",
           "nameKo": "MR/Wiki/Graph 환류",
-          "reasoning": "n/a",
+          "reasoning": "high",
           "stage": 11,
-          "startedAt": null,
-          "status": "진행 중",
+          "startedAt": "2026-05-12T12:51:00+09:00",
+          "status": "완료",
           "tokenUsage": {
             "availability": "unavailable",
             "reportedTotalTokens": null
@@ -797,7 +905,7 @@
         }
       ],
       "startedAt": "2026-05-12T11:41:00+09:00",
-      "status": "진행 중",
+      "status": "완료",
       "title": "AIDD dashboard issue lifecycle 상세 관제 화면 구현",
       "totalStageCount": 12,
       "url": "https://linear.app/ktds-ai-eng/issue/KTD-11/aidd-dashboard-issue-lifecycle-상세-관제-화면-구현"

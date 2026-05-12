@@ -11,7 +11,7 @@ describe("AIDD workflow dashboard", () => {
     expect(screen.getAllByText("KTD-11").length).toBeGreaterThan(0);
     expect(screen.getAllByText("dashboard").length).toBeGreaterThan(0);
     expect(screen.getAllByText("완료").length).toBeGreaterThan(0);
-    expect(screen.getByLabelText("KTD-11 stage progress")).toHaveTextContent("11 / 12");
+    expect(screen.getByLabelText("KTD-11 stage progress")).toHaveTextContent("12 / 12");
   });
 
   it("shows stage agent, model, token, timing, and status", () => {
