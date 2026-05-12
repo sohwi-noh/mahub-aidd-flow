@@ -2655,9 +2655,9 @@
         }
       ],
       "completedAt": null,
-      "completedStageCount": 10,
-      "currentStage": 10,
-      "currentStageName": "검증/리뷰",
+      "completedStageCount": 11,
+      "currentStage": 11,
+      "currentStageName": "MR/Wiki/Graph 환류",
       "issueId": "KTD-16",
       "labels": [
         "dashboard",
@@ -2688,7 +2688,7 @@
         {
           "agent": "executor",
           "artifactPath": ".omx/artifacts/KTD-16/run-001/run-summary.md",
-          "completedAt": "2026-05-12T18:54:03+09:00",
+          "completedAt": "2026-05-12T19:12:00+09:00",
           "model": "gpt-5.5",
           "nameKo": "최소 구현",
           "reasoning": "medium",
@@ -2704,7 +2704,7 @@
         {
           "agent": "frontend-design",
           "artifactPath": ".omx/artifacts/KTD-16/run-001/subagents/01-frontend-design.md",
-          "completedAt": "2026-05-12T18:54:03+09:00",
+          "completedAt": "2026-05-12T19:12:00+09:00",
           "model": "gpt-5.5",
           "nameKo": "검증/리뷰",
           "reasoning": "high",
@@ -2720,13 +2720,13 @@
         {
           "agent": "git-master",
           "artifactPath": ".omx/artifacts/KTD-16/run-001/run-summary.md",
-          "completedAt": "2026-05-12T18:54:03+09:00",
+          "completedAt": "2026-05-12T19:12:00+09:00",
           "model": "n/a",
           "nameKo": "MR/Wiki/Graph 환류",
           "reasoning": "n/a",
           "stage": 11,
-          "startedAt": "2026-05-12T18:54:03+09:00",
-          "status": "PR 생성 전",
+          "startedAt": "2026-05-12T19:12:00+09:00",
+          "status": "PR #9 생성, merge 대기",
           "tokenUsage": {
             "availability": "estimated",
             "reportedTotalTokens": null,
@@ -2741,7 +2741,13 @@
       "url": "https://linear.app/ktds-ai-eng/issue/KTD-16/aidd-dashboard-label-filter를-2레벨-chip-구조로-변경",
       "linearProject": "MA Hub",
       "linearMilestone": "환경 구성하기",
-      "pullRequests": []
+      "pullRequests": [
+        {
+          "number": 9,
+          "repository": "mahub-aidd-flow",
+          "url": "https://github.com/sohwi-noh/mahub-aidd-flow/pull/9"
+        }
+      ]
     }
   ],
   "schemaVersion": 1,
