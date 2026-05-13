@@ -2748,6 +2748,138 @@
           "url": "https://github.com/sohwi-noh/mahub-aidd-flow/pull/9"
         }
       ]
+    },
+    {
+      "artifacts": [
+        {
+          "kind": "plan",
+          "label": "subagents/01-architect-artifact-semantics-plan.md",
+          "path": ".omx/artifacts/KTD-17/run-001/subagents/01-architect-artifact-semantics-plan.md",
+          "summary": "KTD 17 architect 산출물 의미 점검 담당 subagent: architect 모델: gpt 5.5 reasoning: high 시작: 2026 05 13 12:27 KST 종료: 2026 05 13 12:35 KST 상태: 완료 판단 근거 KTD 15만 의도한 판단 근거/계획/결과 형태로 보인 이유는 snapshot에 적은 수의 curated artifact가 들어가 있었기 때문"
+        },
+        {
+          "kind": "subagent",
+          "label": "subagents/02-ui-designer-robot-feedback-result.md",
+          "path": ".omx/artifacts/KTD-17/run-001/subagents/02-ui-designer-robot-feedback-result.md",
+          "summary": "KTD 17 ui designer 로봇 아이콘/피드백 검토 담당 subagent: ui designer 모델: gpt 5.4 reasoning: high 시작: 2026 05 13 12:36 KST 종료: 2026 05 13 12:45 KST 상태: 완료 판단 근거 표 stage cell은 폭이 좁기 때문에 agent 이름과 아이콘이 같은 줄에서 말줄임 처리되어야 한다. 상세 패널은 선택 s"
+        },
+        {
+          "kind": "evidence",
+          "label": "evidence/frontend-visual-audit.md",
+          "path": ".omx/artifacts/KTD-17/run-001/evidence/frontend-visual-audit.md",
+          "summary": "KTD 17 frontend visual audit 실행 전 기준 dashboard 기본 필터에서 KTD 17, KTD 16, KTD 11이 표시되어야 한다. 증거 열은 gate proof가 아니라 subagent 판단 근거로 보이도록 판단 근거 제목과 설명을 가진다. agent 이름 옆 robot icon이 표와 상세 패널에 표시되어야 한다. 따봉/역따봉 버튼은 stage별로 독립 토글되어"
+        },
+        {
+          "kind": "summary",
+          "label": "run-summary.md",
+          "path": ".omx/artifacts/KTD-17/run-001/run-summary.md",
+          "summary": "KTD 17 run summary 이슈 Linear: KTD 17 제목: AIDD dashboard artifact 의미와 agent 피드백 UI 보정 프로젝트: MA Hub 마일스톤: 환경 구성하기 라벨: dashboard, Improvement 범위 artifact 상세 화면에서 증거 가 gate proof처럼 보이지 않도록 판단 근거 의미로 재정렬한다. agent 이름 옆에 robot "
+        }
+      ],
+      "completedAt": null,
+      "completedStageCount": 10,
+      "currentStage": 10,
+      "currentStageName": "검증/리뷰",
+      "issueId": "KTD-17",
+      "labels": [
+        "dashboard",
+        "Improvement"
+      ],
+      "repoPath": "workflow/mahub-aidd-flow",
+      "runs": [
+        "run-001"
+      ],
+      "stageStates": {},
+      "stages": [
+        {
+          "agent": "analyst",
+          "artifactPath": ".omx/artifacts/KTD-17/run-001/run-summary.md",
+          "completedAt": "2026-05-13T12:24:28+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "요구사항 정리",
+          "reasoning": "medium",
+          "stage": 1,
+          "startedAt": "2026-05-13T12:24:28+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 188
+          }
+        },
+        {
+          "agent": "architect",
+          "artifactPath": ".omx/artifacts/KTD-17/run-001/subagents/01-architect-artifact-semantics-plan.md",
+          "completedAt": "2026-05-13T12:52:00+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "아키텍처 정리",
+          "reasoning": "high",
+          "stage": 2,
+          "startedAt": "2026-05-13T12:24:28+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 612
+          }
+        },
+        {
+          "agent": "executor",
+          "artifactPath": ".omx/artifacts/KTD-17/run-001/run-summary.md",
+          "completedAt": "2026-05-13T12:52:00+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "최소 구현",
+          "reasoning": "medium",
+          "stage": 7,
+          "startedAt": "2026-05-13T12:24:28+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 548
+          }
+        },
+        {
+          "agent": "ui-designer",
+          "artifactPath": ".omx/artifacts/KTD-17/run-001/subagents/02-ui-designer-robot-feedback-result.md",
+          "completedAt": "2026-05-13T12:52:00+09:00",
+          "model": "gpt-5.4",
+          "nameKo": "검증/리뷰",
+          "reasoning": "high",
+          "stage": 10,
+          "startedAt": "2026-05-13T12:24:28+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 465
+          }
+        },
+        {
+          "agent": "git-master",
+          "artifactPath": ".omx/artifacts/KTD-17/run-001/run-summary.md",
+          "completedAt": "2026-05-13T12:52:00+09:00",
+          "model": "n/a",
+          "nameKo": "MR/Wiki/Graph 환류",
+          "reasoning": "n/a",
+          "stage": 11,
+          "startedAt": "2026-05-13T12:52:00+09:00",
+          "status": "PR 생성 전",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 190
+          }
+        }
+      ],
+      "startedAt": "2026-05-13T12:24:28+09:00",
+      "status": "In Progress",
+      "title": "AIDD dashboard artifact 의미와 agent 피드백 UI 보정",
+      "totalStageCount": 12,
+      "url": "https://linear.app/ktds-ai-eng/issue/KTD-17/aidd-dashboard-artifact-의미와-agent-피드백-ui-보정",
+      "linearProject": "MA Hub",
+      "linearMilestone": "환경 구성하기",
+      "pullRequests": []
     }
   ],
   "schemaVersion": 1,

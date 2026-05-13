@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react";
 import {
   Box,
+  Button,
+  ButtonGroup,
   Chip,
   Collapse,
   CssBaseline,
@@ -78,6 +80,8 @@ type Selection = {
   issueId: string;
   stage: number;
 };
+
+type AgentFeedback = "up" | "down" | null;
 
 type BoardColumn =
   | {
@@ -163,6 +167,47 @@ function statusTone(status: string): "success" | "warning" | "error" | "default"
     return "warning";
   }
   return "default";
+}
+
+function agentTone(agent: string): "green" | "purple" | "blue" | "red" | "amber" {
+  const normalized = agent.toLowerCase();
+  if (normalized.includes("test") || normalized.includes("verifier") || normalized.includes("quality")) {
+    return "purple";
+  }
+  if (normalized.includes("architect") || normalized.includes("planner") || normalized.includes("analyst")) {
+    return "blue";
+  }
+  if (normalized.includes("git") || normalized.includes("review")) {
+    return "amber";
+  }
+  if (normalized.includes("ui") || normalized.includes("design") || normalized.includes("frontend")) {
+    return "green";
+  }
+  return "red";
+}
+
+function AgentRobotIcon({ agent }: { agent: string }) {
+  return (
+    <Box aria-hidden="true" className={`agent-robot agent-robot-${agentTone(agent)}`} component="span">
+      <Box className="agent-robot-antenna" component="span" />
+      <Box className="agent-robot-head" component="span">
+        <Box className="agent-robot-eye agent-robot-eye-left" component="span" />
+        <Box className="agent-robot-eye agent-robot-eye-right" component="span" />
+      </Box>
+      <Box className="agent-robot-body" component="span" />
+    </Box>
+  );
+}
+
+function AgentName({ agent, className }: { agent: string; className?: string }) {
+  return (
+    <Box className={`agent-name ${className ?? ""}`} component="span">
+      <AgentRobotIcon agent={agent} />
+      <Box className="agent-name-text" component="span">
+        {agent}
+      </Box>
+    </Box>
+  );
 }
 
 function findStage(issue: DashboardIssue, stage: number): LifecycleStage | undefined {
@@ -287,6 +332,45 @@ function issueMatchesFilters(issue: DashboardIssue, filters: Filters): boolean {
   return issueProject(issue) === activeProjectName && areaMatch && typeMatch && milestoneMatch;
 }
 
+function inferredArtifactKind(path: string): ArtifactRef["kind"] {
+  const normalized = path.toLowerCase();
+  if (normalized.includes("/evidence/") || normalized.includes("audit")) {
+    return "evidence";
+  }
+  if (normalized.includes("plan") || normalized.includes("requirements") || normalized.includes("architecture") || normalized.includes("spec")) {
+    return "plan";
+  }
+  if (normalized.includes("stage-ledger")) {
+    return "ledger";
+  }
+  if (normalized.includes("token-usage")) {
+    return "token";
+  }
+  if (normalized.includes("timeline")) {
+    return "timeline";
+  }
+  if (normalized.includes("/subagents/")) {
+    return "subagent";
+  }
+  if (normalized.includes("run-summary")) {
+    return "result";
+  }
+  return "unknown";
+}
+
+function synthesizedStageArtifact(stage: LifecycleStage | undefined): ArtifactRef | undefined {
+  if (!stage?.artifactPath) {
+    return undefined;
+  }
+
+  return {
+    kind: inferredArtifactKind(stage.artifactPath),
+    label: "선택 stage 산출물",
+    path: stage.artifactPath,
+    summary: `${stage.nameKo} 단계에서 ${stage.agent}가 남긴 대표 산출물이다. snapshot에 요약이 없으면 위치만 연결한다.`,
+  };
+}
+
 function relevantArtifacts(issue: DashboardIssue, selectedStage: LifecycleStage | undefined): ArtifactRef[] {
   const byPath = new Map<string, ArtifactRef>();
   const add = (artifact: ArtifactRef | undefined) => {
@@ -296,7 +380,7 @@ function relevantArtifacts(issue: DashboardIssue, selectedStage: LifecycleStage 
   };
 
   if (selectedStage?.artifactPath) {
-    add(issue.artifacts.find((artifact) => artifact.path === selectedStage.artifactPath));
+    add(issue.artifacts.find((artifact) => artifact.path === selectedStage.artifactPath) ?? synthesizedStageArtifact(selectedStage));
   }
 
   issue.artifacts.slice(0, 18).forEach(add);
@@ -306,7 +390,8 @@ function relevantArtifacts(issue: DashboardIssue, selectedStage: LifecycleStage 
 
 type ArtifactGroup = {
   id: "evidence" | "plan" | "result";
-  title: "증거" | "계획" | "결과";
+  title: "판단 근거" | "계획" | "결과";
+  description: string;
   artifacts: ArtifactRef[];
 };
 
@@ -321,11 +406,28 @@ function artifactGroupId(artifact: ArtifactRef): ArtifactGroup["id"] {
   return "result";
 }
 
+function artifactDisplayLabel(artifact: ArtifactRef): string {
+  return artifactGroupId(artifact) === "evidence" && artifact.label === "증거" ? "판단 근거" : artifact.label;
+}
+
+function artifactKindLabel(artifact: ArtifactRef): string {
+  if (artifactGroupId(artifact) === "evidence") {
+    return "근거";
+  }
+  if (artifact.kind === "plan") {
+    return "계획";
+  }
+  if (artifact.kind === "result" || artifact.kind === "summary") {
+    return "결과";
+  }
+  return artifact.kind;
+}
+
 function artifactGroups(artifacts: ArtifactRef[]): ArtifactGroup[] {
   const groups: ArtifactGroup[] = [
-    { id: "evidence", title: "증거", artifacts: [] },
-    { id: "plan", title: "계획", artifacts: [] },
-    { id: "result", title: "결과", artifacts: [] },
+    { id: "evidence", title: "판단 근거", description: "subagent 판단에 사용된 관측 자료", artifacts: [] },
+    { id: "plan", title: "계획", description: "subagent가 세운 실행/검토 방향", artifacts: [] },
+    { id: "result", title: "결과", description: "subagent 판단과 실행 결론", artifacts: [] },
   ];
   const byId = new Map(groups.map((group) => [group.id, group]));
   artifacts.forEach((artifact) => byId.get(artifactGroupId(artifact))?.artifacts.push(artifact));
@@ -497,10 +599,10 @@ function StageCell({
             />
           </Tooltip>
         </Stack>
-        <Tooltip arrow describeChild title={agent}>
-          <Typography className="stage-cell-agent" variant="caption">
-            {agent}
-          </Typography>
+        <Tooltip arrow describeChild title={`보장된 subagent: ${agent}`}>
+          <Box className="stage-cell-agent" component="span">
+            <AgentName agent={agent} />
+          </Box>
         </Tooltip>
         <Typography color="text.secondary" variant="caption">
           {formatTokenUsage(stage?.tokenUsage ?? { availability: "unavailable", reportedTotalTokens: null })}
@@ -660,7 +762,17 @@ function IssueLifecycleBoard({
   );
 }
 
-function IssueDetailPanel({ issue, stage }: { issue: DashboardIssue; stage: LifecycleStage | undefined }) {
+function IssueDetailPanel({
+  issue,
+  stage,
+  feedback,
+  onFeedback,
+}: {
+  issue: DashboardIssue;
+  stage: LifecycleStage | undefined;
+  feedback: AgentFeedback;
+  onFeedback: (next: Exclude<AgentFeedback, null>) => void;
+}) {
   const artifacts = relevantArtifacts(issue, stage);
   const groups = artifactGroups(artifacts);
   const detailAgent = stage?.agent ?? "n/a";
@@ -692,13 +804,75 @@ function IssueDetailPanel({ issue, stage }: { issue: DashboardIssue; stage: Life
                 {issue.title}
               </Typography>
             </Box>
-            <Stack direction="row" sx={{ alignItems: "center", flexWrap: "wrap", gap: 1 }}>
-              <Chip label={`agent ${detailAgent}`} />
-              {shouldShowModel ? <Chip label={`model ${detailModel}`} variant="outlined" /> : null}
-              <Chip label={`token ${formatTokenUsage(stage?.tokenUsage ?? { availability: "unavailable", reportedTotalTokens: null })}`} variant="outlined" />
-              <Chip label={formatStageTiming(detailStartedAt, detailCompletedAt)} variant="outlined" />
+            <Stack
+              className="detail-meta-row"
+              direction="row"
+              sx={{ alignItems: "center", flexWrap: "wrap", gap: 1, justifyContent: { md: "flex-end" } }}
+            >
+              <Box className="agent-pill">
+                <AgentRobotIcon agent={detailAgent} />
+                <Typography className="agent-pill-text" variant="caption">
+                  agent {detailAgent}
+                </Typography>
+              </Box>
+              {shouldShowModel ? <Chip className="detail-meta-chip" label={`model ${detailModel}`} variant="outlined" /> : null}
+              <Chip
+                className="detail-meta-chip"
+                label={`token ${formatTokenUsage(stage?.tokenUsage ?? { availability: "unavailable", reportedTotalTokens: null })}`}
+                variant="outlined"
+              />
+              <Chip className="detail-meta-chip detail-meta-chip-time" label={formatStageTiming(detailStartedAt, detailCompletedAt)} variant="outlined" />
             </Stack>
           </Stack>
+
+          <Box
+            aria-label={`${issue.issueId} ${stage?.nameKo ?? issue.currentStageName} agent feedback`}
+            className="agent-feedback"
+          >
+            <Box>
+              <Typography sx={{ fontWeight: 900 }} variant="body2">
+                agent 실행결과 피드백
+              </Typography>
+              <Typography color="text.secondary" variant="caption">
+                따봉은 판단 적합, 역따봉은 판단 보강 필요야. 같은 버튼을 다시 누르면 해제돼.
+              </Typography>
+            </Box>
+            <ButtonGroup aria-label="agent result feedback" size="small" variant="outlined">
+              <Tooltip arrow describeChild title="이 stage의 subagent 판단이 적합함">
+                <Button
+                  aria-pressed={feedback === "up"}
+                  className={feedback === "up" ? "feedback-button-selected" : ""}
+                  onClick={() => onFeedback("up")}
+                >
+                  따봉
+                </Button>
+              </Tooltip>
+              <Tooltip arrow describeChild title="이 stage의 subagent 판단에 보강이 필요함">
+                <Button
+                  aria-pressed={feedback === "down"}
+                  className={feedback === "down" ? "feedback-button-selected feedback-button-down" : ""}
+                  color="error"
+                  onClick={() => onFeedback("down")}
+                >
+                  역따봉
+                </Button>
+              </Tooltip>
+            </ButtonGroup>
+          </Box>
+
+          <Box className="stage-artifact-callout">
+            <Typography sx={{ fontWeight: 900 }} variant="body2">
+              선택 stage 직접 산출물
+            </Typography>
+            <Tooltip arrow describeChild title={stage?.artifactPath ?? "직접 연결 없음"}>
+              <Typography className="stage-artifact-path" color="text.secondary" variant="caption">
+                {stage?.artifactPath ?? "직접 연결 없음"}
+              </Typography>
+            </Tooltip>
+            <Typography color="text.secondary" variant="caption">
+              아래 3열은 선택 stage 직접 산출물을 먼저 보여주고, 나머지는 이슈 참고자료로 함께 묶어 보여줘.
+            </Typography>
+          </Box>
 
           <Divider />
 
@@ -711,17 +885,28 @@ function IssueDetailPanel({ issue, stage }: { issue: DashboardIssue; stage: Life
                   </Typography>
                   <Chip label={`${group.artifacts.length}`} size="small" variant="outlined" />
                 </Stack>
+                <Typography color="text.secondary" variant="caption">
+                  {group.description}
+                </Typography>
                 <Stack spacing={1}>
                   {group.artifacts.length > 0 ? (
                     group.artifacts.map((artifact) => (
                       <Box key={artifact.path} className="artifact-row">
                         <Stack direction="row" sx={{ alignItems: "center", gap: 1, justifyContent: "space-between" }}>
-                          <Tooltip arrow describeChild title={artifact.label}>
+                          <Tooltip arrow describeChild title={artifactDisplayLabel(artifact)}>
                             <Typography className="artifact-label" sx={{ fontWeight: 800 }} variant="body2">
-                              {artifact.label}
+                              {artifactDisplayLabel(artifact)}
                             </Typography>
                           </Tooltip>
-                          <Chip label={artifact.kind} size="small" variant="outlined" />
+                          <Stack direction="row" sx={{ flex: "0 0 auto", gap: 0.5 }}>
+                            <Chip
+                              color={artifact.path === stage?.artifactPath ? "primary" : "default"}
+                              label={artifact.path === stage?.artifactPath ? "선택 stage" : "이슈 참고"}
+                              size="small"
+                              variant={artifact.path === stage?.artifactPath ? "filled" : "outlined"}
+                            />
+                            <Chip label={artifactKindLabel(artifact)} size="small" variant="outlined" />
+                          </Stack>
                         </Stack>
                         <Box className="artifact-meta-block">
                           <Typography color="text.secondary" variant="caption">
@@ -766,6 +951,7 @@ export function App() {
     [],
   );
   const [filters, setFilters] = useState<Filters>({ area: "dashboard", type: "improvement", milestone: activeMilestoneName });
+  const [agentFeedback, setAgentFeedback] = useState<Record<string, AgentFeedback>>({});
   const milestones = useMemo(() => [...linearProjectSnapshot.milestones].sort((left, right) => left.sortOrder - right.sortOrder), []);
   const visibleIssues = useMemo(() => issues.filter((issue) => issueMatchesFilters(issue, filters)), [filters, issues]);
   const handleAreaChange = (area: Filters["area"]) => {
@@ -782,6 +968,18 @@ export function App() {
   });
   const selectedIssue = visibleIssues.find((issue) => issue.issueId === selected.issueId) ?? visibleIssues[0];
   const selectedStage = selectedIssue ? findStage(selectedIssue, selected.stage) : undefined;
+  const selectedFeedbackKey = selectedIssue ? `${selectedIssue.issueId}:${selectedStage?.stage ?? selectedIssue.currentStage ?? "issue"}` : "";
+  const selectedFeedback = selectedFeedbackKey ? (agentFeedback[selectedFeedbackKey] ?? null) : null;
+  const handleAgentFeedback = (next: Exclude<AgentFeedback, null>) => {
+    if (!selectedFeedbackKey) {
+      return;
+    }
+
+    setAgentFeedback((current) => ({
+      ...current,
+      [selectedFeedbackKey]: current[selectedFeedbackKey] === next ? null : next,
+    }));
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -810,7 +1008,9 @@ export function App() {
             </Typography>
           </Paper>
         )}
-        {selectedIssue ? <IssueDetailPanel issue={selectedIssue} stage={selectedStage} /> : null}
+        {selectedIssue ? (
+          <IssueDetailPanel issue={selectedIssue} stage={selectedStage} feedback={selectedFeedback} onFeedback={handleAgentFeedback} />
+        ) : null}
       </Box>
     </ThemeProvider>
   );
