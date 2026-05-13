@@ -2776,10 +2776,10 @@
           "summary": "KTD 17 run summary 이슈 Linear: KTD 17 제목: AIDD dashboard artifact 의미와 agent 피드백 UI 보정 프로젝트: MA Hub 마일스톤: 환경 구성하기 라벨: dashboard, Improvement 범위 artifact 상세 화면에서 증거 가 gate proof처럼 보이지 않도록 판단 근거 의미로 재정렬한다. agent 이름 옆에 robot "
         }
       ],
-      "completedAt": null,
-      "completedStageCount": 10,
-      "currentStage": 10,
-      "currentStageName": "검증/리뷰",
+      "completedAt": "2026-05-13T13:12:00+09:00",
+      "completedStageCount": 12,
+      "currentStage": 11,
+      "currentStageName": "MR/Wiki/Graph 환류",
       "issueId": "KTD-17",
       "labels": [
         "dashboard",
@@ -2810,7 +2810,7 @@
         {
           "agent": "architect",
           "artifactPath": ".omx/artifacts/KTD-17/run-001/subagents/01-architect-artifact-semantics-plan.md",
-          "completedAt": "2026-05-13T12:52:00+09:00",
+          "completedAt": "2026-05-13T13:12:00+09:00",
           "model": "gpt-5.5",
           "nameKo": "아키텍처 정리",
           "reasoning": "high",
@@ -2826,7 +2826,7 @@
         {
           "agent": "executor",
           "artifactPath": ".omx/artifacts/KTD-17/run-001/run-summary.md",
-          "completedAt": "2026-05-13T12:52:00+09:00",
+          "completedAt": "2026-05-13T13:12:00+09:00",
           "model": "gpt-5.5",
           "nameKo": "최소 구현",
           "reasoning": "medium",
@@ -2842,7 +2842,7 @@
         {
           "agent": "ui-designer",
           "artifactPath": ".omx/artifacts/KTD-17/run-001/subagents/02-ui-designer-robot-feedback-result.md",
-          "completedAt": "2026-05-13T12:52:00+09:00",
+          "completedAt": "2026-05-13T13:12:00+09:00",
           "model": "gpt-5.4",
           "nameKo": "검증/리뷰",
           "reasoning": "high",
@@ -2858,13 +2858,13 @@
         {
           "agent": "git-master",
           "artifactPath": ".omx/artifacts/KTD-17/run-001/run-summary.md",
-          "completedAt": "2026-05-13T12:52:00+09:00",
+          "completedAt": "2026-05-13T13:12:00+09:00",
           "model": "n/a",
           "nameKo": "MR/Wiki/Graph 환류",
           "reasoning": "n/a",
           "stage": 11,
-          "startedAt": "2026-05-13T12:52:00+09:00",
-          "status": "PR 생성 전",
+          "startedAt": "2026-05-13T13:12:00+09:00",
+          "status": "PR #11 merge 완료",
           "tokenUsage": {
             "availability": "estimated",
             "reportedTotalTokens": null,
@@ -2873,13 +2873,19 @@
         }
       ],
       "startedAt": "2026-05-13T12:24:28+09:00",
-      "status": "In Progress",
+      "status": "Done",
       "title": "AIDD dashboard artifact 의미와 agent 피드백 UI 보정",
       "totalStageCount": 12,
       "url": "https://linear.app/ktds-ai-eng/issue/KTD-17/aidd-dashboard-artifact-의미와-agent-피드백-ui-보정",
       "linearProject": "MA Hub",
       "linearMilestone": "환경 구성하기",
-      "pullRequests": []
+      "pullRequests": [
+        {
+          "number": 11,
+          "repository": "mahub-aidd-flow",
+          "url": "https://github.com/sohwi-noh/mahub-aidd-flow/pull/11"
+        }
+      ]
     }
   ],
   "schemaVersion": 1,
