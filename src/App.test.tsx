@@ -23,7 +23,12 @@ describe("AIDD workflow dashboard", () => {
     render(<App />);
 
     expect(screen.getByRole("heading", { name: "AIDD workflow dashboard" })).toBeInTheDocument();
-    expect(screen.getByRole("img", { name: /Understand와 Quality 결과가 asset으로 고정되고 Understand Wiki로 환류되는 도식/ })).toBeInTheDocument();
+    const lifecycleImage = screen.getByRole("img", {
+      name: /Understand와 Quality 결과가 asset으로 고정되고 Understand Wiki로 환류되는 도식/,
+    });
+    expect(lifecycleImage).toBeInTheDocument();
+    expect(lifecycleImage.getAttribute("src")).toContain("/src/assets/issue-to-mr-lifecycle.svg");
+    expect(lifecycleImage.getAttribute("src")).not.toContain("/@fs/");
     expect(screen.queryByText("issue-to-mr-lifecycle")).not.toBeInTheDocument();
     expect(screen.queryByText("docs/issue-to-mr-lifecycle.svg")).not.toBeInTheDocument();
     expect(screen.getAllByText("KTD-17").length).toBeGreaterThan(0);

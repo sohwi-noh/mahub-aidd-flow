@@ -34,7 +34,7 @@ import type { ArtifactRef, DashboardIssue, DashboardSnapshot, LifecycleStage, Pu
 import { formatDateTime, formatTokenUsage } from "./domain/dashboard";
 
 const dashboardSnapshot = snapshot as DashboardSnapshot;
-const issueToMrLifecycleUrl = new URL("../../../docs/issue-to-mr-lifecycle.svg", import.meta.url).href;
+const issueToMrLifecycleUrl = new URL("./assets/issue-to-mr-lifecycle.svg", import.meta.url).href;
 
 type LinearMilestone = {
   id: string;
