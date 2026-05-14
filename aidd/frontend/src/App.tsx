@@ -1,13 +1,12 @@
 import { useMemo, useState } from "react";
 import {
   Box,
-  Button,
-  ButtonGroup,
   Chip,
   Collapse,
   CssBaseline,
   Divider,
   FormControl,
+  IconButton,
   InputLabel,
   Link as MuiLink,
   LinearProgress,
@@ -395,42 +394,78 @@ type ArtifactGroup = {
   artifacts: ArtifactRef[];
 };
 
-function artifactGroupId(artifact: ArtifactRef): ArtifactGroup["id"] {
-  const source = `${artifact.kind} ${artifact.label} ${artifact.path}`.toLowerCase();
+function artifactSource(artifact: ArtifactRef): string {
+  return `${artifact.kind} ${artifact.label} ${artifact.path}`.toLowerCase();
+}
+
+function isPlanArtifact(artifact: ArtifactRef): boolean {
+  const source = artifactSource(artifact);
+  return source.includes("plan") || source.includes("tdd") || source.includes("strategy");
+}
+
+function isResultArtifact(artifact: ArtifactRef): boolean {
+  const source = artifactSource(artifact);
+  return artifact.kind === "result" || artifact.kind === "summary" || source.includes("run-summary") || source.includes("implementation") || source.includes("review") || source.includes("mr");
+}
+
+function artifactGroupId(artifact: ArtifactRef, selectedStage: LifecycleStage | undefined): ArtifactGroup["id"] {
+  const source = artifactSource(artifact);
+  const isSelectedStageArtifact = artifact.path === selectedStage?.artifactPath;
+
+  if (isSelectedStageArtifact && isPlanArtifact(artifact)) {
+    return "plan";
+  }
+  if (isSelectedStageArtifact && isResultArtifact(artifact)) {
+    return "result";
+  }
   if (artifact.kind === "evidence" || source.includes("/evidence/") || source.includes("audit") || source.includes("검증")) {
     return "evidence";
   }
-  if (artifact.kind === "plan" || source.includes("plan") || source.includes("requirements") || source.includes("architecture") || source.includes("spec")) {
-    return "plan";
+  if (isPlanArtifact(artifact) || artifact.kind === "plan" || source.includes("requirements") || source.includes("architecture") || source.includes("spec") || source.includes("/subagents/")) {
+    return "evidence";
   }
   return "result";
 }
 
-function artifactDisplayLabel(artifact: ArtifactRef): string {
-  return artifactGroupId(artifact) === "evidence" && artifact.label === "증거" ? "판단 근거" : artifact.label;
+function artifactDisplayLabel(artifact: ArtifactRef, selectedStage: LifecycleStage | undefined): string {
+  return artifactGroupId(artifact, selectedStage) === "evidence" && artifact.label === "증거" ? "판단 근거" : artifact.label;
 }
 
-function artifactKindLabel(artifact: ArtifactRef): string {
-  if (artifactGroupId(artifact) === "evidence") {
-    return "근거";
+function artifactKindLabel(artifact: ArtifactRef, selectedStage: LifecycleStage | undefined): string {
+  const groupId = artifactGroupId(artifact, selectedStage);
+  if (groupId === "evidence") {
+    const source = artifactSource(artifact);
+    if (source.includes("raw-linear") || source.includes("requirements")) {
+      return "사용자 요청";
+    }
+    if (source.includes("search") || source.includes("web")) {
+      return "검색";
+    }
+    if (source.includes("/subagents/") || source.includes("architecture") || source.includes("spec") || isPlanArtifact(artifact)) {
+      return "이전 agent 흔적";
+    }
+    if (source.includes("/evidence/") || source.includes("audit") || source.includes("검증")) {
+      return "관측/검증";
+    }
+    return "입력 근거";
   }
-  if (artifact.kind === "plan") {
+  if (groupId === "plan") {
     return "계획";
   }
-  if (artifact.kind === "result" || artifact.kind === "summary") {
+  if (groupId === "result" || artifact.kind === "result" || artifact.kind === "summary") {
     return "결과";
   }
   return artifact.kind;
 }
 
-function artifactGroups(artifacts: ArtifactRef[]): ArtifactGroup[] {
+function artifactGroups(artifacts: ArtifactRef[], selectedStage: LifecycleStage | undefined): ArtifactGroup[] {
   const groups: ArtifactGroup[] = [
-    { id: "evidence", title: "판단 근거", description: "subagent 판단에 사용된 관측 자료", artifacts: [] },
-    { id: "plan", title: "계획", description: "subagent가 세운 실행/검토 방향", artifacts: [] },
-    { id: "result", title: "결과", description: "subagent 판단과 실행 결론", artifacts: [] },
+    { id: "evidence", title: "판단 근거", description: "agent가 계획/결과를 낼 때 참고한 사용자 요청, 이전 agent 흔적, 검색/관측/검증 자료", artifacts: [] },
+    { id: "plan", title: "계획", description: "선택 stage agent가 근거를 바탕으로 직접 세운 실행/검토 계획", artifacts: [] },
+    { id: "result", title: "결과", description: "선택 stage agent가 계획을 실행하거나 검토해 남긴 판단과 후속 결론", artifacts: [] },
   ];
   const byId = new Map(groups.map((group) => [group.id, group]));
-  artifacts.forEach((artifact) => byId.get(artifactGroupId(artifact))?.artifacts.push(artifact));
+  artifacts.forEach((artifact) => byId.get(artifactGroupId(artifact, selectedStage))?.artifacts.push(artifact));
   return groups;
 }
 
@@ -774,7 +809,7 @@ function IssueDetailPanel({
   onFeedback: (next: Exclude<AgentFeedback, null>) => void;
 }) {
   const artifacts = relevantArtifacts(issue, stage);
-  const groups = artifactGroups(artifacts);
+  const groups = artifactGroups(artifacts, stage);
   const detailAgent = stage?.agent ?? "n/a";
   const detailModel = stage?.model ?? "n/a";
   const shouldShowModel = isKnownValue(detailAgent) && isKnownValue(detailModel);
@@ -837,27 +872,35 @@ function IssueDetailPanel({
                 따봉은 판단 적합, 역따봉은 판단 보강 필요야. 같은 버튼을 다시 누르면 해제돼.
               </Typography>
             </Box>
-            <ButtonGroup aria-label="agent result feedback" size="small" variant="outlined">
+            <Box aria-label="agent result feedback" className="feedback-button-group" role="group">
               <Tooltip arrow describeChild title="이 stage의 subagent 판단이 적합함">
-                <Button
+                <IconButton
+                  aria-label="따봉"
                   aria-pressed={feedback === "up"}
                   className={feedback === "up" ? "feedback-button-selected" : ""}
+                  size="small"
                   onClick={() => onFeedback("up")}
                 >
-                  따봉
-                </Button>
+                  <Box aria-hidden="true" className="feedback-thumb-icon" component="span">
+                    👍
+                  </Box>
+                </IconButton>
               </Tooltip>
               <Tooltip arrow describeChild title="이 stage의 subagent 판단에 보강이 필요함">
-                <Button
+                <IconButton
+                  aria-label="역따봉"
                   aria-pressed={feedback === "down"}
                   className={feedback === "down" ? "feedback-button-selected feedback-button-down" : ""}
                   color="error"
+                  size="small"
                   onClick={() => onFeedback("down")}
                 >
-                  역따봉
-                </Button>
+                  <Box aria-hidden="true" className="feedback-thumb-icon feedback-thumb-icon-down" component="span">
+                    👎
+                  </Box>
+                </IconButton>
               </Tooltip>
-            </ButtonGroup>
+            </Box>
           </Box>
 
           <Box className="stage-artifact-callout">
@@ -870,7 +913,7 @@ function IssueDetailPanel({
               </Typography>
             </Tooltip>
             <Typography color="text.secondary" variant="caption">
-              아래 3열은 선택 stage 직접 산출물을 먼저 보여주고, 나머지는 이슈 참고자료로 함께 묶어 보여줘.
+              아래 3열은 agent가 참고한 근거, 직접 세운 계획, 실행/검토 결과를 분리해서 보여줘. 다른 agent 산출물은 다음 판단의 근거로 취급해.
             </Typography>
           </Box>
 
@@ -892,20 +935,20 @@ function IssueDetailPanel({
                   {group.artifacts.length > 0 ? (
                     group.artifacts.map((artifact) => (
                       <Box key={artifact.path} className="artifact-row">
-                        <Stack direction="row" sx={{ alignItems: "center", gap: 1, justifyContent: "space-between" }}>
-                          <Tooltip arrow describeChild title={artifactDisplayLabel(artifact)}>
+                        <Stack className="artifact-row-head" direction="row">
+                          <Tooltip arrow describeChild title={artifactDisplayLabel(artifact, stage)}>
                             <Typography className="artifact-label" sx={{ fontWeight: 800 }} variant="body2">
-                              {artifactDisplayLabel(artifact)}
+                              {artifactDisplayLabel(artifact, stage)}
                             </Typography>
                           </Tooltip>
-                          <Stack direction="row" sx={{ flex: "0 0 auto", gap: 0.5 }}>
+                          <Stack className="artifact-row-tags" direction="row">
                             <Chip
                               color={artifact.path === stage?.artifactPath ? "primary" : "default"}
                               label={artifact.path === stage?.artifactPath ? "선택 stage" : "이슈 참고"}
                               size="small"
                               variant={artifact.path === stage?.artifactPath ? "filled" : "outlined"}
                             />
-                            <Chip label={artifactKindLabel(artifact)} size="small" variant="outlined" />
+                            <Chip label={artifactKindLabel(artifact, stage)} size="small" variant="outlined" />
                           </Stack>
                         </Stack>
                         <Box className="artifact-meta-block">
