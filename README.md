@@ -4,6 +4,31 @@ Foundary는 `AIDD` workflow/harness를 중심으로 `MA Hub` 제품 산출물을
 
 `.codex/`, `.omx/`, `docs/`는 공통 잡동사니가 아니라 AIDD를 운영하기 위한 agent, artifact, 지식/절차 표면입니다. `mahub/`는 사람이 직접 제품 개발을 계속하는 주 작업면이 아니라, AIDD 이슈 기반 개발 루프가 변경하고 검증할 대상 산출물로 취급합니다.
 
+## Symphony 운영 기준
+
+Symphony는 Linear 이슈를 보고 AIDD workflow를 실행하는 로컬/서버 실행기다. secret 파일은 커밋하지 않는다.
+
+| 모드 | 기준 |
+|---|---|
+| 개인 로컬 | 자기 Linear key + `LINEAR_ASSIGNEE=me`로 자기 assigned issue만 처리 |
+| 공유 개발서버 | AIDD bot/service key로 `Symphony Ready` queue 전체 처리. 서버 Symphony는 한 대만 운영 |
+
+로컬에서는 각자 `symphony.env`를 만들고 아래 값을 넣는다.
+
+```bash
+cp symphony.env.example symphony.env
+LINEAR_API_KEY=lin_api_...
+LINEAR_ASSIGNEE=me
+```
+
+대시보드:
+
+```text
+http://127.0.0.1:4100/
+```
+
+AIDD backend는 이후 실행 이력, stage, agent, token, artifact, PR, 상태값을 저장하는 control-plane으로 확장한다.
+
 ## AIDD / MA Hub 비교 기준
 
 | 항목 | AIDD | MA Hub |
