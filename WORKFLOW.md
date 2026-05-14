@@ -19,7 +19,10 @@ workspace:
 hooks:
   after_create: |
     cp /Users/so2/workspace-so2/foundary/ai-foundry-architecture.md ./ai-foundry-architecture.md
-    mkdir -p .omx/artifacts
+    mkdir -p /Users/so2/workspace-so2/foundary/.omx/artifacts .omx
+    if [ ! -e .omx/artifacts ]; then
+      ln -s /Users/so2/workspace-so2/foundary/.omx/artifacts .omx/artifacts
+    fi
 agent:
   max_concurrent_agents: 1
   max_turns: 1
@@ -76,13 +79,14 @@ Operating rules:
 5. Treat Linear as the human intake source.
 6. Treat understand-anything as the code graph context source.
 7. Keep evidence, inference, unknowns, and follow-ups separate.
-8. Write only issue-local planning artifacts in `.omx/artifacts/{{ issue.identifier }}/`.
+8. Write only issue-local planning artifacts in `/Users/so2/workspace-so2/foundary/.omx/artifacts/{{ issue.identifier }}/`.
+   In a Symphony issue workspace, `.omx/artifacts` is a symlink to that root artifact store.
 9. Do not continue past the intake gate when the label or required issue information is missing.
 
-Expected local artifact bundle:
+Expected canonical artifact bundle:
 
 ```text
-.omx/artifacts/{{ issue.identifier }}/
+/Users/so2/workspace-so2/foundary/.omx/artifacts/{{ issue.identifier }}/
   raw-linear.md
   00-intake.md
   bug-report.md
@@ -110,7 +114,7 @@ If required fields are missing:
 
 - do not implement
 - do not open or update pull requests
-- write `.omx/artifacts/{{ issue.identifier }}/00-intake.md`
+- write `/Users/so2/workspace-so2/foundary/.omx/artifacts/{{ issue.identifier }}/00-intake.md`
 - set the disposition to `needs-info`
 - list the missing fields and recommended human questions in `result.md`
 - keep the final response focused on the missing human inputs
