@@ -52,8 +52,8 @@ Use this routing rule:
 
 | Question | If yes | If no |
 |---|---|---|
-| Does the issue have a single fixed `harness` label? | Codex may create PR and complete it | Do not directly process as harness |
-| Does the issue have a single fixed `aidd` or `mahub` label? | Codex checks intake, then moves it to `Symphony Ready` | Ask to fix the label first |
+| Does the issue have a `harness` owner label without `aidd`/`mahub` conflict? | Codex may create PR and complete it | Do not directly process as harness |
+| Does the issue have an `aidd` or `mahub` owner label? | Codex checks intake, then moves it to `Symphony Ready`; helper labels are allowed | Ask to fix the owner label first |
 | Are issue template fields complete enough? | Symphony can take the issue | Ask for missing problem/scope/AC/verification/artifacts |
 | Does the workflow start? | Symphony must leave at least one subagent activity | Treat missing subagent activity as an observability gap |
 
