@@ -30,9 +30,9 @@ mise exec -- mix build
 
 | 기준 | 처리 |
 |---|---|
-| Linear 라벨 없음/혼합 | 접수하지 않고, 먼저 작업 라벨을 하나로 고정합니다. |
-| `harness` 라벨 | Codex가 직접 PR 및 완료 처리를 할 수 있습니다. Symphony 처리 대상이 아닙니다. |
-| `aidd`/`mahub` 라벨 | Codex가 intake를 점검한 뒤 `Symphony Ready`로 넘기고, 이후 Symphony가 주관합니다. |
+| 주관 라벨 없음/충돌 | Codex gate에서 접수하지 않고, 먼저 작업 주관 라벨을 하나로 고정합니다. |
+| `harness` 라벨 포함 | Codex가 직접 PR 및 완료 처리를 할 수 있습니다. Symphony 처리 대상이 아닙니다. |
+| `aidd`/`mahub` 라벨 포함 | Codex가 intake를 점검한 뒤 `Symphony Ready`로 넘기고, 이후 Symphony가 주관합니다. 보조 라벨은 함께 있어도 됩니다. Symphony는 라벨을 다시 통과/실패 기준으로 보지 않습니다. |
 
 This repo has a conservative starter workflow:
 
@@ -46,7 +46,7 @@ It is configured for Linear project:
 - Project URL: `https://linear.app/ktds-ai-eng/project/ma-hub-2f076b86e186`
 - `tracker.project_slug`: `ma-hub-2f076b86e186`
 
-The workflow intentionally listens only to the `Symphony Ready` Linear state so it will not pick up every `Todo` issue by accident. Symphony는 각 workflow 하위에 최소 1개 이상의 subagent 동작을 보장합니다.
+The workflow intentionally listens only to the `Symphony Ready` and `In Progress` Linear states so it will not pick up every `Todo` issue by accident. Symphony는 각 workflow 하위에 최소 1개 이상의 subagent 동작을 보장합니다.
 
 ## Before Running
 
@@ -86,4 +86,4 @@ http://127.0.0.1:4100/
 - `result.md`
 - `insight-summary.md`
 
-구현 단계는 `aidd`/`mahub` 라벨 이슈가 Codex gate를 통과해 `Symphony Ready`가 된 뒤 Symphony가 주관합니다.
+구현 단계는 Codex gate를 통과해 `Symphony Ready`가 된 뒤 Symphony가 주관합니다. Symphony는 실행 중 `needs-info`를 `보완 요청`으로, 3턴 안에 끝나지 않는 작업을 `확인 필요`로 넘겨 반복 실행을 멈춥니다.
