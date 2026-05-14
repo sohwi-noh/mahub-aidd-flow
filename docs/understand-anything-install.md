@@ -60,9 +60,9 @@ Launch the graph dashboard:
 
 The dashboard requires `.understand-anything/knowledge-graph.json` in the target repo. If that file is missing, run `/understand` first.
 
-## Notes For This Planning Repo
+## Notes For This Repo
 
-This `/Users/so2/workspace-so2/foundary` repo is currently a planning/config repo. It does not yet contain its own `.understand-anything/knowledge-graph.json`, and `.understand-anything/` is gitignored.
+`/Users/so2/workspace-so2/foundary`는 `AIDD` workflow/harness를 중심으로 `MA Hub` 제품 산출물을 개발하고 검증하는 작업 저장소입니다. `.understand-anything/`은 로컬 graph 산출물이므로 gitignore 대상입니다.
 
 For the AI Foundry flow, treat Understand-Anything as the graph context provider:
 

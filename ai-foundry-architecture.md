@@ -1,12 +1,12 @@
 # AI Foundry MVP Plan
 
-목표는 처음부터 완전 자동화된 agentic delivery loop를 만드는 것이 아니다. 지금 단계의 목표는 사람이 Linear에 이슈와 버그 리포트를 넣고, 그 자료를 understand-anything graph context와 연결해 축적한 뒤, 시각화로 반복 패턴과 병목을 발견하는 것이다. Shympony, OMX TDD, MR 자동화, harness feedback loop는 이 관찰 기반이 쌓인 뒤 단계적으로 붙인다.
+목표는 Linear issue를 기준으로 AIDD workflow/harness와 MA Hub 산출물을 연결하고, issue별 artifact와 graph context를 축적해 반복 패턴과 병목을 확인하는 것이다. 모든 작업은 Linear issue로 기록하며, `harness` 라벨은 Codex가 직접 PR까지 처리하고 `aidd`/`mahub` 코드 영역 작업은 Codex gate를 통과한 뒤 Symphony가 주관한다.
 
 현재 준비된 것:
 
 - Linear workspace: `https://linear.app/ktds-ai-eng/team/KTD/active`
 - understand-anything graph UI: `http://127.0.0.1:5173/`
-- 로컬 planning repo: `/Users/so2/workspace-so2/foundary`
+- 로컬 작업 저장소: `/Users/so2/workspace-so2/foundary`
 
 ## 1. MVP Architecture
 
@@ -28,9 +28,9 @@ flowchart TB
   Insight --> HumanReview["Human Review\nprioritize next improvement"]
   HumanReview --> AutomationBacklog["Automation Backlog\nonly after repeated patterns"]
 
-  AutomationBacklog -. "later" .-> Shympony["Shympony\nworkflow orchestration"]
-  AutomationBacklog -. "later" .-> OMX["OMX TDD Lane\nRED/GREEN/REFACTOR"]
-  AutomationBacklog -. "later" .-> Harness["Harness Feedback\nscoring and policy tuning"]
+  AutomationBacklog --> Symphony["Symphony\nworkflow orchestration"]
+  AutomationBacklog --> OMX["OMX TDD Lane\nRED/GREEN/REFACTOR"]
+  AutomationBacklog --> Harness["Harness Feedback\nscoring and policy tuning"]
 ```
 
 The first loop is deliberately human-in-the-loop:
@@ -42,23 +42,22 @@ The first loop is deliberately human-in-the-loop:
 5. The accumulated data is visualized for insight.
 6. Only repeated, stable, low-risk steps become automation candidates.
 
-## 2. Do We Need Shympony Now?
+## 2. Symphony 운영 기준
 
-No, not for the first MVP.
+Symphony는 이제 `aidd`/`mahub` 코드 영역 작업을 주관하는 실행기로 둔다.
 
-Shympony becomes useful when workflow state transitions and repeated handoffs need to run automatically. Right now, the valuable work is to standardize issue intake, bug evidence, graph links, and insight artifacts. Installing Shympony before those contracts are stable would add orchestration before there is enough signal to orchestrate.
+Codex는 모든 이슈를 먼저 intake gate로 확인한다. `harness` 라벨이면 Codex가 직접 PR과 완료 처리를 할 수 있고, `aidd`/`mahub` 라벨이면 문제, 범위, 인수 조건, 검증 기준, 산출물이 충분한지 확인한 뒤 `Symphony Ready`로 넘긴다.
 
-Use this decision rule:
+Use this routing rule:
 
 | Question | If yes | If no |
 |---|---|---|
-| Are Linear issue templates stable? | Consider wiring Shympony intake sync | Keep using manual templates |
-| Do issues have consistent artifact folders? | Consider automated artifact creation | Keep local folder conventions |
-| Are graph context fields repeatable? | Consider graph snapshot capture | Keep manual graph links/screenshots |
-| Are humans repeatedly doing the same read-only step? | Automate that step first | Keep observing |
-| Do we need automatic MR/TDD execution? | Add Shympony + OMX lane later | Do not install yet |
+| Does the issue have a single fixed `harness` label? | Codex may create PR and complete it | Do not directly process as harness |
+| Does the issue have a single fixed `aidd` or `mahub` label? | Codex checks intake, then moves it to `Symphony Ready` | Ask to fix the label first |
+| Are issue template fields complete enough? | Symphony can take the issue | Ask for missing problem/scope/AC/verification/artifacts |
+| Does the workflow start? | Symphony must leave at least one subagent activity | Treat missing subagent activity as an observability gap |
 
-Initial answer: defer Shympony installation until Phase 3 or 4.
+현재 기준은 루트 `README.md`를 우선한다.
 
 ## 3. Phased Plan
 
@@ -187,11 +186,11 @@ Exit criteria:
 
 - Read-only automations save time without changing code or workflow state.
 
-### Phase 6. Shympony And OMX Automation
+### Phase 6. Symphony And OMX Automation
 
-Purpose: add orchestration only after the manual flow proves repeatable.
+Purpose: expand orchestration after the intake and evidence flow proves repeatable.
 
-Add Shympony when:
+Expand Symphony when:
 
 - The artifact schema has stabilized.
 - Linear templates are consistently used.
@@ -358,23 +357,22 @@ Recommended first automations:
 4. Evidence vs inference formatter.
 5. Insight summary table generator.
 
-Shympony can orchestrate these later, but the contracts should come first.
+Symphony can orchestrate these after the contracts are clear enough for repeatable execution.
 
 ## 9. Immediate Next Steps
 
-1. Keep Shympony uninstalled for now unless there is already a required team workflow depending on it.
-2. Create the first real Linear issue or bug report using the template above.
-3. Create `.omx/artifacts/{KTD-ID}/` manually for that issue.
-4. Capture graph context from `http://127.0.0.1:5173/`.
-5. Fill `00-intake.md`, `bug-report.md` if relevant, `graph-context.md`, and `evidence.md`.
-6. After 5 to 10 issues, build the first insight summary table.
-7. Decide the first read-only automation from observed repetition.
+1. Keep the README as the first source of truth for label routing and local run commands.
+2. Use Linear labels to split `harness` and `aidd`/`mahub` work before processing.
+3. Move only intake-complete `aidd`/`mahub` issues to `Symphony Ready`.
+4. Store issue-local workflow evidence under `.omx/artifacts/{KTD-ID}/run-*`.
+5. Capture graph context from understand-anything when it helps explain scope or impact.
+6. Build insight summaries from repeated issue, artifact, PR, and graph patterns.
 
 ## 10. Long-Term Direction
 
 The earlier full architecture still matters, but it is a later layer:
 
-- Shympony: orchestrates repeated handoffs after manual patterns stabilize.
+- Symphony: orchestrates repeated handoffs after intake and evidence patterns stabilize.
 - OMX TDD: runs test-first implementation after issue/test contracts are clear.
 - E2E scenario owner: manages smoke/full/quarantine after user-flow bugs are consistently captured.
 - Harness feedback: scores agent behavior after there is enough historical issue/result data.

@@ -12,9 +12,35 @@ USE CODEX NATIVE SUBAGENTS FOR INDEPENDENT PARALLEL SUBTASKS WHEN THAT IMPROVES 
 - 사용자가 명시적으로 영문 문서를 요청하거나 외부 제출 양식이 영문을 요구하는 경우에만 예외로 한다.
 - Linear 이슈, MR 본문, Wiki/운영 기록, `.omx/artifacts/**/*.md`, `docs/**/*.md` 산출물에도 이 정책을 적용한다.
 
+## Codex 이슈 접수 정책
+
+- 모든 작업은 Linear issue로 기록한다.
+- Linear 라벨로 `harness` 작업과 `aidd`/`mahub` 코드 영역 작업을 구분한다.
+- Linear 라벨은 처리 전에 반드시 하나의 작업 주관으로 고정한다.
+- 라벨 없음/혼합 이슈는 접수하지 않고, 먼저 작업 라벨을 하나로 고정하도록 요청한다.
+- `harness` 라벨 이슈만 Codex가 직접 branch, commit, PR, 완료 처리를 할 수 있다.
+- `aidd`/`mahub` 라벨 이슈는 Codex가 직접 코드 수정, branch 생성, commit, PR 생성을 수행하지 않는다.
+- `aidd`/`mahub` 라벨 이슈는 `Symphony Ready`로 넘기기 전에 문제, 범위, 인수 조건, 검증 기준, 산출물이 이슈 발행 템플릿 기준을 어느 정도 충족하는지 1회 점검한다.
+- intake 검사에서 필수 정보가 부족하면 이슈를 `Symphony Ready`로 전환하지 않고 사용자에게 보완 질문을 한다.
+- intake 검사를 통과한 `aidd`/`mahub` 이슈만 `Symphony Ready`로 전환한다.
+- `harness` 라벨이 아닌 이슈는 연결된 PR이 생성되기 전에는 Linear 완료 상태로 전환하지 않는다.
+- `harness` 라벨 이슈라도 AIDD control-plane 제품 코드나 MA Hub 제품 산출물 변경이 포함되면 직접 처리 예외를 적용하지 않고 별도 구현 이슈로 분리한다.
+- `harness` 라벨 직접 PR의 commit/PR 본문에는 이 작업이 제품 개발이 아니라 하네스/운영 계약 변경이라 Codex가 직접 처리했다는 사유를 남긴다.
+
+Linear 라벨 라우팅 기준:
+
+| 기준 | Codex 처리 |
+|---|---|
+| Linear 라벨 없음/혼합 | 접수하지 않는다. 먼저 작업 라벨을 하나로 고정한다. |
+| `harness` 라벨 | Codex가 직접 PR 및 완료 처리를 할 수 있다. |
+| `aidd`/`mahub` 라벨 | Codex가 직접 처리하지 않는다. `Symphony Ready`로 넘기기 전에 문제, 범위, 인수 조건, 검증 기준, 산출물이 이슈 발행 템플릿 기준을 어느 정도 충족하는지 한 번 점검한다. |
+
 ## Subagent 관측 정책
 
 - Linear 이슈 단위로 subagent workflow를 실행할 때는 `.omx/artifacts/<ISSUE-ID>/run-<NNN>/` 아래에 실행 기록을 남긴다.
+- Symphony는 각 workflow 하위에 최소 1개 이상의 subagent 동작을 보장한다.
+- 모든 subagent는 본인의 plan, plan의 근거(evidence), result를 작성한다.
+- evidence에는 사용자 프롬프트, 검색 결과, 로컬 코드/문서 확인, 다른 agent 결과물처럼 plan에 사용한 근거를 포함한다.
 - 각 subagent의 시작/종료 관측 시각, 상태, 담당 모델, reasoning effort, 계획/결과/증거 파일 경로를 `run.jsonl`과 `run-summary.md`에 기록한다.
 - per-subagent 정확 토큰 사용량이 도구에서 노출되지 않으면 `reported*Tokens`는 `null`로 두고, 산출물 기준 `estimatedVisibleTokens`와 한계를 명시한다.
 - read-only agent가 파일을 직접 쓰지 못하면 실패 이벤트를 남기고, 필요한 경우 `executor`가 대리 기록하되 대리 기록 사실을 산출물 상단에 명시한다.

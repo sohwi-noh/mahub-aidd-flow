@@ -2,18 +2,44 @@
 
 Foundary는 `AIDD` workflow/harness를 중심으로 `MA Hub` 제품 산출물을 개발하고 검증하는 작업 저장소입니다. 이 README는 로컬 기동/빌드 명령의 1차 기준입니다.
 
-`.codex/`, `.omx/`, `docs/`는 공통 잡동사니가 아니라 AIDD를 운영하기 위한 agent, artifact, 지식/절차 표면입니다. `mahub/`는 사람이 직접 제품 개발을 계속하는 주 작업면이 아니라, AIDD 이슈 기반 개발 루프가 변경하고 검증할 대상 산출물로 취급합니다.
+모든 작업은 Linear issue로 기록합니다.
+Linear 라벨로 `harness` 작업과 `aidd`/`mahub` 코드 영역 작업을 구분합니다.
+
+1. `harness`는 Codex가 바로 PR까지 처리하며 `.codex/`, `.omx/`, `docs/`는 `harness` 라벨 작업의 주요 표면입니다. 이 영역은 공통 잡동사니가 아니라 AIDD를 운영하기 위한 agent, artifact, 지식/절차 표면입니다.
+2. 코드 영역 작업은 Symphony가 주관합니다. Symphony는 각 workflow 하위에 최소 1개 이상의 subagent 동작을 보장합니다. `mahub/`는 사람이 직접 제품 개발을 계속하는 주 작업면이 아니라, AIDD 이슈 기반 개발 루프가 변경하고 검증할 대상 산출물로 취급합니다.
+
+## Codex 이슈 접수 기준
+
+| 기준 | Codex 처리 |
+|---|---|
+| Linear 라벨 없음/혼합 | 접수하지 않습니다. 먼저 작업 라벨을 하나로 고정합니다. |
+| `harness` 라벨 | Codex가 직접 PR 및 완료 처리를 할 수 있습니다. |
+| `aidd`/`mahub` 라벨 | Codex가 직접 처리하지 않습니다. `Symphony Ready`로 넘기기 전에 문제, 범위, 인수 조건, 검증 기준, 산출물이 이슈 발행 템플릿 기준을 어느 정도 충족하는지 한 번 점검합니다. |
+
+| Linear 상태/표시 | 의미 |
+|---|---|
+| `Todo` 또는 보완 요청 | Codex gate에서 정보가 부족해 아직 `Symphony Ready`로 넘기지 않는 상태입니다. |
+| `Symphony Ready` | Codex gate를 통과해 Symphony가 가져갈 수 있는 상태입니다. |
+| `In Progress` | `harness`는 Codex가, `aidd`/`mahub`는 Symphony가 처리 중인 상태입니다. |
+| `Done` | 산출물과 PR 확인 후 완료된 상태입니다. |
+
+## 이슈-Artifact-PR 정합성 원칙
+
+기본 단위는 **Linear issue 1개 → `.omx/artifacts/<ISSUE-ID>/run-*` 실행 기록 → GitHub PR 1개**입니다.
+
+- 브랜치, commit, PR 제목/본문, artifact 경로에는 같은 Linear issue key를 사용합니다.
+- 모든 subagent는 본인의 plan, plan의 근거(evidence), result를 해당 issue의 run 아래에 남깁니다.
 
 ## Symphony 운영 기준
 
-Symphony는 Linear 이슈를 보고 AIDD workflow를 실행하는 로컬/서버 실행기다. secret 파일은 커밋하지 않는다.
+Symphony는 Linear 이슈를 보고 AIDD workflow를 실행하는 로컬/서버 실행기입니다. secret 파일은 커밋하지 않습니다.
 
 | 모드 | 기준 |
 |---|---|
-| 개인 로컬 | 자기 Linear key + `LINEAR_ASSIGNEE=me`로 자기 assigned issue만 처리 |
-| 공유 개발서버 | AIDD bot/service key로 `Symphony Ready` queue 전체 처리. 서버 Symphony는 한 대만 운영 |
+| 개인 로컬 | 자기 Linear key + `LINEAR_ASSIGNEE=me`로 자기 assigned issue만 처리합니다. |
+| 공유 개발서버 | AIDD bot/service key로 `Symphony Ready` queue 전체를 처리합니다. 서버 Symphony는 한 대만 운영합니다. |
 
-로컬에서는 각자 `symphony.env`를 만들고 아래 값을 넣는다.
+로컬에서는 각자 `symphony.env`를 만들고 아래 값을 넣습니다.
 
 ```bash
 cp symphony.env.example symphony.env
@@ -27,7 +53,7 @@ LINEAR_ASSIGNEE=me
 http://127.0.0.1:4100/
 ```
 
-AIDD backend는 이후 실행 이력, stage, agent, token, artifact, PR, 상태값을 저장하는 control-plane으로 확장한다.
+AIDD backend는 이후 실행 이력, stage, agent, token, artifact, PR, 상태값을 저장하는 control-plane으로 확장합니다.
 
 ## AIDD / MA Hub 비교 기준
 
