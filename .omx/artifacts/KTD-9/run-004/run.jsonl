@@ -1,0 +1,18 @@
+{"ts":"2026-05-12T00:31:00+09:00","event":"run_started","issue":"KTD-9","run":"run-004"}
+{"ts":"2026-05-12T00:32:00+09:00","event":"subagent_completed","role":"git-master","model":"gpt-5.5","reasoning":"high","artifact":"subagents/01-pr-orchestration.md","reportedTotalTokens":null}
+{"ts":"2026-05-12T00:36:32+09:00","event":"subagent_completed","role":"executor","model":"gpt-5.5","reasoning":"medium","artifact":"subagents/02-api-implementation.md","reportedTotalTokens":null}
+{"ts":"2026-05-12T00:38:00+09:00","event":"subagent_completed","role":"executor","model":"gpt-5.5","reasoning":"medium","artifact":"subagents/03-web-implementation.md","reportedTotalTokens":null}
+{"ts":"2026-05-12T00:41:00+09:00","event":"subagent_completed","role":"test-engineer","model":"gpt-5.5","reasoning":"medium","artifact":"subagents/04-pre-pr-verification-plan.md","reportedTotalTokens":null}
+{"ts":"2026-05-12T09:15:57+09:00","event":"subagent_completed","role":"build-fixer","model":"gpt-5.5","reasoning":"high","artifact":"subagents/05-web-build-fix.md","reportedTotalTokens":null}
+{"ts":"2026-05-12T09:20:00+09:00","event":"subagent_timeout_recorded","role":"code-reviewer/verifier","model":"gpt-5.5","reasoning":"high","artifact":"subagents/06-pre-pr-review.md","reportedTotalTokens":null}
+{"ts":"2026-05-12T09:15:45+09:00","event":"verification_passed","target":"mahub-api","command":"JAVA_HOME=/opt/homebrew/Cellar/openjdk@21/21.0.11/libexec/openjdk.jdk/Contents/Home mvn test","artifact":"evidence/api-mvn-test.txt"}
+{"ts":"2026-05-12T09:24:40+09:00","event":"verification_passed","target":"mahub-web","command":"npm test","artifact":"evidence/web-npm-test.txt"}
+{"ts":"2026-05-12T09:24:41+09:00","event":"verification_passed","target":"mahub-web","command":"npm run build","artifact":"evidence/web-npm-build.txt"}
+{"ts":"2026-05-12T09:47:18+09:00","event":"pr_created","target":"mahub-api","url":"https://github.com/sohwi-noh/mahub-api/pull/1","mergeable":"MERGEABLE"}
+{"ts":"2026-05-12T09:47:17+09:00","event":"pr_created","target":"mahub-web","url":"https://github.com/sohwi-noh/mahub-web/pull/1","mergeable":"MERGEABLE"}
+{"ts":"2026-05-12T09:55:39+09:00","event":"stage_index_synced","artifact":"evidence/stage-index-sync.md","note":"canonical stage-index remains schema-only; run-004 evidence belongs in run-local ledger, summary, jsonl, and evidence files"}
+{"ts":"2026-05-12T10:00:00+09:00","event":"stage_index_synced","artifact":"evidence/stage-index-sync.md","note":"stage-index-sync audit found run-local evidence index gaps; run-004 summary and ledger were expanded without turning stage-index into a PR/evidence database"}
+{"ts":"2026-05-12T10:16:53+09:00","event":"linear_status_updated","issue":"KTD-9","status":"Done","statusType":"completed","completedAt":"2026-05-12T01:16:53.974Z","artifact":"evidence/linear-status-done.md"}
+{"ts":"2026-05-12T10:17:00+09:00","event":"subagent_started","role":"verifier","model":"gpt-5.5","reasoning":"high","artifact":"subagents/07-linear-done-verifier.md","reportedTotalTokens":null}
+{"ts":"2026-05-12T10:18:00+09:00","event":"subagent_completed","role":"verifier","model":"gpt-5.5","reasoning":"high","artifact":"subagents/07-linear-done-verifier.md","reportedTotalTokens":null}
+{"ts":"2026-05-12T10:19:00+09:00","event":"stage_index_synced","artifact":"evidence/stage-index-sync.md","note":"Linear Done 후처리 evidence and verifier artifact were added to run-local records; canonical stage-index remains schema-only"}

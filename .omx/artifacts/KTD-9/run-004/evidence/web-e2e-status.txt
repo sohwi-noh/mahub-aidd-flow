@@ -1,0 +1,11 @@
+status: NOT_CONFIGURED
+checked_at_kst: 2026-05-12 09:16:00 KST
+
+reason:
+- `mahub-web` is currently an environment baseline repository.
+- No E2E scenario files, browser runner, scenario fixture, or human-managed scenario catalog exists in this repo yet.
+
+next action:
+- Do not create or modify E2E tests without explicit user intervention.
+- After the human owner defines E2E scenarios, run them before PR when a target environment is available.
+- PR after this baseline should use CI/merge gate to enforce E2E status when configured.

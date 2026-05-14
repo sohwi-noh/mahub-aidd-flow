@@ -1,0 +1,6 @@
+API build meaning for run-004:
+
+- `mvn test` was used as the PR-before gate.
+- Maven lifecycle includes compile, test-compile, and test execution before reporting success.
+- This is sufficient for the `환경구성` baseline milestone.
+- After the Linear `환경구성` milestone, backend feature work must add DB-backed integration tests rather than mock-object completion evidence.

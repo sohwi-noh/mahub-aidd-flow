@@ -1,0 +1,29 @@
+created_at_kst: 2026-05-12 09:47:18 KST
+
+bootstrap:
+- Both target GitHub repositories were empty.
+- A code-free `main` base commit was pushed to each repository so the environment baseline can be reviewed through PRs.
+
+mahub-api:
+- repo: https://github.com/sohwi-noh/mahub-api
+- base branch: main
+- head branch: ktd-9/environment-baseline
+- base commit: df430de Establish PR base branch for MA Hub API
+- feature commit: c9b4393 Establish Java 21 API baseline for KTD-9
+- PR: https://github.com/sohwi-noh/mahub-api/pull/1
+- PR created: 2026-05-12 09:47:18 KST
+- state: OPEN
+- mergeable: MERGEABLE
+- status checks: none reported
+
+mahub-web:
+- repo: https://github.com/sohwi-noh/mahub-web
+- base branch: main
+- head branch: ktd-9/environment-baseline
+- base commit: 2b5c9a5 Establish PR base branch for MA Hub Web
+- feature commit: 34d6a60 Establish React web baseline for KTD-9
+- PR: https://github.com/sohwi-noh/mahub-web/pull/1
+- PR created: 2026-05-12 09:47:17 KST
+- state: OPEN
+- mergeable: MERGEABLE
+- status checks: none reported

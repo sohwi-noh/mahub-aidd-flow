@@ -1,0 +1,25 @@
+initial command: npm run build
+cwd: /Users/so2/workspace-so2/foundary/.worktrees/mahub-web
+initial_exit_code: 2
+classification: tooling/config issue
+
+initial failure:
+- TS2688: Cannot find type definition file for 'node'.
+- Cause: `tsconfig.node.json` includes `types: ["node"]` but `@types/node` was missing.
+
+second failure after @types/node:
+- TS2769: Object literal may only specify known properties, and 'test' does not exist in type 'UserConfigExport'.
+- Cause: `vite.config.ts` imported `defineConfig` from `vite`, but Vitest test config needs `vitest/config`.
+
+fixes:
+- Added `@types/node` to devDependencies.
+- Changed `vite.config.ts` to import `defineConfig` from `vitest/config`.
+
+final command: npm run build
+final_exit_code: 0
+verified_at_kst: 2026-05-12 09:24:41 KST
+final summary:
+- `tsc -b && vite build` passed.
+- Vite v8.0.12 built production assets.
+- Output included `dist/index.html`, CSS asset, and JS asset.
+- Final verification was repeated after aligning `@types/node` to the Node 20.19+ engine floor.

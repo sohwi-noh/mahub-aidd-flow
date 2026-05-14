@@ -1,0 +1,11 @@
+command: npm test
+cwd: /Users/so2/workspace-so2/foundary/.worktrees/mahub-web
+exit_code: 0
+verified_at_kst: 2026-05-12 09:24:40 KST
+classification: pass
+
+summary:
+- Vitest ran successfully after `@types/node` alignment to 20.x.
+- Test Files: 1 passed.
+- Tests: 1 passed.
+- The baseline React screen renders MAHub Web, React 19, Vite + TS, and Vitest labels.

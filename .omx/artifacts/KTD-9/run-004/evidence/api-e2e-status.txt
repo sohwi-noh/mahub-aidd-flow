@@ -1,0 +1,11 @@
+status: NOT_CONFIGURED
+checked_at_kst: 2026-05-12 09:16:00 KST
+
+reason:
+- `mahub-api` is currently an environment baseline repository.
+- No E2E scenario files, E2E runner, target service orchestration, auth fixture, or scenario owner handoff has been created yet.
+
+next action:
+- Do not create or modify E2E tests without explicit user intervention.
+- When E2E scenarios are provided by the human owner, run them before PR if the environment is available.
+- If unavailable before PR, keep CI/merge gate blocked until E2E status is explicitly recorded.

@@ -1,0 +1,10 @@
+{
+  "hidesModelNa": true,
+  "hasCombinedTiming": true,
+  "hasJudgmentBasis": true,
+  "hasAgentFeedback": true,
+  "hasFeedbackMeaning": true,
+  "hasStageArtifactScope": true,
+  "hasRobotIcon": true,
+  "feedbackToggleWorks": true
+}

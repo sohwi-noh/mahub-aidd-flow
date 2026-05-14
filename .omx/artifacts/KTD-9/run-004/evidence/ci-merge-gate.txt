@@ -1,0 +1,22 @@
+checked_at_kst: 2026-05-12 09:47:30 KST
+
+mahub-api:
+- PR: https://github.com/sohwi-noh/mahub-api/pull/1
+- state: OPEN
+- mergeable: MERGEABLE
+- statusCheckRollup: []
+- reviewDecision: empty
+- interpretation: GitHub reports no CI status checks yet. Merge gate must rely on local evidence until CI is configured.
+
+mahub-web:
+- PR: https://github.com/sohwi-noh/mahub-web/pull/1
+- state: OPEN
+- mergeable: MERGEABLE
+- statusCheckRollup: []
+- reviewDecision: empty
+- interpretation: GitHub reports no CI status checks yet. Merge gate must rely on local evidence until CI is configured.
+
+merge gate recommendation:
+- Do not treat missing CI as a long-term acceptable state.
+- Add repository CI in the next environment-hardening issue.
+- After E2E scenarios are human-defined, wire E2E status into CI before regular feature merges.

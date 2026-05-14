@@ -1,0 +1,3 @@
+display_name: AIDD Artifact Summary
+short_description: Summarize AIDD run artifacts
+default_prompt: Generate dashboard-ready summaries from .omx artifact markdown for the selected issue and run.

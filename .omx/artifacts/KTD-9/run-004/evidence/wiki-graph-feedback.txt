@@ -1,0 +1,16 @@
+checked_at_kst: 2026-05-12 09:47:30 KST
+
+wiki feedback:
+- run-004 PR links and verification evidence are recorded locally under `.omx/artifacts/KTD-9/run-004/`.
+- PR bodies include KTD-9, verification, E2E protection, and DB-backed test policy notes.
+
+graph feedback:
+- Target graph split remains per repository:
+  - `mahub-api` graph for Java/Spring/Maven API structure.
+  - `mahub-web` graph for React/Vite/Vitest web structure.
+- Aggregate boundary graph should remain separate from code PR evidence if created later.
+
+current graph status:
+- Graph generation was not committed into the PR branches.
+- `understand-anything` graph generation requires repo-local `.understandignore` review/confirmation before full analysis under the skill workflow.
+- Next graph action: generate or approve `.understand-anything/.understandignore` in each target repo, then run `/understand <repo> --full`.

@@ -1,0 +1,2893 @@
+{
+  "generatedBy": "aidd-artifact-summary",
+  "issues": [
+    {
+      "artifacts": [
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-9/run-004/subagents/01-pr-orchestration.md",
+          "summary": "KTD 9 run 004 PR 생성 실행 계획/추적 산출물 실행 메타데이터 단계명: 11단계 MR/Wiki/Graph 환류 담당 subagent: git master 모델: gpt 5.5 추론 노력: high 시작 시각(KST): 2026 05 12 00:31:12 KST 종료 시각(KST): 2026 05 12 00:3"
+        },
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-9/run-004/subagents/02-api-implementation.md",
+          "summary": "KTD 9 run 004 API 구현 subagent 기록 상태 완료 상태: 완료 완료 시각: 2026 05 12 00:36:32 KST 원격 push/PR: 수행하지 않음 담당 subagent 역할: API 구현 subagent 모델: gpt 5.5로 추정 추론 노력: medium으로 추정"
+        },
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-9/run-004/subagents/03-web-implementation.md",
+          "summary": "KTD 9 run 004 Web 구현 subagent 기록 담당 subagent: 03 web implementation 모델/추론노력: gpt 5.5 / medium 추정 시작 시각(KST): 2026 05 12 00:34:12 KST 종료 시각(KST): 2026 05 12 00:37:32 KST 상태: 완료(검증 일"
+        },
+        {
+          "kind": "plan",
+          "label": "계획",
+          "path": ".omx/artifacts/KTD-9/run-004/subagents/04-pre-pr-verification-plan.md",
+          "summary": "KTD 9 run 004 PR 전 검증 계획 실행 메타데이터 대상 이슈: KTD 9 run: run 004 담당 subagent: 04 pre pr verification plan 담당 역할: test engineer 모델: gpt 5.5 추론 노력: medium 담당 단계: 11단계 MR/Wiki/Graph 환류 중 P"
+        },
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-9/run-004/subagents/05-web-build-fix.md",
+          "summary": "KTD 9 run 004 Web 빌드 수정 기록 상태 상태: 완료 담당 모델/추론 노력: build fixer gpt 5.5/high 시작 시각(KST): 2026 05 12 09:13:05 KST 종료 시각(KST): 2026 05 12 09:15:57 KST 실패 원인 1. TS2688: Cannot find type"
+        },
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-9/run-004/subagents/06-pre-pr-review.md",
+          "summary": "KTD 9 run 004 PR 전 리뷰 기록 상태 담당 단계: 10단계 검증/리뷰 및 11단계 PR 전 체크포인트 담당 subagent: code reviewer/verifier 시도 모델/추론 노력: code reviewer gpt 5.5/high, verifier gpt 5.5/high 시작 시각(KST): 2026"
+        },
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-9/run-004/subagents/07-linear-done-verifier.md",
+          "summary": "KTD 9 run 004 Linear Done 후처리 검증 기록 상태 담당 단계: 11단계 MR/Wiki/Graph 환류 후처리 담당 subagent: linear done verifier 모델/추론 노력: verifier gpt 5.5/high 작성 시각(KST): 2026 05 12 10:16 KST"
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-9/run-004/evidence/api-pr-body.md",
+          "summary": "Java 21 LTS + Maven + Spring Boot 3.5.14 API 기준선을 추가합니다. GET /api/health smoke endpoint와 Spring context/health 테스트를 포함합니다. 환경구성 이후 backend 이슈는 mock 객체 테스트를 완료 증거로 인정하지 않고 DB backed"
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-9/run-004/evidence/db-backed-test-policy.md",
+          "summary": "DB backed 테스트 정책 반영 작성 시각(KST): 2026 05 12 00:43:30 KST 사용자 지시: 실제 Linear 단계에서 환경구성 마일스톤 이후 mock 객체 테스트를 금지하고, 반드시 DB를 통해 실제 테스트가 이뤄져야 한다. 반영 내용 boundary 최상단 AGENTS.md에 Linear 마일스톤"
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-9/run-004/evidence/linear-status-done.md",
+          "summary": "KTD 9 Linear Done 상태 반영 증거 반영 시각(KST): 2026 05 12 10:16 Issue: KTD 9 Status: Done Status type: completed Completed at: 2026 05 12T01:16:53.974Z URL: https://linear.app/ktds ai eng/"
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-9/run-004/evidence/pr-checkpoints.md",
+          "summary": "run 004 PR 체크포인트 작성 시각(KST): 2026 05 12 00:34:01 KST 대상 이슈: KTD 9 대상 저장소: API: https://github.com/sohwi noh/mahub api Web: https://github.com/sohwi noh/mahub web"
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-9/run-004/evidence/stage-index-sync.md",
+          "summary": "stage index 동기화 기록 작성 시각(KST): 2026 05 12 대상 파일: .omx/artifacts/KTD 9/stage index.md 문제 run 004에서 실제 PR 생성, PR 전 검증, Web build fix, CI/merge gate, graph 보류 evidence가 추가됐다. 처음에는 이 세"
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-9/run-004/evidence/web-pr-body.md",
+          "summary": "React 19 + Vite 8 + TypeScript + Vitest 프론트엔드 기준선을 추가합니다. 최소 앱 화면과 Vitest/Testing Library 렌더링 테스트를 포함합니다. E2E 시나리오는 사람 관리 영역으로 두고, 사용자 명시 개입 없이 E2E 테스트 코드를 생성/수정하지 않는 규칙을 AGENTS.md"
+        },
+        {
+          "kind": "result",
+          "label": "결과",
+          "path": ".omx/artifacts/KTD-9/run-004/run-summary.md",
+          "summary": "mahub api PR 생성 완료: https://github.com/sohwi noh/mahub api/pull/1 mahub web PR 생성 완료: https://github.com/sohwi noh/mahub web/pull/1 Linear KTD 9 상태를 Done으로 반영 완료. 두 PR 모두 GitHub 기준"
+        },
+        {
+          "kind": "ledger",
+          "label": "단계 원장",
+          "path": ".omx/artifacts/KTD-9/run-004/stage-ledger.md",
+          "summary": "KTD 9 run 004 단계 원장 단계 한글 단계명 담당 산출물/증거 상태 : 0 이슈 발행 사람 Linear KTD 9, 사람 관리 E2E 시나리오 입력 대기 완료, E2E 미구성 1 요구사항 정리 leader run summary.md 완료"
+        },
+        {
+          "kind": "token",
+          "label": "토큰 기록",
+          "path": ".omx/artifacts/KTD-9/run-004/token-usage.md",
+          "summary": "KTD 9 run 004 토큰 사용 기록 도구 노출 한계 Codex native subagent별 실제 토큰 사용량은 현재 도구 응답에 노출되지 않았다. 따라서 reportedInputTokens, reportedOutputTokens, reportedTotalTokens는 null로 간주한다."
+        },
+        {
+          "kind": "timeline",
+          "label": "타임라인",
+          "path": ".omx/artifacts/KTD-9/run-004/timeline.md",
+          "summary": "KTD 9 run 004 타임라인 2026 05 12 00:31 KST: run 004 시작, 두 GitHub repo clone. 2026 05 12 00:32 KST: git master가 PR 오케스트레이션 산출물 작성. 2026 05 12 00:36 KST: API 구현 subagent 완료. 2026 05 12"
+        }
+      ],
+      "completedAt": null,
+      "completedStageCount": 9,
+      "currentStage": 11,
+      "currentStageName": "MR/Wiki/Graph 환류",
+      "issueId": "KTD-9",
+      "labels": [
+        "Feature"
+      ],
+      "repoPath": "workflow/mahub-aidd-flow",
+      "runs": [
+        {
+          "artifacts": [
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-9/run-004/subagents/01-pr-orchestration.md",
+              "summary": "KTD 9 run 004 PR 생성 실행 계획/추적 산출물 실행 메타데이터 단계명: 11단계 MR/Wiki/Graph 환류 담당 subagent: git master 모델: gpt 5.5 추론 노력: high 시작 시각(KST): 2026 05 12 00:31:12 KST 종료 시각(KST): 2026 05 12 00:3"
+            },
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-9/run-004/subagents/02-api-implementation.md",
+              "summary": "KTD 9 run 004 API 구현 subagent 기록 상태 완료 상태: 완료 완료 시각: 2026 05 12 00:36:32 KST 원격 push/PR: 수행하지 않음 담당 subagent 역할: API 구현 subagent 모델: gpt 5.5로 추정 추론 노력: medium으로 추정"
+            },
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-9/run-004/subagents/03-web-implementation.md",
+              "summary": "KTD 9 run 004 Web 구현 subagent 기록 담당 subagent: 03 web implementation 모델/추론노력: gpt 5.5 / medium 추정 시작 시각(KST): 2026 05 12 00:34:12 KST 종료 시각(KST): 2026 05 12 00:37:32 KST 상태: 완료(검증 일"
+            },
+            {
+              "kind": "plan",
+              "label": "계획",
+              "path": ".omx/artifacts/KTD-9/run-004/subagents/04-pre-pr-verification-plan.md",
+              "summary": "KTD 9 run 004 PR 전 검증 계획 실행 메타데이터 대상 이슈: KTD 9 run: run 004 담당 subagent: 04 pre pr verification plan 담당 역할: test engineer 모델: gpt 5.5 추론 노력: medium 담당 단계: 11단계 MR/Wiki/Graph 환류 중 P"
+            },
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-9/run-004/subagents/05-web-build-fix.md",
+              "summary": "KTD 9 run 004 Web 빌드 수정 기록 상태 상태: 완료 담당 모델/추론 노력: build fixer gpt 5.5/high 시작 시각(KST): 2026 05 12 09:13:05 KST 종료 시각(KST): 2026 05 12 09:15:57 KST 실패 원인 1. TS2688: Cannot find type"
+            },
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-9/run-004/subagents/06-pre-pr-review.md",
+              "summary": "KTD 9 run 004 PR 전 리뷰 기록 상태 담당 단계: 10단계 검증/리뷰 및 11단계 PR 전 체크포인트 담당 subagent: code reviewer/verifier 시도 모델/추론 노력: code reviewer gpt 5.5/high, verifier gpt 5.5/high 시작 시각(KST): 2026"
+            },
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-9/run-004/subagents/07-linear-done-verifier.md",
+              "summary": "KTD 9 run 004 Linear Done 후처리 검증 기록 상태 담당 단계: 11단계 MR/Wiki/Graph 환류 후처리 담당 subagent: linear done verifier 모델/추론 노력: verifier gpt 5.5/high 작성 시각(KST): 2026 05 12 10:16 KST"
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-9/run-004/evidence/api-pr-body.md",
+              "summary": "Java 21 LTS + Maven + Spring Boot 3.5.14 API 기준선을 추가합니다. GET /api/health smoke endpoint와 Spring context/health 테스트를 포함합니다. 환경구성 이후 backend 이슈는 mock 객체 테스트를 완료 증거로 인정하지 않고 DB backed"
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-9/run-004/evidence/db-backed-test-policy.md",
+              "summary": "DB backed 테스트 정책 반영 작성 시각(KST): 2026 05 12 00:43:30 KST 사용자 지시: 실제 Linear 단계에서 환경구성 마일스톤 이후 mock 객체 테스트를 금지하고, 반드시 DB를 통해 실제 테스트가 이뤄져야 한다. 반영 내용 boundary 최상단 AGENTS.md에 Linear 마일스톤"
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-9/run-004/evidence/linear-status-done.md",
+              "summary": "KTD 9 Linear Done 상태 반영 증거 반영 시각(KST): 2026 05 12 10:16 Issue: KTD 9 Status: Done Status type: completed Completed at: 2026 05 12T01:16:53.974Z URL: https://linear.app/ktds ai eng/"
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-9/run-004/evidence/pr-checkpoints.md",
+              "summary": "run 004 PR 체크포인트 작성 시각(KST): 2026 05 12 00:34:01 KST 대상 이슈: KTD 9 대상 저장소: API: https://github.com/sohwi noh/mahub api Web: https://github.com/sohwi noh/mahub web"
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-9/run-004/evidence/stage-index-sync.md",
+              "summary": "stage index 동기화 기록 작성 시각(KST): 2026 05 12 대상 파일: .omx/artifacts/KTD 9/stage index.md 문제 run 004에서 실제 PR 생성, PR 전 검증, Web build fix, CI/merge gate, graph 보류 evidence가 추가됐다. 처음에는 이 세"
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-9/run-004/evidence/web-pr-body.md",
+              "summary": "React 19 + Vite 8 + TypeScript + Vitest 프론트엔드 기준선을 추가합니다. 최소 앱 화면과 Vitest/Testing Library 렌더링 테스트를 포함합니다. E2E 시나리오는 사람 관리 영역으로 두고, 사용자 명시 개입 없이 E2E 테스트 코드를 생성/수정하지 않는 규칙을 AGENTS.md"
+            },
+            {
+              "kind": "result",
+              "label": "결과",
+              "path": ".omx/artifacts/KTD-9/run-004/run-summary.md",
+              "summary": "mahub api PR 생성 완료: https://github.com/sohwi noh/mahub api/pull/1 mahub web PR 생성 완료: https://github.com/sohwi noh/mahub web/pull/1 Linear KTD 9 상태를 Done으로 반영 완료. 두 PR 모두 GitHub 기준"
+            },
+            {
+              "kind": "ledger",
+              "label": "단계 원장",
+              "path": ".omx/artifacts/KTD-9/run-004/stage-ledger.md",
+              "summary": "KTD 9 run 004 단계 원장 단계 한글 단계명 담당 산출물/증거 상태 : 0 이슈 발행 사람 Linear KTD 9, 사람 관리 E2E 시나리오 입력 대기 완료, E2E 미구성 1 요구사항 정리 leader run summary.md 완료"
+            },
+            {
+              "kind": "token",
+              "label": "토큰 기록",
+              "path": ".omx/artifacts/KTD-9/run-004/token-usage.md",
+              "summary": "KTD 9 run 004 토큰 사용 기록 도구 노출 한계 Codex native subagent별 실제 토큰 사용량은 현재 도구 응답에 노출되지 않았다. 따라서 reportedInputTokens, reportedOutputTokens, reportedTotalTokens는 null로 간주한다."
+            },
+            {
+              "kind": "timeline",
+              "label": "타임라인",
+              "path": ".omx/artifacts/KTD-9/run-004/timeline.md",
+              "summary": "KTD 9 run 004 타임라인 2026 05 12 00:31 KST: run 004 시작, 두 GitHub repo clone. 2026 05 12 00:32 KST: git master가 PR 오케스트레이션 산출물 작성. 2026 05 12 00:36 KST: API 구현 subagent 완료. 2026 05 12"
+            }
+          ],
+          "endedAt": "2026-05-12T10:19:00+09:00",
+          "runId": "run-004",
+          "startedAt": "2026-05-12T00:31:00+09:00",
+          "status": "running",
+          "subagents": [
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-9/run-004/subagents/05-web-build-fix.md",
+                "summary": "KTD 9 run 004 Web 빌드 수정 기록 상태 상태: 완료 담당 모델/추론 노력: build fixer gpt 5.5/high 시작 시각(KST): 2026 05 12 09:13:05 KST 종료 시각(KST): 2026 05 12 09:15:57 KST 실패 원인 1. TS2688: Cannot find type"
+              },
+              "completedAt": "2026-05-12T09:15:57+09:00",
+              "id": "subagents/05-web-build-fix.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "build-fixer",
+              "stage": null,
+              "startedAt": null,
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-9/run-004/subagents/06-pre-pr-review.md",
+                "summary": "KTD 9 run 004 PR 전 리뷰 기록 상태 담당 단계: 10단계 검증/리뷰 및 11단계 PR 전 체크포인트 담당 subagent: code reviewer/verifier 시도 모델/추론 노력: code reviewer gpt 5.5/high, verifier gpt 5.5/high 시작 시각(KST): 2026"
+              },
+              "completedAt": null,
+              "id": "subagents/06-pre-pr-review.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "code-reviewer/verifier",
+              "stage": null,
+              "startedAt": null,
+              "status": "unknown",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-9/run-004/subagents/02-api-implementation.md",
+                "summary": "KTD 9 run 004 API 구현 subagent 기록 상태 완료 상태: 완료 완료 시각: 2026 05 12 00:36:32 KST 원격 push/PR: 수행하지 않음 담당 subagent 역할: API 구현 subagent 모델: gpt 5.5로 추정 추론 노력: medium으로 추정"
+              },
+              "completedAt": "2026-05-12T00:36:32+09:00",
+              "id": "subagents/02-api-implementation.md",
+              "model": "gpt-5.5",
+              "reasoning": "medium",
+              "role": "executor",
+              "stage": null,
+              "startedAt": null,
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-9/run-004/subagents/03-web-implementation.md",
+                "summary": "KTD 9 run 004 Web 구현 subagent 기록 담당 subagent: 03 web implementation 모델/추론노력: gpt 5.5 / medium 추정 시작 시각(KST): 2026 05 12 00:34:12 KST 종료 시각(KST): 2026 05 12 00:37:32 KST 상태: 완료(검증 일"
+              },
+              "completedAt": "2026-05-12T00:38:00+09:00",
+              "id": "subagents/03-web-implementation.md",
+              "model": "gpt-5.5",
+              "reasoning": "medium",
+              "role": "executor",
+              "stage": null,
+              "startedAt": null,
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-9/run-004/subagents/01-pr-orchestration.md",
+                "summary": "KTD 9 run 004 PR 생성 실행 계획/추적 산출물 실행 메타데이터 단계명: 11단계 MR/Wiki/Graph 환류 담당 subagent: git master 모델: gpt 5.5 추론 노력: high 시작 시각(KST): 2026 05 12 00:31:12 KST 종료 시각(KST): 2026 05 12 00:3"
+              },
+              "completedAt": "2026-05-12T00:32:00+09:00",
+              "id": "subagents/01-pr-orchestration.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "git-master",
+              "stage": null,
+              "startedAt": null,
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "plan",
+                "label": "계획",
+                "path": ".omx/artifacts/KTD-9/run-004/subagents/04-pre-pr-verification-plan.md",
+                "summary": "KTD 9 run 004 PR 전 검증 계획 실행 메타데이터 대상 이슈: KTD 9 run: run 004 담당 subagent: 04 pre pr verification plan 담당 역할: test engineer 모델: gpt 5.5 추론 노력: medium 담당 단계: 11단계 MR/Wiki/Graph 환류 중 P"
+              },
+              "completedAt": "2026-05-12T00:41:00+09:00",
+              "id": "subagents/04-pre-pr-verification-plan.md",
+              "model": "gpt-5.5",
+              "reasoning": "medium",
+              "role": "test-engineer",
+              "stage": null,
+              "startedAt": null,
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-9/run-004/subagents/07-linear-done-verifier.md",
+                "summary": "KTD 9 run 004 Linear Done 후처리 검증 기록 상태 담당 단계: 11단계 MR/Wiki/Graph 환류 후처리 담당 subagent: linear done verifier 모델/추론 노력: verifier gpt 5.5/high 작성 시각(KST): 2026 05 12 10:16 KST"
+              },
+              "completedAt": "2026-05-12T10:18:00+09:00",
+              "id": "subagents/07-linear-done-verifier.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "verifier",
+              "stage": null,
+              "startedAt": "2026-05-12T10:17:00+09:00",
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            }
+          ]
+        }
+      ],
+      "stageStates": [
+        {
+          "nameKo": "이슈 발행",
+          "ownerRoles": [],
+          "stage": 0,
+          "status": "완료, E2E 미구성",
+          "summary": "완료, E2E 미구성"
+        },
+        {
+          "nameKo": "요구사항 정리",
+          "ownerRoles": [],
+          "stage": 1,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "아키텍처 정리",
+          "ownerRoles": [],
+          "stage": 2,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "TDD 계획",
+          "ownerRoles": [],
+          "stage": 3,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "테스트 명세",
+          "ownerRoles": [],
+          "stage": 4,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "Red 실패 증거",
+          "ownerRoles": [],
+          "stage": 5,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "구현 전 검토 루프",
+          "ownerRoles": [],
+          "stage": 6,
+          "status": "완료, leader 대리",
+          "summary": "완료, leader 대리"
+        },
+        {
+          "nameKo": "최소 구현",
+          "ownerRoles": [],
+          "stage": 7,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "Green 통과 증거",
+          "ownerRoles": [],
+          "stage": 8,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "리팩터링",
+          "ownerRoles": [],
+          "stage": 9,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "검증/리뷰",
+          "ownerRoles": [],
+          "stage": 10,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "MR/Wiki/Graph 환류",
+          "ownerRoles": [],
+          "stage": 11,
+          "status": "PR 완료, Linear Done 반영, graph 보류",
+          "summary": "PR 완료, Linear Done 반영, graph 보류"
+        }
+      ],
+      "stages": [
+        {
+          "agent": "사람",
+          "artifactPath": ".omx/artifacts/KTD-9/run-004/Linear KTD-9",
+          "completedAt": null,
+          "model": "n/a",
+          "nameKo": "이슈 발행",
+          "reasoning": "n/a",
+          "stage": 0,
+          "startedAt": null,
+          "status": "완료, E2E 미구성",
+          "tokenUsage": {
+            "availability": "unavailable",
+            "reportedTotalTokens": null
+          }
+        },
+        {
+          "agent": "leader",
+          "artifactPath": ".omx/artifacts/KTD-9/run-004/run-summary.md",
+          "completedAt": null,
+          "model": "n/a",
+          "nameKo": "요구사항 정리",
+          "reasoning": "n/a",
+          "stage": 1,
+          "startedAt": null,
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 811
+          }
+        },
+        {
+          "agent": "leader",
+          "artifactPath": ".omx/artifacts/KTD-9/run-004/PR repo split 결정",
+          "completedAt": null,
+          "model": "n/a",
+          "nameKo": "아키텍처 정리",
+          "reasoning": "n/a",
+          "stage": 2,
+          "startedAt": null,
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "unavailable",
+            "reportedTotalTokens": null
+          }
+        },
+        {
+          "agent": "test engineer",
+          "artifactPath": ".omx/artifacts/KTD-9/run-004/subagents/04-pre-pr-verification-plan.md",
+          "completedAt": null,
+          "model": "n/a",
+          "nameKo": "TDD 계획",
+          "reasoning": "n/a",
+          "stage": 3,
+          "startedAt": null,
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 1560
+          }
+        },
+        {
+          "agent": "test engineer",
+          "artifactPath": ".omx/artifacts/KTD-9/run-004/subagents/04-pre-pr-verification-plan.md",
+          "completedAt": null,
+          "model": "n/a",
+          "nameKo": "테스트 명세",
+          "reasoning": "n/a",
+          "stage": 4,
+          "startedAt": null,
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 1560
+          }
+        },
+        {
+          "agent": "build fixer",
+          "artifactPath": ".omx/artifacts/KTD-9/run-004/evidence/web-npm-build.txt",
+          "completedAt": null,
+          "model": "n/a",
+          "nameKo": "Red 실패 증거",
+          "reasoning": "n/a",
+          "stage": 5,
+          "startedAt": null,
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 257
+          }
+        },
+        {
+          "agent": "code reviewer/verifier 시도",
+          "artifactPath": ".omx/artifacts/KTD-9/run-004/subagents/06-pre-pr-review.md",
+          "completedAt": null,
+          "model": "n/a",
+          "nameKo": "구현 전 검토 루프",
+          "reasoning": "n/a",
+          "stage": 6,
+          "startedAt": null,
+          "status": "완료, leader 대리",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 429
+          }
+        },
+        {
+          "agent": "executor",
+          "artifactPath": ".omx/artifacts/KTD-9/run-004/subagents/02-api-implementation.md",
+          "completedAt": null,
+          "model": "n/a",
+          "nameKo": "최소 구현",
+          "reasoning": "n/a",
+          "stage": 7,
+          "startedAt": null,
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 521
+          }
+        },
+        {
+          "agent": "test engineer/leader",
+          "artifactPath": ".omx/artifacts/KTD-9/run-004/evidence/api-mvn-test.txt",
+          "completedAt": null,
+          "model": "n/a",
+          "nameKo": "Green 통과 증거",
+          "reasoning": "n/a",
+          "stage": 8,
+          "startedAt": null,
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 144
+          }
+        },
+        {
+          "agent": "build fixer",
+          "artifactPath": ".omx/artifacts/KTD-9/run-004/subagents/05-web-build-fix.md",
+          "completedAt": null,
+          "model": "n/a",
+          "nameKo": "리팩터링",
+          "reasoning": "n/a",
+          "stage": 9,
+          "startedAt": null,
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 584
+          }
+        },
+        {
+          "agent": "verifier/leader",
+          "artifactPath": ".omx/artifacts/KTD-9/run-004/evidence/review-gate.txt",
+          "completedAt": null,
+          "model": "n/a",
+          "nameKo": "검증/리뷰",
+          "reasoning": "n/a",
+          "stage": 10,
+          "startedAt": null,
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 204
+          }
+        },
+        {
+          "agent": "git master/leader/verifier",
+          "artifactPath": ".omx/artifacts/KTD-9/run-004/evidence/pr-links.txt",
+          "completedAt": null,
+          "model": "n/a",
+          "nameKo": "MR/Wiki/Graph 환류",
+          "reasoning": "n/a",
+          "stage": 11,
+          "startedAt": null,
+          "status": "PR 완료, Linear Done 반영, graph 보류",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 259
+          }
+        }
+      ],
+      "startedAt": "2026-05-12T00:31:00+09:00",
+      "status": "Done",
+      "title": "개발환경 및 SW 아키텍처 기준선 셋업: Java 21 LTS + React 최신 스택",
+      "totalStageCount": 12,
+      "url": "",
+      "linearProject": "MA Hub",
+      "linearMilestone": "환경 구성하기",
+      "pullRequests": [
+        {
+          "number": 1,
+          "repository": "mahub-api",
+          "url": "https://github.com/sohwi-noh/mahub-api/pull/1"
+        },
+        {
+          "number": 1,
+          "repository": "mahub-web",
+          "url": "https://github.com/sohwi-noh/mahub-web/pull/1"
+        }
+      ]
+    },
+    {
+      "artifacts": [
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-10/run-002/subagents/02-architect.md",
+          "summary": "KTD 10은 mahub aidd flow에 AIDD workflow 관제용 frontend baseline을 구축하는 이슈다. 이 저장소는 mahub api나 mahub web 제품 기능을 구현하는 곳이 아니라, Linear issue stage, subagent 실행, evidence, token 기록을 읽어 운영자가"
+        },
+        {
+          "kind": "plan",
+          "label": "계획",
+          "path": ".omx/artifacts/KTD-10/run-002/subagents/03-tdd-plan.md",
+          "summary": "KTD 10 Stage 3 TDD 계획 대상 이슈 Issue: KTD 10 목표: AIDD workflow 관제 프론트 baseline 구축 대상 Repo: /Users/so2/workspace so2/foundary/.worktrees/mahub aidd flow 현재 상태: README, AGENTS.md, .giti"
+        },
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-10/run-002/subagents/04-test-spec-red.md",
+          "summary": "KTD 10 Stage 4/5 테스트 명세 및 RED 실패 기준 대상 이슈 Issue: KTD 10 제목: AIDD workflow 관제 프론트 baseline 구축 대상 repo: /Users/so2/workspace so2/foundary/.worktrees/mahub aidd flow 현재 상태: package.js"
+        },
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-10/run-002/subagents/06-critic-gate.md",
+          "summary": "KTD 10 Stage 6 구현 착수 검토 검토 범위 Issue: KTD 10 AIDD workflow 관제 프론트 baseline 구축 대상 repo: /Users/so2/workspace so2/foundary/.worktrees/mahub aidd flow 검토 목적: stage 7 최소 구현 착수 전, archit"
+        },
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-10/run-002/subagents/06-gate-rerun-verifier.md",
+          "summary": "KTD 10 Stage 6 구현 착수 재검증 검증 목적 Issue: KTD 10 대상 판단: stage 7 최소 구현 착수 가능 여부 이전 artifact: .omx/artifacts/KTD 10/run 002/subagents/06 critic gate.md 재검증 사유: 이전 critic 검토 이후 architectu"
+        },
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-10/run-002/subagents/06-path-correction-verifier.md",
+          "summary": "KTD 10 Stage 6 경로 보정 재검증 검증 목적 Issue: KTD 10 검증 대상: stage 7 최소 구현을 /Users/so2/workspace so2/foundary/workflow/mahub aidd flow에서 착수할 수 있는지 확인 최신 경로 보정 증거: .omx/artifacts/KTD 10/run"
+        },
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-10/run-002/subagents/09-refactor-review.md",
+          "summary": "KTD 10 Stage 9 리팩터링 검토 검토 범위 대상 repo: /Users/so2/workspace so2/foundary/workflow/mahub aidd flow 검토 목적: React/Vite/TypeScript baseline 구현 후 behavior preserving refactor 필요 여부 판단"
+        },
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-10/run-002/subagents/10-code-review.md",
+          "summary": "KTD 10 Stage 10 코드 리뷰 Findings Blocking finding 없음. 검토 범위 대상 repo: workflow/mahub aidd flow 변경 성격: React/Vite/TypeScript baseline, component test, 정적 dashboard sample UI"
+        },
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-10/run-002/subagents/11-pr-merge.md",
+          "summary": "PR 1은 MERGED 상태로 확인했다. 병합 시각은 2026 05 12T02:26:51Z / 2026 05 12 11:26:51 KST다. head는 ktd 10/aidd flow baseline pr, base는 main이다. 원 feature branch는 main과 공통 히스토리가 없어 PR 생성에 실패했다."
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-10/run-002/evidence/green-failure-test-query.md",
+          "summary": "npm test: exit code 1 npm run typecheck: exit code 0 npm run build: exit code 0"
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-10/run-002/evidence/green-failure-vitest-globals.md",
+          "summary": "KTD 10 Green 재검증 실패 증거 실행 시각(KST): 2026 05 12 11:11 대상 repo: workflow/mahub aidd flow 원인 분류: 테스트 설정 결함 npm test 명령: npm test exit code: 1 요약: Vitest globals가 활성화되지 않아 describe가 런타임"
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-10/run-002/evidence/green.md",
+          "summary": "KTD 10 Green 통과 증거 실행 시각(KST): 2026 05 12 11:13 대상 repo: workflow/mahub aidd flow npm test 명령: npm test exit code: 0 ```text Test Files 1 passed (1) Tests 2 passed (2)"
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-10/run-002/evidence/linear-done.md",
+          "summary": "Linear issue: KTD 10 URL: https://linear.app/ktds ai eng/issue/KTD 10/aidd workflow 관제 프론트 baseline 구축 Status: Done Status type: completed Completed at: 2026 05 12T02:31:56.401Z /"
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-10/run-002/evidence/npm-install-network-failure.md",
+          "summary": "npm install 네트워크 실패 증거 실행 시각(KST): 2026 05 12 10:37 이후 종료 대상 repo: workflow/mahub aidd flow 명령: npm install no audit no fund exit code: 1 원인 분류: 환경 제약, sandbox DNS/network 제한"
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-10/run-002/evidence/path-correction.md",
+          "summary": "KTD 10 target path 보정 증거 보정 시각(KST): 2026 05 12 10:36 기존 잘못된 경로: .worktrees/mahub aidd flow canonical 경로: workflow/mahub aidd flow 보정 이유 사용자 최신 지시: ```text ./worktree/mahub aidd fl"
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-10/run-002/evidence/post-merge-green.md",
+          "summary": "npm test exit code 0 Test Files: 1 passed (1) Tests: 2 passed (2) npm run typecheck exit code 0 npm run build exit code 0 Vite production build completed"
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-10/run-002/evidence/pr-body.md",
+          "summary": "workflow/mahub aidd flow에 React + Vite + TypeScript baseline을 추가했습니다. AIDD workflow 관제 첫 화면을 정적 sample data 기반으로 구현했습니다. issue stage 진행률, subagent/model/reasoning, artifact/evidenc"
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-10/run-002/evidence/pr-merge.md",
+          "summary": "Repository: sohwi noh/mahub aidd flow PR: https://github.com/sohwi noh/mahub aidd flow/pull/1 State: MERGED Base: main Head: ktd 10/aidd flow baseline pr Merged at: 2026 05 12T02:2"
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-10/run-002/evidence/red.md",
+          "summary": "KTD 10 Red 실패 증거 실행 시각(KST): 2026 05 12 10:30 대상 repo: .worktrees/mahub aidd flow 경로 보정: 사용자 최신 지시에 따라 canonical 구현 경로는 workflow/mahub aidd flow로 수정했다. 이 Red 증거는 경로 보정 전 package ba"
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-10/run-002/evidence/stage-index-audit.md",
+          "summary": "stage index audit: KTD 10 run 002 generated at: 2026 05 12T11:38:44+09:00 stage index: .omx/artifacts/KTD 10/stage index.md run dir: .omx/artifacts/KTD 10/run 002 Core files"
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-10/run-002/evidence/test-first-red.md",
+          "summary": "KTD 10 test first Red 증거 실행 시각(KST): 2026 05 12 11:09 대상 repo: workflow/mahub aidd flow 명령: npm test exit code: 1 원인 분류: 제품 결함, 의도된 test first Red 실패 요약 src/App.test.tsx가 먼저 작성되었고,"
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-10/run-002/evidence/wiki-graph.md",
+          "summary": "KTD 10 Wiki/Graph 환류 증거 Wiki 환류 Wiki 문서: .omx/wiki/KTD 10 aidd flow baseline.md 내용: KTD 10 목표, 산출물, PR/Merge 결과, 검증 결과, 운영 정책, 다음 단계 Graph 환류 이번 run에서는 understand anything graph 생성"
+        },
+        {
+          "kind": "result",
+          "label": "결과",
+          "path": ".omx/artifacts/KTD-10/run-002/run-summary.md",
+          "summary": "Linear KTD 10 상태를 In Progress로 변경했다. stage 2 아키텍처, stage 3 TDD 계획, stage 4/5 테스트 명세/Red 기준, stage 6 critic gate subagent를 실행했다. Red 실패 증거를 수집했다. 최초 critic gate는 run 002 산출물 생성 전 확인"
+        },
+        {
+          "kind": "ledger",
+          "label": "단계 원장",
+          "path": ".omx/artifacts/KTD-10/run-002/stage-ledger.md",
+          "summary": "KTD 10 run 002 단계 원장 단계 한글 단계명 담당 산출물/증거 상태 : 2 아키텍처 정리 architect subagents/02 architect.md 완료 3 TDD 계획 planner subagents/03 tdd plan.md 완료"
+        },
+        {
+          "kind": "token",
+          "label": "토큰 기록",
+          "path": ".omx/artifacts/KTD-10/run-002/token-usage.md",
+          "summary": "KTD 10 run 002 토큰 사용 기록 도구 노출 한계 Codex native subagent별 실제 토큰 사용량은 현재 도구 응답에 노출되지 않을 수 있다. Subagent별 기록 산출물 역할 모델/추론 노력 reportedTotalTokens : 02 architect.md architect gpt 5.5/high"
+        },
+        {
+          "kind": "timeline",
+          "label": "타임라인",
+          "path": ".omx/artifacts/KTD-10/run-002/timeline.md",
+          "summary": "KTD 10 run 002 timeline 시각(KST) 이벤트 2026 05 12 10:28 Linear KTD 10 상태를 In Progress로 변경 2026 05 12 10:29 stage 2~6 subagent 실행 시작 2026 05 12 10:30 Red 증거 수집: npm test, npm run build"
+        }
+      ],
+      "completedAt": null,
+      "completedStageCount": 7,
+      "currentStage": 11,
+      "currentStageName": "MR/Wiki/Graph 환류",
+      "issueId": "KTD-10",
+      "labels": [
+        "dashboard",
+        "Feature"
+      ],
+      "repoPath": "workflow/mahub-aidd-flow",
+      "runs": [
+        {
+          "artifacts": [
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-10/run-002/subagents/02-architect.md",
+              "summary": "KTD 10은 mahub aidd flow에 AIDD workflow 관제용 frontend baseline을 구축하는 이슈다. 이 저장소는 mahub api나 mahub web 제품 기능을 구현하는 곳이 아니라, Linear issue stage, subagent 실행, evidence, token 기록을 읽어 운영자가"
+            },
+            {
+              "kind": "plan",
+              "label": "계획",
+              "path": ".omx/artifacts/KTD-10/run-002/subagents/03-tdd-plan.md",
+              "summary": "KTD 10 Stage 3 TDD 계획 대상 이슈 Issue: KTD 10 목표: AIDD workflow 관제 프론트 baseline 구축 대상 Repo: /Users/so2/workspace so2/foundary/.worktrees/mahub aidd flow 현재 상태: README, AGENTS.md, .giti"
+            },
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-10/run-002/subagents/04-test-spec-red.md",
+              "summary": "KTD 10 Stage 4/5 테스트 명세 및 RED 실패 기준 대상 이슈 Issue: KTD 10 제목: AIDD workflow 관제 프론트 baseline 구축 대상 repo: /Users/so2/workspace so2/foundary/.worktrees/mahub aidd flow 현재 상태: package.js"
+            },
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-10/run-002/subagents/06-critic-gate.md",
+              "summary": "KTD 10 Stage 6 구현 착수 검토 검토 범위 Issue: KTD 10 AIDD workflow 관제 프론트 baseline 구축 대상 repo: /Users/so2/workspace so2/foundary/.worktrees/mahub aidd flow 검토 목적: stage 7 최소 구현 착수 전, archit"
+            },
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-10/run-002/subagents/06-gate-rerun-verifier.md",
+              "summary": "KTD 10 Stage 6 구현 착수 재검증 검증 목적 Issue: KTD 10 대상 판단: stage 7 최소 구현 착수 가능 여부 이전 artifact: .omx/artifacts/KTD 10/run 002/subagents/06 critic gate.md 재검증 사유: 이전 critic 검토 이후 architectu"
+            },
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-10/run-002/subagents/06-path-correction-verifier.md",
+              "summary": "KTD 10 Stage 6 경로 보정 재검증 검증 목적 Issue: KTD 10 검증 대상: stage 7 최소 구현을 /Users/so2/workspace so2/foundary/workflow/mahub aidd flow에서 착수할 수 있는지 확인 최신 경로 보정 증거: .omx/artifacts/KTD 10/run"
+            },
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-10/run-002/subagents/09-refactor-review.md",
+              "summary": "KTD 10 Stage 9 리팩터링 검토 검토 범위 대상 repo: /Users/so2/workspace so2/foundary/workflow/mahub aidd flow 검토 목적: React/Vite/TypeScript baseline 구현 후 behavior preserving refactor 필요 여부 판단"
+            },
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-10/run-002/subagents/10-code-review.md",
+              "summary": "KTD 10 Stage 10 코드 리뷰 Findings Blocking finding 없음. 검토 범위 대상 repo: workflow/mahub aidd flow 변경 성격: React/Vite/TypeScript baseline, component test, 정적 dashboard sample UI"
+            },
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-10/run-002/subagents/11-pr-merge.md",
+              "summary": "PR 1은 MERGED 상태로 확인했다. 병합 시각은 2026 05 12T02:26:51Z / 2026 05 12 11:26:51 KST다. head는 ktd 10/aidd flow baseline pr, base는 main이다. 원 feature branch는 main과 공통 히스토리가 없어 PR 생성에 실패했다."
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-10/run-002/evidence/green-failure-test-query.md",
+              "summary": "npm test: exit code 1 npm run typecheck: exit code 0 npm run build: exit code 0"
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-10/run-002/evidence/green-failure-vitest-globals.md",
+              "summary": "KTD 10 Green 재검증 실패 증거 실행 시각(KST): 2026 05 12 11:11 대상 repo: workflow/mahub aidd flow 원인 분류: 테스트 설정 결함 npm test 명령: npm test exit code: 1 요약: Vitest globals가 활성화되지 않아 describe가 런타임"
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-10/run-002/evidence/green.md",
+              "summary": "KTD 10 Green 통과 증거 실행 시각(KST): 2026 05 12 11:13 대상 repo: workflow/mahub aidd flow npm test 명령: npm test exit code: 0 ```text Test Files 1 passed (1) Tests 2 passed (2)"
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-10/run-002/evidence/linear-done.md",
+              "summary": "Linear issue: KTD 10 URL: https://linear.app/ktds ai eng/issue/KTD 10/aidd workflow 관제 프론트 baseline 구축 Status: Done Status type: completed Completed at: 2026 05 12T02:31:56.401Z /"
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-10/run-002/evidence/npm-install-network-failure.md",
+              "summary": "npm install 네트워크 실패 증거 실행 시각(KST): 2026 05 12 10:37 이후 종료 대상 repo: workflow/mahub aidd flow 명령: npm install no audit no fund exit code: 1 원인 분류: 환경 제약, sandbox DNS/network 제한"
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-10/run-002/evidence/path-correction.md",
+              "summary": "KTD 10 target path 보정 증거 보정 시각(KST): 2026 05 12 10:36 기존 잘못된 경로: .worktrees/mahub aidd flow canonical 경로: workflow/mahub aidd flow 보정 이유 사용자 최신 지시: ```text ./worktree/mahub aidd fl"
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-10/run-002/evidence/post-merge-green.md",
+              "summary": "npm test exit code 0 Test Files: 1 passed (1) Tests: 2 passed (2) npm run typecheck exit code 0 npm run build exit code 0 Vite production build completed"
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-10/run-002/evidence/pr-body.md",
+              "summary": "workflow/mahub aidd flow에 React + Vite + TypeScript baseline을 추가했습니다. AIDD workflow 관제 첫 화면을 정적 sample data 기반으로 구현했습니다. issue stage 진행률, subagent/model/reasoning, artifact/evidenc"
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-10/run-002/evidence/pr-merge.md",
+              "summary": "Repository: sohwi noh/mahub aidd flow PR: https://github.com/sohwi noh/mahub aidd flow/pull/1 State: MERGED Base: main Head: ktd 10/aidd flow baseline pr Merged at: 2026 05 12T02:2"
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-10/run-002/evidence/red.md",
+              "summary": "KTD 10 Red 실패 증거 실행 시각(KST): 2026 05 12 10:30 대상 repo: .worktrees/mahub aidd flow 경로 보정: 사용자 최신 지시에 따라 canonical 구현 경로는 workflow/mahub aidd flow로 수정했다. 이 Red 증거는 경로 보정 전 package ba"
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-10/run-002/evidence/stage-index-audit.md",
+              "summary": "stage index audit: KTD 10 run 002 generated at: 2026 05 12T11:38:44+09:00 stage index: .omx/artifacts/KTD 10/stage index.md run dir: .omx/artifacts/KTD 10/run 002 Core files"
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-10/run-002/evidence/test-first-red.md",
+              "summary": "KTD 10 test first Red 증거 실행 시각(KST): 2026 05 12 11:09 대상 repo: workflow/mahub aidd flow 명령: npm test exit code: 1 원인 분류: 제품 결함, 의도된 test first Red 실패 요약 src/App.test.tsx가 먼저 작성되었고,"
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-10/run-002/evidence/wiki-graph.md",
+              "summary": "KTD 10 Wiki/Graph 환류 증거 Wiki 환류 Wiki 문서: .omx/wiki/KTD 10 aidd flow baseline.md 내용: KTD 10 목표, 산출물, PR/Merge 결과, 검증 결과, 운영 정책, 다음 단계 Graph 환류 이번 run에서는 understand anything graph 생성"
+            },
+            {
+              "kind": "result",
+              "label": "결과",
+              "path": ".omx/artifacts/KTD-10/run-002/run-summary.md",
+              "summary": "Linear KTD 10 상태를 In Progress로 변경했다. stage 2 아키텍처, stage 3 TDD 계획, stage 4/5 테스트 명세/Red 기준, stage 6 critic gate subagent를 실행했다. Red 실패 증거를 수집했다. 최초 critic gate는 run 002 산출물 생성 전 확인"
+            },
+            {
+              "kind": "ledger",
+              "label": "단계 원장",
+              "path": ".omx/artifacts/KTD-10/run-002/stage-ledger.md",
+              "summary": "KTD 10 run 002 단계 원장 단계 한글 단계명 담당 산출물/증거 상태 : 2 아키텍처 정리 architect subagents/02 architect.md 완료 3 TDD 계획 planner subagents/03 tdd plan.md 완료"
+            },
+            {
+              "kind": "token",
+              "label": "토큰 기록",
+              "path": ".omx/artifacts/KTD-10/run-002/token-usage.md",
+              "summary": "KTD 10 run 002 토큰 사용 기록 도구 노출 한계 Codex native subagent별 실제 토큰 사용량은 현재 도구 응답에 노출되지 않을 수 있다. Subagent별 기록 산출물 역할 모델/추론 노력 reportedTotalTokens : 02 architect.md architect gpt 5.5/high"
+            },
+            {
+              "kind": "timeline",
+              "label": "타임라인",
+              "path": ".omx/artifacts/KTD-10/run-002/timeline.md",
+              "summary": "KTD 10 run 002 timeline 시각(KST) 이벤트 2026 05 12 10:28 Linear KTD 10 상태를 In Progress로 변경 2026 05 12 10:29 stage 2~6 subagent 실행 시작 2026 05 12 10:30 Red 증거 수집: npm test, npm run build"
+            }
+          ],
+          "endedAt": "2026-05-12T11:37:00+09:00",
+          "runId": "run-002",
+          "startedAt": "2026-05-12T10:28:06+09:00",
+          "status": "running",
+          "subagents": [
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-10/run-002/subagents/02-architect.md",
+                "summary": "KTD 10은 mahub aidd flow에 AIDD workflow 관제용 frontend baseline을 구축하는 이슈다. 이 저장소는 mahub api나 mahub web 제품 기능을 구현하는 곳이 아니라, Linear issue stage, subagent 실행, evidence, token 기록을 읽어 운영자가"
+              },
+              "completedAt": "2026-05-12T10:32:00+09:00",
+              "id": "subagents/02-architect.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "architect",
+              "stage": null,
+              "startedAt": "2026-05-12T10:29:10+09:00",
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-10/run-002/subagents/10-code-review.md",
+                "summary": "KTD 10 Stage 10 코드 리뷰 Findings Blocking finding 없음. 검토 범위 대상 repo: workflow/mahub aidd flow 변경 성격: React/Vite/TypeScript baseline, component test, 정적 dashboard sample UI"
+              },
+              "completedAt": null,
+              "id": "subagents/10-code-review.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "code-reviewer",
+              "stage": null,
+              "startedAt": null,
+              "status": "unknown",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-10/run-002/subagents/09-refactor-review.md",
+                "summary": "KTD 10 Stage 9 리팩터링 검토 검토 범위 대상 repo: /Users/so2/workspace so2/foundary/workflow/mahub aidd flow 검토 목적: React/Vite/TypeScript baseline 구현 후 behavior preserving refactor 필요 여부 판단"
+              },
+              "completedAt": "2026-05-12T11:14:00+09:00",
+              "id": "subagents/09-refactor-review.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "code-simplifier",
+              "stage": null,
+              "startedAt": null,
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-10/run-002/subagents/06-critic-gate.md",
+                "summary": "KTD 10 Stage 6 구현 착수 검토 검토 범위 Issue: KTD 10 AIDD workflow 관제 프론트 baseline 구축 대상 repo: /Users/so2/workspace so2/foundary/.worktrees/mahub aidd flow 검토 목적: stage 7 최소 구현 착수 전, archit"
+              },
+              "completedAt": "2026-05-12T10:32:00+09:00",
+              "id": "subagents/06-critic-gate.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "critic",
+              "stage": null,
+              "startedAt": "2026-05-12T10:29:10+09:00",
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-10/run-002/subagents/11-pr-merge.md",
+                "summary": "PR 1은 MERGED 상태로 확인했다. 병합 시각은 2026 05 12T02:26:51Z / 2026 05 12 11:26:51 KST다. head는 ktd 10/aidd flow baseline pr, base는 main이다. 원 feature branch는 main과 공통 히스토리가 없어 PR 생성에 실패했다."
+              },
+              "completedAt": null,
+              "id": "subagents/11-pr-merge.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "git-master",
+              "stage": null,
+              "startedAt": null,
+              "status": "unknown",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "plan",
+                "label": "계획",
+                "path": ".omx/artifacts/KTD-10/run-002/subagents/03-tdd-plan.md",
+                "summary": "KTD 10 Stage 3 TDD 계획 대상 이슈 Issue: KTD 10 목표: AIDD workflow 관제 프론트 baseline 구축 대상 Repo: /Users/so2/workspace so2/foundary/.worktrees/mahub aidd flow 현재 상태: README, AGENTS.md, .giti"
+              },
+              "completedAt": "2026-05-12T10:32:00+09:00",
+              "id": "subagents/03-tdd-plan.md",
+              "model": "gpt-5.5",
+              "reasoning": "medium",
+              "role": "planner",
+              "stage": null,
+              "startedAt": "2026-05-12T10:29:10+09:00",
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-10/run-002/subagents/04-test-spec-red.md",
+                "summary": "KTD 10 Stage 4/5 테스트 명세 및 RED 실패 기준 대상 이슈 Issue: KTD 10 제목: AIDD workflow 관제 프론트 baseline 구축 대상 repo: /Users/so2/workspace so2/foundary/.worktrees/mahub aidd flow 현재 상태: package.js"
+              },
+              "completedAt": "2026-05-12T10:32:00+09:00",
+              "id": "subagents/04-test-spec-red.md",
+              "model": "gpt-5.5",
+              "reasoning": "medium",
+              "role": "test-engineer",
+              "stage": null,
+              "startedAt": "2026-05-12T10:29:10+09:00",
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-10/run-002/subagents/06-gate-rerun-verifier.md",
+                "summary": "KTD 10 Stage 6 구현 착수 재검증 검증 목적 Issue: KTD 10 대상 판단: stage 7 최소 구현 착수 가능 여부 이전 artifact: .omx/artifacts/KTD 10/run 002/subagents/06 critic gate.md 재검증 사유: 이전 critic 검토 이후 architectu"
+              },
+              "completedAt": null,
+              "id": "subagents/06-gate-rerun-verifier.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "verifier",
+              "stage": null,
+              "startedAt": "2026-05-12T10:33:00+09:00",
+              "status": "running",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            }
+          ]
+        }
+      ],
+      "stageStates": [
+        {
+          "nameKo": "아키텍처 정리",
+          "ownerRoles": [
+            "architect"
+          ],
+          "stage": 2,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "TDD 계획",
+          "ownerRoles": [
+            "planner"
+          ],
+          "stage": 3,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "테스트 명세",
+          "ownerRoles": [
+            "test-engineer"
+          ],
+          "stage": 4,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "Red 실패 증거",
+          "ownerRoles": [
+            "test-engineer"
+          ],
+          "stage": 5,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "구현 착수 검토 루프",
+          "ownerRoles": [
+            "critic",
+            "verifier"
+          ],
+          "stage": 6,
+          "status": "완료, PASS",
+          "summary": "완료, PASS"
+        },
+        {
+          "nameKo": "최소 구현",
+          "ownerRoles": [],
+          "stage": 7,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "Green 통과 증거",
+          "ownerRoles": [],
+          "stage": 8,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "리팩터링",
+          "ownerRoles": [
+            "code-simplifier"
+          ],
+          "stage": 9,
+          "status": "완료, 변경 불필요",
+          "summary": "완료, 변경 불필요"
+        },
+        {
+          "nameKo": "검증/리뷰",
+          "ownerRoles": [
+            "code-reviewer"
+          ],
+          "stage": 10,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "MR/Wiki/Graph 환류",
+          "ownerRoles": [
+            "git-master"
+          ],
+          "stage": 11,
+          "status": "PR merge 완료, post-merge 검증 통과, Wiki 환류 완료, Graph 보류 사유 기록, Linear Done 완료, stage-index 동기화 확인",
+          "summary": "PR merge 완료, post merge 검증 통과, Wiki 환류 완료, Graph 보류 사유 기록, Linear Done 완료, stage index 동기화 확인"
+        }
+      ],
+      "stages": [
+        {
+          "agent": "architect",
+          "artifactPath": ".omx/artifacts/KTD-10/run-002/subagents/02-architect.md",
+          "completedAt": null,
+          "model": "n/a",
+          "nameKo": "아키텍처 정리",
+          "reasoning": "n/a",
+          "stage": 2,
+          "startedAt": null,
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 2380
+          }
+        },
+        {
+          "agent": "planner",
+          "artifactPath": ".omx/artifacts/KTD-10/run-002/subagents/03-tdd-plan.md",
+          "completedAt": null,
+          "model": "n/a",
+          "nameKo": "TDD 계획",
+          "reasoning": "n/a",
+          "stage": 3,
+          "startedAt": null,
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 1406
+          }
+        },
+        {
+          "agent": "test-engineer",
+          "artifactPath": ".omx/artifacts/KTD-10/run-002/subagents/04-test-spec-red.md",
+          "completedAt": null,
+          "model": "n/a",
+          "nameKo": "테스트 명세",
+          "reasoning": "n/a",
+          "stage": 4,
+          "startedAt": null,
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 1514
+          }
+        },
+        {
+          "agent": "test-engineer",
+          "artifactPath": ".omx/artifacts/KTD-10/run-002/evidence/red.md",
+          "completedAt": null,
+          "model": "n/a",
+          "nameKo": "Red 실패 증거",
+          "reasoning": "n/a",
+          "stage": 5,
+          "startedAt": null,
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 529
+          }
+        },
+        {
+          "agent": "critic, verifier",
+          "artifactPath": ".omx/artifacts/KTD-10/run-002/subagents/06-critic-gate.md",
+          "completedAt": null,
+          "model": "n/a",
+          "nameKo": "구현 착수 검토 루프",
+          "reasoning": "n/a",
+          "stage": 6,
+          "startedAt": null,
+          "status": "완료, PASS",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 1556
+          }
+        },
+        {
+          "agent": "leader/executor",
+          "artifactPath": ".omx/artifacts/KTD-10/run-002/workflow/mahub-aidd-flow",
+          "completedAt": null,
+          "model": "n/a",
+          "nameKo": "최소 구현",
+          "reasoning": "n/a",
+          "stage": 7,
+          "startedAt": null,
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "unavailable",
+            "reportedTotalTokens": null
+          }
+        },
+        {
+          "agent": "leader",
+          "artifactPath": ".omx/artifacts/KTD-10/run-002/evidence/green.md",
+          "completedAt": null,
+          "model": "n/a",
+          "nameKo": "Green 통과 증거",
+          "reasoning": "n/a",
+          "stage": 8,
+          "startedAt": null,
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 205
+          }
+        },
+        {
+          "agent": "code-simplifier",
+          "artifactPath": ".omx/artifacts/KTD-10/run-002/subagents/09-refactor-review.md",
+          "completedAt": null,
+          "model": "n/a",
+          "nameKo": "리팩터링",
+          "reasoning": "n/a",
+          "stage": 9,
+          "startedAt": null,
+          "status": "완료, 변경 불필요",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 744
+          }
+        },
+        {
+          "agent": "code-reviewer",
+          "artifactPath": ".omx/artifacts/KTD-10/run-002/subagents/10-code-review.md",
+          "completedAt": null,
+          "model": "n/a",
+          "nameKo": "검증/리뷰",
+          "reasoning": "n/a",
+          "stage": 10,
+          "startedAt": null,
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 355
+          }
+        },
+        {
+          "agent": "git-master",
+          "artifactPath": ".omx/artifacts/KTD-10/run-002/subagents/11-pr-merge.md",
+          "completedAt": null,
+          "model": "n/a",
+          "nameKo": "MR/Wiki/Graph 환류",
+          "reasoning": "n/a",
+          "stage": 11,
+          "startedAt": null,
+          "status": "PR merge 완료, post-merge 검증 통과, Wiki 환류 완료, Graph 보류 사유 기록, Linear Done 완료, stage-index 동기화 확인",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 437
+          }
+        }
+      ],
+      "startedAt": "2026-05-12T10:28:06+09:00",
+      "status": "Done",
+      "title": "AIDD workflow 관제 프론트 baseline 구축",
+      "totalStageCount": 12,
+      "url": "",
+      "linearProject": "MA Hub",
+      "linearMilestone": "환경 구성하기",
+      "pullRequests": [
+        {
+          "number": 1,
+          "repository": "mahub-aidd-flow",
+          "url": "https://github.com/sohwi-noh/mahub-aidd-flow/pull/1"
+        }
+      ]
+    },
+    {
+      "artifacts": [
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-11/run-001/subagents/01-requirements.md",
+          "summary": "KTD 11 요구사항 정리 요구사항 Dashboard 라벨이 붙은 Linear issue를 화면에서 조회할 수 있어야 한다. 각 Linear issue별 lifecycle 실행 정보를 확인할 수 있어야 한다. stage agent model token 사용량 startedAt"
+        },
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-11/run-001/subagents/02-architecture.md",
+          "summary": "KTD 11은 mahub aidd flow를 기존 hardcoded baseline에서 실제 OMX artifact snapshot 기반의 MUI dashboard로 확장한다. 브라우저가 로컬 filesystem을 직접 읽을 수 없으므로 .omx/artifacts를 build time deterministic JSON으로"
+        },
+        {
+          "kind": "plan",
+          "label": "계획",
+          "path": ".omx/artifacts/KTD-11/run-001/subagents/03-tdd-plan.md",
+          "summary": "Red, Green, Refactor 순서와 검증 명령을 고정했다. 요약 생성 기준은 markdown 제목과 본문 앞부분을 deterministic하게 추출한다."
+        },
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-11/run-001/subagents/04-test-spec-red.md",
+          "summary": "KTD 11 테스트 명세 / Red 기준 실패해야 할 테스트 dashboard label issue 표시 KTD 11 issue가 표시된다. dashboard label이 표시된다. status와 stage progress가 표시된다. stage agent/model/token/timing/status 표시"
+        },
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-11/run-001/subagents/07-implementation.md",
+          "summary": "KTD 11 Stage 7 최소 구현 결과 변경 파일 목록 package.json package lock.json src/App.tsx src/App.css src/App.test.tsx src/domain/dashboard.ts src/generated/artifact dashboard.json"
+        },
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-11/run-001/subagents/08-green-verification.md",
+          "summary": "KTD 11 Stage 8 Green 통과 증거 범위 Workspace: /Users/so2/workspace so2/foundary App repo: /Users/so2/workspace so2/foundary/workflow/mahub aidd flow 산출물 역할: Green 단계 검증 결과 기록"
+        },
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-11/run-001/subagents/09-refactor.md",
+          "summary": "KTD 11 Stage 9 리팩터링 판단 Findings MUI 기반 dashboard 구현은 완료된 상태다. domain formatter가 화면 구현에서 분리되어 표시 로직의 책임 경계가 정리되었다. 테스트는 generated artifact snapshot을 사용해 dashboard 입력 데이터를 고정한다."
+        },
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-11/run-001/subagents/10-review.md",
+          "summary": "KTD 11 Stage 10 검증/리뷰 Findings 중대 findings 없음. 검토 근거 MUI dashboard 구현 완료 확인 App.test.tsx component tests 3개 작성 확인 npm test 통과 npm run typecheck 통과 npm run build 통과"
+        },
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-11/run-001/subagents/11-git-master.md",
+          "summary": "KTD 11 AIDD dashboard lifecycle 작업은 sohwi noh/mahub aidd flow 저장소 PR로 환류됐고, merge 완료 후 Linear KTD 11 상태가 Done으로 정리됐다."
+        },
+        {
+          "kind": "subagent",
+          "label": "Subagent 기록",
+          "path": ".omx/artifacts/KTD-11/run-001/subagents/11-wiki-graph.md",
+          "summary": "KTD 11 Stage 11 Wiki/Graph 환류 Knowledge summary AIDD dashboard KTD 11 구현은 완료됐고 GitHub PR 2가 merge됐다. PR 2 merge 결과는 .omx/artifacts/KTD 11/run 001/evidence/pr merge.md에 기록했다."
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-11/run-001/evidence/dependency-install.md",
+          "summary": "MUI 단일 디자인 프레임워크 적용을 위해 @mui/material, @emotion/react, @emotion/styled를 추가했다."
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-11/run-001/evidence/green.md",
+          "summary": "KTD 11 dashboard 구현 후 component test, TypeScript check, production build가 모두 통과했다. 중간에 artifact summary generator 재생성 후 stage 0 timing 누락으로 npm test가 1회 실패했으며, evidence/snapshot re"
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-11/run-001/evidence/pr-merge.md",
+          "summary": "KTD 11 dashboard 구현 PR을 생성하고 즉시 merge했다."
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-11/run-001/evidence/red-component-test.md",
+          "summary": "exit code: 1 Test Files: 1 failed (1) Tests: 3 failed (3)"
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-11/run-001/evidence/refactor-review.md",
+          "summary": "리팩터링 subagent와 코드리뷰 subagent가 모두 PR 진행 가능 판정을 남겼다."
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-11/run-001/evidence/snapshot-regeneration-failure.md",
+          "summary": "artifact summary skill로 src/generated/artifact dashboard.json을 재생성한 뒤 npm test가 1회 실패했다."
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-11/run-001/evidence/stage-index-audit.md",
+          "summary": "stage index audit: KTD 11 run 001 generated at: 2026 05 12T12:57:14+09:00 stage index: .omx/artifacts/KTD 11/stage index.md run dir: .omx/artifacts/KTD 11/run 001 Core files"
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-11/run-001/evidence/typecheck-failure.md",
+          "summary": "Green 단계 중 npm run typecheck 1차 실행이 실패했고, 원인은 MUI Typography에 직접 전달한 fontWeight prop type mismatch였다."
+        },
+        {
+          "kind": "evidence",
+          "label": "증거",
+          "path": ".omx/artifacts/KTD-11/run-001/evidence/wiki-graph.md",
+          "summary": "KTD 11의 실행 계획, 증거, 결과는 .omx/artifacts/KTD 11/run 001/ 아래에 run local artifact로 남겼다."
+        },
+        {
+          "kind": "result",
+          "label": "결과",
+          "path": ".omx/artifacts/KTD-11/run-001/run-summary.md",
+          "summary": "Linear label dashboard, mahub를 생성했다. Linear issue KTD 11을 dashboard label과 In Progress 상태로 생성했다. 요구사항/아키텍처/TDD 계획/테스트 명세 subagent artifact를 남겼다. component test를 먼저 수정하고 npm test Re"
+        },
+        {
+          "kind": "ledger",
+          "label": "단계 원장",
+          "path": ".omx/artifacts/KTD-11/run-001/stage-ledger.md",
+          "summary": "KTD 11 run 001 단계 원장 단계 한글 단계명 담당 산출물/증거 상태 : 0 이슈 발행 사람, leader raw linear.md, 00 intake.md 완료 1 요구사항 정리 analyst subagents/01 requirements.md 완료"
+        },
+        {
+          "kind": "token",
+          "label": "토큰 기록",
+          "path": ".omx/artifacts/KTD-11/run-001/token-usage.md",
+          "summary": "KTD 11 run 001 토큰 사용 기록 도구 노출 한계 Codex native subagent별 실제 token 사용량은 현재 도구 응답에 노출되지 않을 수 있다. Subagent별 기록 산출물 역할 모델/추론 노력 reportedTotalTokens : 01 requirements.md analyst gpt 5.5/"
+        },
+        {
+          "kind": "timeline",
+          "label": "타임라인",
+          "path": ".omx/artifacts/KTD-11/run-001/timeline.md",
+          "summary": "KTD 11 run 001 timeline 시각(KST) 이벤트 2026 05 12 11:41 Linear label dashboard, mahub 생성 2026 05 12 11:41 Linear KTD 11 생성 및 In Progress 시작 2026 05 12 11:43 요구사항/아키텍처/TDD/테스트 subagent"
+        }
+      ],
+      "completedAt": "2026-05-12T12:56:48+09:00",
+      "completedStageCount": 12,
+      "currentStage": 11,
+      "currentStageName": "MR/Wiki/Graph 환류",
+      "issueId": "KTD-11",
+      "labels": [
+        "dashboard",
+        "Improvement"
+      ],
+      "repoPath": "workflow/mahub-aidd-flow",
+      "runs": [
+        {
+          "artifacts": [
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-11/run-001/subagents/01-requirements.md",
+              "summary": "KTD 11 요구사항 정리 요구사항 Dashboard 라벨이 붙은 Linear issue를 화면에서 조회할 수 있어야 한다. 각 Linear issue별 lifecycle 실행 정보를 확인할 수 있어야 한다. stage agent model token 사용량 startedAt"
+            },
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-11/run-001/subagents/02-architecture.md",
+              "summary": "KTD 11은 mahub aidd flow를 기존 hardcoded baseline에서 실제 OMX artifact snapshot 기반의 MUI dashboard로 확장한다. 브라우저가 로컬 filesystem을 직접 읽을 수 없으므로 .omx/artifacts를 build time deterministic JSON으로"
+            },
+            {
+              "kind": "plan",
+              "label": "계획",
+              "path": ".omx/artifacts/KTD-11/run-001/subagents/03-tdd-plan.md",
+              "summary": "Red, Green, Refactor 순서와 검증 명령을 고정했다. 요약 생성 기준은 markdown 제목과 본문 앞부분을 deterministic하게 추출한다."
+            },
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-11/run-001/subagents/04-test-spec-red.md",
+              "summary": "KTD 11 테스트 명세 / Red 기준 실패해야 할 테스트 dashboard label issue 표시 KTD 11 issue가 표시된다. dashboard label이 표시된다. status와 stage progress가 표시된다. stage agent/model/token/timing/status 표시"
+            },
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-11/run-001/subagents/07-implementation.md",
+              "summary": "KTD 11 Stage 7 최소 구현 결과 변경 파일 목록 package.json package lock.json src/App.tsx src/App.css src/App.test.tsx src/domain/dashboard.ts src/generated/artifact dashboard.json"
+            },
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-11/run-001/subagents/08-green-verification.md",
+              "summary": "KTD 11 Stage 8 Green 통과 증거 범위 Workspace: /Users/so2/workspace so2/foundary App repo: /Users/so2/workspace so2/foundary/workflow/mahub aidd flow 산출물 역할: Green 단계 검증 결과 기록"
+            },
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-11/run-001/subagents/09-refactor.md",
+              "summary": "KTD 11 Stage 9 리팩터링 판단 Findings MUI 기반 dashboard 구현은 완료된 상태다. domain formatter가 화면 구현에서 분리되어 표시 로직의 책임 경계가 정리되었다. 테스트는 generated artifact snapshot을 사용해 dashboard 입력 데이터를 고정한다."
+            },
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-11/run-001/subagents/10-review.md",
+              "summary": "KTD 11 Stage 10 검증/리뷰 Findings 중대 findings 없음. 검토 근거 MUI dashboard 구현 완료 확인 App.test.tsx component tests 3개 작성 확인 npm test 통과 npm run typecheck 통과 npm run build 통과"
+            },
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-11/run-001/subagents/11-git-master.md",
+              "summary": "KTD 11 AIDD dashboard lifecycle 작업은 sohwi noh/mahub aidd flow 저장소 PR로 환류됐고, merge 완료 후 Linear KTD 11 상태가 Done으로 정리됐다."
+            },
+            {
+              "kind": "subagent",
+              "label": "Subagent 기록",
+              "path": ".omx/artifacts/KTD-11/run-001/subagents/11-wiki-graph.md",
+              "summary": "KTD 11 Stage 11 Wiki/Graph 환류 Knowledge summary AIDD dashboard KTD 11 구현은 완료됐고 GitHub PR 2가 merge됐다. PR 2 merge 결과는 .omx/artifacts/KTD 11/run 001/evidence/pr merge.md에 기록했다."
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-11/run-001/evidence/dependency-install.md",
+              "summary": "MUI 단일 디자인 프레임워크 적용을 위해 @mui/material, @emotion/react, @emotion/styled를 추가했다."
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-11/run-001/evidence/green.md",
+              "summary": "KTD 11 dashboard 구현 후 component test, TypeScript check, production build가 모두 통과했다. 중간에 artifact summary generator 재생성 후 stage 0 timing 누락으로 npm test가 1회 실패했으며, evidence/snapshot re"
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-11/run-001/evidence/pr-merge.md",
+              "summary": "KTD 11 dashboard 구현 PR을 생성하고 즉시 merge했다."
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-11/run-001/evidence/red-component-test.md",
+              "summary": "exit code: 1 Test Files: 1 failed (1) Tests: 3 failed (3)"
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-11/run-001/evidence/refactor-review.md",
+              "summary": "리팩터링 subagent와 코드리뷰 subagent가 모두 PR 진행 가능 판정을 남겼다."
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-11/run-001/evidence/snapshot-regeneration-failure.md",
+              "summary": "artifact summary skill로 src/generated/artifact dashboard.json을 재생성한 뒤 npm test가 1회 실패했다."
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-11/run-001/evidence/stage-index-audit.md",
+              "summary": "stage index audit: KTD 11 run 001 generated at: 2026 05 12T12:57:14+09:00 stage index: .omx/artifacts/KTD 11/stage index.md run dir: .omx/artifacts/KTD 11/run 001 Core files"
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-11/run-001/evidence/typecheck-failure.md",
+              "summary": "Green 단계 중 npm run typecheck 1차 실행이 실패했고, 원인은 MUI Typography에 직접 전달한 fontWeight prop type mismatch였다."
+            },
+            {
+              "kind": "evidence",
+              "label": "증거",
+              "path": ".omx/artifacts/KTD-11/run-001/evidence/wiki-graph.md",
+              "summary": "KTD 11의 실행 계획, 증거, 결과는 .omx/artifacts/KTD 11/run 001/ 아래에 run local artifact로 남겼다."
+            },
+            {
+              "kind": "result",
+              "label": "결과",
+              "path": ".omx/artifacts/KTD-11/run-001/run-summary.md",
+              "summary": "Linear label dashboard, mahub를 생성했다. Linear issue KTD 11을 dashboard label과 In Progress 상태로 생성했다. 요구사항/아키텍처/TDD 계획/테스트 명세 subagent artifact를 남겼다. component test를 먼저 수정하고 npm test Re"
+            },
+            {
+              "kind": "ledger",
+              "label": "단계 원장",
+              "path": ".omx/artifacts/KTD-11/run-001/stage-ledger.md",
+              "summary": "KTD 11 run 001 단계 원장 단계 한글 단계명 담당 산출물/증거 상태 : 0 이슈 발행 사람, leader raw linear.md, 00 intake.md 완료 1 요구사항 정리 analyst subagents/01 requirements.md 완료"
+            },
+            {
+              "kind": "token",
+              "label": "토큰 기록",
+              "path": ".omx/artifacts/KTD-11/run-001/token-usage.md",
+              "summary": "KTD 11 run 001 토큰 사용 기록 도구 노출 한계 Codex native subagent별 실제 token 사용량은 현재 도구 응답에 노출되지 않을 수 있다. Subagent별 기록 산출물 역할 모델/추론 노력 reportedTotalTokens : 01 requirements.md analyst gpt 5.5/"
+            },
+            {
+              "kind": "timeline",
+              "label": "타임라인",
+              "path": ".omx/artifacts/KTD-11/run-001/timeline.md",
+              "summary": "KTD 11 run 001 timeline 시각(KST) 이벤트 2026 05 12 11:41 Linear label dashboard, mahub 생성 2026 05 12 11:41 Linear KTD 11 생성 및 In Progress 시작 2026 05 12 11:43 요구사항/아키텍처/TDD/테스트 subagent"
+            }
+          ],
+          "endedAt": "2026-05-12T12:56:48+09:00",
+          "runId": "run-001",
+          "startedAt": "2026-05-12T11:41:00+09:00",
+          "status": "done",
+          "subagents": [
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-11/run-001/subagents/01-requirements.md",
+                "summary": "KTD 11 요구사항 정리 요구사항 Dashboard 라벨이 붙은 Linear issue를 화면에서 조회할 수 있어야 한다. 각 Linear issue별 lifecycle 실행 정보를 확인할 수 있어야 한다. stage agent model token 사용량 startedAt"
+              },
+              "completedAt": "2026-05-12T11:44:00+09:00",
+              "id": "subagents/01-requirements.md",
+              "model": "gpt-5.5",
+              "reasoning": "medium",
+              "role": "analyst",
+              "stage": 1,
+              "startedAt": "2026-05-12T11:43:00+09:00",
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-11/run-001/subagents/02-architecture.md",
+                "summary": "KTD 11은 mahub aidd flow를 기존 hardcoded baseline에서 실제 OMX artifact snapshot 기반의 MUI dashboard로 확장한다. 브라우저가 로컬 filesystem을 직접 읽을 수 없으므로 .omx/artifacts를 build time deterministic JSON으로"
+              },
+              "completedAt": "2026-05-12T11:48:00+09:00",
+              "id": "subagents/02-architecture.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "architect",
+              "stage": 2,
+              "startedAt": "2026-05-12T11:43:00+09:00",
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "plan",
+                "label": "계획",
+                "path": ".omx/artifacts/KTD-11/run-001/subagents/03-tdd-plan.md",
+                "summary": "Red, Green, Refactor 순서와 검증 명령을 고정했다. 요약 생성 기준은 markdown 제목과 본문 앞부분을 deterministic하게 추출한다."
+              },
+              "completedAt": "2026-05-12T11:45:00+09:00",
+              "id": "subagents/03-tdd-plan.md",
+              "model": "gpt-5.5",
+              "reasoning": "medium",
+              "role": "planner",
+              "stage": 3,
+              "startedAt": "2026-05-12T11:43:00+09:00",
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-11/run-001/subagents/04-test-spec-red.md",
+                "summary": "KTD 11 테스트 명세 / Red 기준 실패해야 할 테스트 dashboard label issue 표시 KTD 11 issue가 표시된다. dashboard label이 표시된다. status와 stage progress가 표시된다. stage agent/model/token/timing/status 표시"
+              },
+              "completedAt": "2026-05-12T11:45:00+09:00",
+              "id": "subagents/04-test-spec-red.md",
+              "model": "gpt-5.5",
+              "reasoning": "medium",
+              "role": "test-engineer",
+              "stage": 4,
+              "startedAt": "2026-05-12T11:43:00+09:00",
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "ledger",
+                "label": "단계 원장",
+                "path": ".omx/artifacts/KTD-11/run-001/stage-ledger.md",
+                "summary": "KTD 11 run 001 단계 원장 단계 한글 단계명 담당 산출물/증거 상태 : 0 이슈 발행 사람, leader raw linear.md, 00 intake.md 완료 1 요구사항 정리 analyst subagents/01 requirements.md 완료"
+              },
+              "completedAt": null,
+              "id": "stage-ledger.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "verifier",
+              "stage": 6,
+              "startedAt": null,
+              "status": "unknown",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "evidence",
+                "label": "증거",
+                "path": ".omx/artifacts/KTD-11/run-001/evidence/dependency-install.md",
+                "summary": "MUI 단일 디자인 프레임워크 적용을 위해 @mui/material, @emotion/react, @emotion/styled를 추가했다."
+              },
+              "completedAt": "2026-05-12T11:50:00+09:00",
+              "id": "evidence/dependency-install.md",
+              "model": "gpt-5.5",
+              "reasoning": "medium",
+              "role": "executor",
+              "stage": 7,
+              "startedAt": null,
+              "status": "failed",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-11/run-001/subagents/07-implementation.md",
+                "summary": "KTD 11 Stage 7 최소 구현 결과 변경 파일 목록 package.json package lock.json src/App.tsx src/App.css src/App.test.tsx src/domain/dashboard.ts src/generated/artifact dashboard.json"
+              },
+              "completedAt": "2026-05-12T11:58:00+09:00",
+              "id": "subagents/07-implementation.md",
+              "model": "gpt-5.5",
+              "reasoning": "medium",
+              "role": "executor",
+              "stage": 7,
+              "startedAt": "2026-05-12T11:53:00+09:00",
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "evidence",
+                "label": "증거",
+                "path": ".omx/artifacts/KTD-11/run-001/evidence/typecheck-failure.md",
+                "summary": "Green 단계 중 npm run typecheck 1차 실행이 실패했고, 원인은 MUI Typography에 직접 전달한 fontWeight prop type mismatch였다."
+              },
+              "completedAt": "2026-05-12T11:59:00+09:00",
+              "id": "evidence/typecheck-failure.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "verifier",
+              "stage": 8,
+              "startedAt": null,
+              "status": "failed",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-11/run-001/subagents/08-green-verification.md",
+                "summary": "KTD 11 Stage 8 Green 통과 증거 범위 Workspace: /Users/so2/workspace so2/foundary App repo: /Users/so2/workspace so2/foundary/workflow/mahub aidd flow 산출물 역할: Green 단계 검증 결과 기록"
+              },
+              "completedAt": "2026-05-12T12:14:10+09:00",
+              "id": "subagents/08-green-verification.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "verifier",
+              "stage": 8,
+              "startedAt": "2026-05-12T12:11:00+09:00",
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "evidence",
+                "label": "증거",
+                "path": ".omx/artifacts/KTD-11/run-001/evidence/green.md",
+                "summary": "KTD 11 dashboard 구현 후 component test, TypeScript check, production build가 모두 통과했다. 중간에 artifact summary generator 재생성 후 stage 0 timing 누락으로 npm test가 1회 실패했으며, evidence/snapshot re"
+              },
+              "completedAt": null,
+              "id": "evidence/green.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "verifier",
+              "stage": 8,
+              "startedAt": null,
+              "status": "unknown",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "evidence",
+                "label": "증거",
+                "path": ".omx/artifacts/KTD-11/run-001/evidence/snapshot-regeneration-failure.md",
+                "summary": "artifact summary skill로 src/generated/artifact dashboard.json을 재생성한 뒤 npm test가 1회 실패했다."
+              },
+              "completedAt": "2026-05-12T12:53:42+09:00",
+              "id": "evidence/snapshot-regeneration-failure.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "verifier",
+              "stage": 8,
+              "startedAt": null,
+              "status": "failed",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-11/run-001/subagents/09-refactor.md",
+                "summary": "KTD 11 Stage 9 리팩터링 판단 Findings MUI 기반 dashboard 구현은 완료된 상태다. domain formatter가 화면 구현에서 분리되어 표시 로직의 책임 경계가 정리되었다. 테스트는 generated artifact snapshot을 사용해 dashboard 입력 데이터를 고정한다."
+              },
+              "completedAt": "2026-05-12T12:18:00+09:00",
+              "id": "subagents/09-refactor.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "code-simplifier",
+              "stage": 9,
+              "startedAt": "2026-05-12T12:15:00+09:00",
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-11/run-001/subagents/10-review.md",
+                "summary": "KTD 11 Stage 10 검증/리뷰 Findings 중대 findings 없음. 검토 근거 MUI dashboard 구현 완료 확인 App.test.tsx component tests 3개 작성 확인 npm test 통과 npm run typecheck 통과 npm run build 통과"
+              },
+              "completedAt": "2026-05-12T12:18:00+09:00",
+              "id": "subagents/10-review.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "code-reviewer",
+              "stage": 10,
+              "startedAt": "2026-05-12T12:15:00+09:00",
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "evidence",
+                "label": "증거",
+                "path": ".omx/artifacts/KTD-11/run-001/evidence/pr-merge.md",
+                "summary": "KTD 11 dashboard 구현 PR을 생성하고 즉시 merge했다."
+              },
+              "completedAt": null,
+              "id": "evidence/pr-merge.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "git-master",
+              "stage": 11,
+              "startedAt": null,
+              "status": "unknown",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-11/run-001/subagents/11-git-master.md",
+                "summary": "KTD 11 AIDD dashboard lifecycle 작업은 sohwi noh/mahub aidd flow 저장소 PR로 환류됐고, merge 완료 후 Linear KTD 11 상태가 Done으로 정리됐다."
+              },
+              "completedAt": "2026-05-12T12:52:00+09:00",
+              "id": "subagents/11-git-master.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "git-master",
+              "stage": 11,
+              "startedAt": "2026-05-12T12:51:00+09:00",
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "evidence",
+                "label": "증거",
+                "path": ".omx/artifacts/KTD-11/run-001/evidence/stage-index-audit.md",
+                "summary": "stage index audit: KTD 11 run 001 generated at: 2026 05 12T12:57:14+09:00 stage index: .omx/artifacts/KTD 11/stage index.md run dir: .omx/artifacts/KTD 11/run 001 Core files"
+              },
+              "completedAt": null,
+              "id": "evidence/stage-index-audit.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "verifier",
+              "stage": 11,
+              "startedAt": null,
+              "status": "unknown",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            },
+            {
+              "artifact": {
+                "kind": "subagent",
+                "label": "Subagent 기록",
+                "path": ".omx/artifacts/KTD-11/run-001/subagents/11-wiki-graph.md",
+                "summary": "KTD 11 Stage 11 Wiki/Graph 환류 Knowledge summary AIDD dashboard KTD 11 구현은 완료됐고 GitHub PR 2가 merge됐다. PR 2 merge 결과는 .omx/artifacts/KTD 11/run 001/evidence/pr merge.md에 기록했다."
+              },
+              "completedAt": "2026-05-12T12:52:00+09:00",
+              "id": "subagents/11-wiki-graph.md",
+              "model": "gpt-5.5",
+              "reasoning": "high",
+              "role": "writer",
+              "stage": 11,
+              "startedAt": "2026-05-12T12:51:00+09:00",
+              "status": "done",
+              "tokenUsage": {
+                "availability": "unavailable",
+                "reportedTotalTokens": null
+              }
+            }
+          ]
+        }
+      ],
+      "stageStates": [
+        {
+          "nameKo": "이슈 발행",
+          "ownerRoles": [],
+          "stage": 0,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "요구사항 정리",
+          "ownerRoles": [
+            "analyst"
+          ],
+          "stage": 1,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "아키텍처 정리",
+          "ownerRoles": [
+            "architect"
+          ],
+          "stage": 2,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "TDD 계획",
+          "ownerRoles": [
+            "planner"
+          ],
+          "stage": 3,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "테스트 명세",
+          "ownerRoles": [
+            "test-engineer"
+          ],
+          "stage": 4,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "Red 실패 증거",
+          "ownerRoles": [
+            "test-engineer"
+          ],
+          "stage": 5,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "구현 착수 검토 루프",
+          "ownerRoles": [
+            "architect",
+            "test-engineer",
+            "planner"
+          ],
+          "stage": 6,
+          "status": "PASS",
+          "summary": "PASS"
+        },
+        {
+          "nameKo": "최소 구현",
+          "ownerRoles": [
+            "executor"
+          ],
+          "stage": 7,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "Green 통과 증거",
+          "ownerRoles": [
+            "verifier"
+          ],
+          "stage": 8,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "리팩터링",
+          "ownerRoles": [
+            "code-simplifier"
+          ],
+          "stage": 9,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "검증/리뷰",
+          "ownerRoles": [
+            "code-reviewer",
+            "verifier"
+          ],
+          "stage": 10,
+          "status": "완료",
+          "summary": "완료"
+        },
+        {
+          "nameKo": "MR/Wiki/Graph 환류",
+          "ownerRoles": [
+            "git-master",
+            "writer"
+          ],
+          "stage": 11,
+          "status": "완료",
+          "summary": "완료"
+        }
+      ],
+      "stages": [
+        {
+          "agent": "사람, leader",
+          "artifactPath": ".omx/artifacts/KTD-11/run-001/raw-linear.md",
+          "completedAt": "2026-05-12T11:41:46+09:00",
+          "model": "n/a",
+          "nameKo": "이슈 발행",
+          "reasoning": "n/a",
+          "stage": 0,
+          "startedAt": "2026-05-12T11:41:46+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "unavailable",
+            "reportedTotalTokens": null
+          }
+        },
+        {
+          "agent": "analyst",
+          "artifactPath": ".omx/artifacts/KTD-11/run-001/subagents/01-requirements.md",
+          "completedAt": "2026-05-12T11:44:00+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "요구사항 정리",
+          "reasoning": "medium",
+          "stage": 1,
+          "startedAt": "2026-05-12T11:43:00+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 549
+          }
+        },
+        {
+          "agent": "architect",
+          "artifactPath": ".omx/artifacts/KTD-11/run-001/subagents/02-architecture.md",
+          "completedAt": "2026-05-12T11:48:00+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "아키텍처 정리",
+          "reasoning": "high",
+          "stage": 2,
+          "startedAt": "2026-05-12T11:43:00+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 410
+          }
+        },
+        {
+          "agent": "planner",
+          "artifactPath": ".omx/artifacts/KTD-11/run-001/subagents/03-tdd-plan.md",
+          "completedAt": "2026-05-12T11:45:00+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "TDD 계획",
+          "reasoning": "medium",
+          "stage": 3,
+          "startedAt": "2026-05-12T11:43:00+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 349
+          }
+        },
+        {
+          "agent": "test-engineer",
+          "artifactPath": ".omx/artifacts/KTD-11/run-001/subagents/04-test-spec-red.md",
+          "completedAt": "2026-05-12T11:45:00+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "테스트 명세",
+          "reasoning": "medium",
+          "stage": 4,
+          "startedAt": "2026-05-12T11:43:00+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 304
+          }
+        },
+        {
+          "agent": "test-engineer",
+          "artifactPath": ".omx/artifacts/KTD-11/run-001/evidence/red-component-test.md",
+          "completedAt": "2026-05-12T11:46:00+09:00",
+          "model": "n/a",
+          "nameKo": "Red 실패 증거",
+          "reasoning": "n/a",
+          "stage": 5,
+          "startedAt": "2026-05-12T11:46:00+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 203
+          }
+        },
+        {
+          "agent": "verifier",
+          "artifactPath": ".omx/artifacts/KTD-11/run-001/stage-ledger.md",
+          "completedAt": "2026-05-12T11:49:00+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "구현 착수 검토 루프",
+          "reasoning": "high",
+          "stage": 6,
+          "startedAt": null,
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 412
+          }
+        },
+        {
+          "agent": "executor",
+          "artifactPath": ".omx/artifacts/KTD-11/run-001/subagents/07-implementation.md",
+          "completedAt": "2026-05-12T11:58:00+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "최소 구현",
+          "reasoning": "medium",
+          "stage": 7,
+          "startedAt": "2026-05-12T11:53:00+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 437
+          }
+        },
+        {
+          "agent": "verifier",
+          "artifactPath": ".omx/artifacts/KTD-11/run-001/evidence/green.md",
+          "completedAt": "2026-05-12T12:54:18+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "Green 통과 증거",
+          "reasoning": "high",
+          "stage": 8,
+          "startedAt": "2026-05-12T12:11:00+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 268
+          }
+        },
+        {
+          "agent": "code-simplifier",
+          "artifactPath": ".omx/artifacts/KTD-11/run-001/subagents/09-refactor.md",
+          "completedAt": "2026-05-12T12:18:00+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "리팩터링",
+          "reasoning": "high",
+          "stage": 9,
+          "startedAt": "2026-05-12T12:15:00+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 313
+          }
+        },
+        {
+          "agent": "code-reviewer",
+          "artifactPath": ".omx/artifacts/KTD-11/run-001/subagents/10-review.md",
+          "completedAt": "2026-05-12T12:18:00+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "검증/리뷰",
+          "reasoning": "high",
+          "stage": 10,
+          "startedAt": "2026-05-12T12:15:00+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 137
+          }
+        },
+        {
+          "agent": "verifier",
+          "artifactPath": ".omx/artifacts/KTD-11/run-001/evidence/stage-index-audit.md",
+          "completedAt": "2026-05-12T12:55:45+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "MR/Wiki/Graph 환류",
+          "reasoning": "high",
+          "stage": 11,
+          "startedAt": "2026-05-12T12:51:00+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 181
+          }
+        }
+      ],
+      "startedAt": "2026-05-12T11:41:00+09:00",
+      "status": "Done",
+      "title": "AIDD dashboard issue lifecycle 상세 관제 화면 구현",
+      "totalStageCount": 12,
+      "url": "https://linear.app/ktds-ai-eng/issue/KTD-11/aidd-dashboard-issue-lifecycle-상세-관제-화면-구현",
+      "linearProject": "MA Hub",
+      "linearMilestone": "환경 구성하기",
+      "pullRequests": [
+        {
+          "number": 2,
+          "repository": "mahub-aidd-flow",
+          "url": "https://github.com/sohwi-noh/mahub-aidd-flow/pull/2"
+        },
+        {
+          "number": 3,
+          "repository": "mahub-aidd-flow",
+          "url": "https://github.com/sohwi-noh/mahub-aidd-flow/pull/3"
+        }
+      ]
+    },
+    {
+      "artifacts": [
+        {
+          "kind": "subagent",
+          "label": "subagents/01-frontend-design.md",
+          "path": ".omx/artifacts/KTD-14/run-001/subagents/01-frontend-design.md",
+          "summary": "KTD 14 frontend design 검토 역할 담당: frontend design 목적: AIDD dashboard 좌→우 lifecycle 화면의 추가PR 열 깨짐을 수정하고, 배포/PR 전 반응형 검증 규칙을 고정한다. 판단 원인: 추가PR 셀 안에서 MUI Chip 이 내부 label nowrap과 고정 content width를 유지해, 긴 연결 PR n · repository "
+        },
+        {
+          "kind": "evidence",
+          "label": "evidence/frontend-visual-audit.md",
+          "path": ".omx/artifacts/KTD-14/run-001/evidence/frontend-visual-audit.md",
+          "summary": "KTD 14 frontend visual audit 검증 대상 URL: http://127.0.0.1:5174/ 대상 화면: AIDD workflow dashboard 좌→우 lifecycle board 집중 영역: 추가PR (사람개입) 열의 연결 PR 링크와 11 MR/Wiki/Graph 환류 열 사이의 겹침 실행 결과 npm test : PASS, 1 file / 7 tests npm r"
+        },
+        {
+          "kind": "summary",
+          "label": "run-summary.md",
+          "path": ".omx/artifacts/KTD-14/run-001/run-summary.md",
+          "summary": "KTD 14 run summary 이슈 Linear: KTD 14 제목: AIDD dashboard 추가PR 열 반응형 깨짐 수정 프로젝트/마일스톤: MA Hub / 환경 구성하기 변경 요약 추가PR 열의 연결 PR 렌더링을 전용 link pill 구조로 변경했다. 긴 PR link label이 셀 밖으로 나가지 않도록 CSS overflow/ellipsis를 고정했다. stage/statu"
+        }
+      ],
+      "completedAt": "2026-05-12T14:22:48+09:00",
+      "completedStageCount": 12,
+      "currentStage": 11,
+      "currentStageName": "MR/Wiki/Graph 환류",
+      "issueId": "KTD-14",
+      "labels": [
+        "dashboard",
+        "Bug"
+      ],
+      "repoPath": "workflow/mahub-aidd-flow",
+      "runs": [
+        "run-001"
+      ],
+      "stageStates": {},
+      "stages": [
+        {
+          "agent": "analyst",
+          "artifactPath": ".omx/artifacts/KTD-14/run-001/run-summary.md",
+          "completedAt": "2026-05-12T14:16:05+09:00",
+          "model": "n/a",
+          "nameKo": "요구사항 정리",
+          "reasoning": "n/a",
+          "stage": 1,
+          "startedAt": "2026-05-12T14:16:05+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 140
+          }
+        },
+        {
+          "agent": "executor",
+          "artifactPath": ".omx/artifacts/KTD-14/run-001/run-summary.md",
+          "completedAt": "2026-05-12T14:22:48+09:00",
+          "model": "n/a",
+          "nameKo": "최소 구현",
+          "reasoning": "n/a",
+          "stage": 7,
+          "startedAt": "2026-05-12T14:16:05+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 220
+          }
+        },
+        {
+          "agent": "frontend-design",
+          "artifactPath": ".omx/artifacts/KTD-14/run-001/subagents/01-frontend-design.md",
+          "completedAt": "2026-05-12T14:22:48+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "검증/리뷰",
+          "reasoning": "high",
+          "stage": 10,
+          "startedAt": "2026-05-12T14:16:05+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 360
+          }
+        },
+        {
+          "agent": "git-master",
+          "artifactPath": ".omx/artifacts/KTD-14/run-001/run-summary.md",
+          "completedAt": "2026-05-12T14:22:48+09:00",
+          "model": "n/a",
+          "nameKo": "MR/Wiki/Graph 환류",
+          "reasoning": "n/a",
+          "stage": 11,
+          "startedAt": "2026-05-12T14:22:48+09:00",
+          "status": "PR #6 merge 완료, Linear Done 반영, visual audit 증거 기록",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 180
+          }
+        }
+      ],
+      "startedAt": "2026-05-12T14:16:05+09:00",
+      "status": "Done",
+      "title": "AIDD dashboard 추가PR 열 반응형 깨짐 수정",
+      "totalStageCount": 12,
+      "url": "https://linear.app/ktds-ai-eng/issue/KTD-14/aidd-dashboard-추가pr-열-반응형-깨짐-수정",
+      "linearProject": "MA Hub",
+      "linearMilestone": "환경 구성하기",
+      "pullRequests": [
+        {
+          "number": 6,
+          "repository": "mahub-aidd-flow",
+          "url": "https://github.com/sohwi-noh/mahub-aidd-flow/pull/6"
+        }
+      ]
+    },
+    {
+      "artifacts": [
+        {
+          "kind": "subagent",
+          "label": "subagents/01-frontend-design.md",
+          "path": ".omx/artifacts/KTD-15/run-001/subagents/01-frontend-design.md",
+          "summary": "KTD 15 frontend design 검토 역할 담당: frontend design 목적: AIDD dashboard lifecycle stage 카드에서 상태 Chip이 카드 밖으로 넘치는 화면 깨짐을 수정한다. 원인 stage 카드 상단 행은 단계 번호와 상태 Chip을 같은 flex row에 배치한다. 기존 CSS는 .stage cell .MuiChip root { max width"
+        },
+        {
+          "kind": "evidence",
+          "label": "evidence/frontend-visual-audit.md",
+          "path": ".omx/artifacts/KTD-15/run-001/evidence/frontend-visual-audit.md",
+          "summary": "KTD 15 frontend visual audit 검증 대상 URL: http://127.0.0.1:5174/ 대상 화면: AIDD workflow dashboard 좌→우 lifecycle board 집중 영역: stage 카드 상단 상태 Chip containment, PR link label, Tooltip, Bug label filter, 0~11 stage 한눈 보기, 상세 패널 "
+        },
+        {
+          "kind": "summary",
+          "label": "run-summary.md",
+          "path": ".omx/artifacts/KTD-15/run-001/run-summary.md",
+          "summary": "KTD 15 run summary 이슈 Linear: KTD 15 제목: AIDD dashboard stage 상태 Chip 셀 밖 넘침 수정 프로젝트/마일스톤: MA Hub / 환경 구성하기 변경 요약 stage 카드 상단 행에 전용 클래스와 flex 제약을 추가했다. 단계 번호는 고정폭, 상태 Chip은 남은 폭 안에서만 줄어드는 구조로 변경했다. 긴 상태명은 카드 내부에서 말줄임 처리되"
+        }
+      ],
+      "completedAt": "2026-05-12T17:29:01+09:00",
+      "completedStageCount": 12,
+      "currentStage": 11,
+      "currentStageName": "MR/Wiki/Graph 환류",
+      "issueId": "KTD-15",
+      "labels": [
+        "dashboard",
+        "Bug"
+      ],
+      "repoPath": "workflow/mahub-aidd-flow",
+      "runs": [
+        "run-001"
+      ],
+      "stageStates": {},
+      "stages": [
+        {
+          "agent": "analyst",
+          "artifactPath": ".omx/artifacts/KTD-15/run-001/run-summary.md",
+          "completedAt": "2026-05-12T14:24:12+09:00",
+          "model": "n/a",
+          "nameKo": "요구사항 정리",
+          "reasoning": "n/a",
+          "stage": 1,
+          "startedAt": "2026-05-12T14:24:12+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 140
+          }
+        },
+        {
+          "agent": "executor",
+          "artifactPath": ".omx/artifacts/KTD-15/run-001/run-summary.md",
+          "completedAt": "2026-05-12T17:29:01+09:00",
+          "model": "n/a",
+          "nameKo": "최소 구현",
+          "reasoning": "n/a",
+          "stage": 7,
+          "startedAt": "2026-05-12T14:24:12+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 220
+          }
+        },
+        {
+          "agent": "frontend-design",
+          "artifactPath": ".omx/artifacts/KTD-15/run-001/subagents/01-frontend-design.md",
+          "completedAt": "2026-05-12T17:29:01+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "검증/리뷰",
+          "reasoning": "high",
+          "stage": 10,
+          "startedAt": "2026-05-12T14:24:12+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 360
+          }
+        },
+        {
+          "agent": "git-master",
+          "artifactPath": ".omx/artifacts/KTD-15/run-001/run-summary.md",
+          "completedAt": "2026-05-12T17:29:01+09:00",
+          "model": "n/a",
+          "nameKo": "MR/Wiki/Graph 환류",
+          "reasoning": "n/a",
+          "stage": 11,
+          "startedAt": "2026-05-12T17:29:01+09:00",
+          "status": "PR #7 merge 완료, Linear Done 반영, responsive audit 증거 기록",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 180
+          }
+        }
+      ],
+      "startedAt": "2026-05-12T14:24:12+09:00",
+      "status": "Done",
+      "title": "AIDD dashboard stage 상태 Chip 셀 밖 넘침 수정",
+      "totalStageCount": 12,
+      "url": "https://linear.app/ktds-ai-eng/issue/KTD-15/aidd-dashboard-stage-상태-chip-셀-밖-넘침-수정",
+      "linearProject": "MA Hub",
+      "linearMilestone": "환경 구성하기",
+      "pullRequests": [
+        {
+          "number": 7,
+          "repository": "mahub-aidd-flow",
+          "url": "https://github.com/sohwi-noh/mahub-aidd-flow/pull/7"
+        }
+      ]
+    },
+    {
+      "artifacts": [
+        {
+          "kind": "subagent",
+          "label": "subagents/01-frontend-design.md",
+          "path": ".omx/artifacts/KTD-16/run-001/subagents/01-frontend-design.md",
+          "summary": "KTD 16 frontend design 검토 역할 담당: frontend design / ui designer 검토 보조 대상: AIDD workflow dashboard 필터와 상세 metadata chip 목적: label filter를 2레벨 chip 구조로 바꾸고, 상세 metadata에서 불필요한 model n/a 노출을 제거한다. 설계 결정 기존 전체 label chip은 제거했"
+        },
+        {
+          "kind": "subagent",
+          "label": "subagents/02-ui-designer-review.md",
+          "path": ".omx/artifacts/KTD-16/run-001/subagents/02-ui-designer-review.md",
+          "summary": "KTD 16 ui designer 검토 보정 역할 담당: ui designer 모델: gpt 5.4 / reasoning high 대상: AIDD dashboard 2레벨 chip filter 전환 UX 발견 기본값이 dashboard + improvement 인 상태에서 1레벨을 mahub api 또는 mahub web 으로 바꾸면, 해당 repository 파생 이슈가 존재해도 2레벨 i"
+        },
+        {
+          "kind": "evidence",
+          "label": "evidence/frontend-visual-audit.md",
+          "path": ".omx/artifacts/KTD-16/run-001/evidence/frontend-visual-audit.md",
+          "summary": "KTD 16 frontend visual audit 검증 대상 URL: http://127.0.0.1:5174/ 대상 화면: AIDD workflow dashboard 집중 영역: 2레벨 chip filter, 기본 선택값, repository 파생 필터, 상세 metadata chip 실행 결과 npm test : PASS, 1 file / 10 tests npm run build : PA"
+        },
+        {
+          "kind": "summary",
+          "label": "run-summary.md",
+          "path": ".omx/artifacts/KTD-16/run-001/run-summary.md",
+          "summary": "KTD 16 run summary 이슈 Linear: KTD 16 제목: AIDD dashboard label filter를 2레벨 chip 구조로 변경 프로젝트/마일스톤: MA Hub / 환경 구성하기 변경 요약 label filter를 1레벨 dashboard , mahub api , mahub web 와 2레벨 all , bug , improvement , feature chip으로 분"
+        }
+      ],
+      "completedAt": "2026-05-12T19:15:30+09:00",
+      "completedStageCount": 12,
+      "currentStage": 11,
+      "currentStageName": "MR/Wiki/Graph 환류",
+      "issueId": "KTD-16",
+      "labels": [
+        "dashboard",
+        "Improvement"
+      ],
+      "repoPath": "workflow/mahub-aidd-flow",
+      "runs": [
+        "run-001"
+      ],
+      "stageStates": {},
+      "stages": [
+        {
+          "agent": "analyst",
+          "artifactPath": ".omx/artifacts/KTD-16/run-001/run-summary.md",
+          "completedAt": "2026-05-12T18:17:12+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "요구사항 정리",
+          "reasoning": "medium",
+          "stage": 1,
+          "startedAt": "2026-05-12T18:17:12+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 160
+          }
+        },
+        {
+          "agent": "executor",
+          "artifactPath": ".omx/artifacts/KTD-16/run-001/run-summary.md",
+          "completedAt": "2026-05-12T19:15:30+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "최소 구현",
+          "reasoning": "medium",
+          "stage": 7,
+          "startedAt": "2026-05-12T18:17:12+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 360
+          }
+        },
+        {
+          "agent": "frontend-design",
+          "artifactPath": ".omx/artifacts/KTD-16/run-001/subagents/01-frontend-design.md",
+          "completedAt": "2026-05-12T19:15:30+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "검증/리뷰",
+          "reasoning": "high",
+          "stage": 10,
+          "startedAt": "2026-05-12T18:17:12+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 520
+          }
+        },
+        {
+          "agent": "git-master",
+          "artifactPath": ".omx/artifacts/KTD-16/run-001/run-summary.md",
+          "completedAt": "2026-05-12T19:15:30+09:00",
+          "model": "n/a",
+          "nameKo": "MR/Wiki/Graph 환류",
+          "reasoning": "n/a",
+          "stage": 11,
+          "startedAt": "2026-05-12T19:15:30+09:00",
+          "status": "PR #9 merge 완료, Linear Done 반영, filter/detail audit 증거 기록",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 180
+          }
+        }
+      ],
+      "startedAt": "2026-05-12T18:17:12+09:00",
+      "status": "Done",
+      "title": "AIDD dashboard label filter를 2레벨 chip 구조로 변경",
+      "totalStageCount": 12,
+      "url": "https://linear.app/ktds-ai-eng/issue/KTD-16/aidd-dashboard-label-filter를-2레벨-chip-구조로-변경",
+      "linearProject": "MA Hub",
+      "linearMilestone": "환경 구성하기",
+      "pullRequests": [
+        {
+          "number": 9,
+          "repository": "mahub-aidd-flow",
+          "url": "https://github.com/sohwi-noh/mahub-aidd-flow/pull/9"
+        }
+      ]
+    },
+    {
+      "artifacts": [
+        {
+          "kind": "plan",
+          "label": "subagents/01-architect-artifact-semantics-plan.md",
+          "path": ".omx/artifacts/KTD-17/run-001/subagents/01-architect-artifact-semantics-plan.md",
+          "summary": "KTD 17 architect 산출물 의미 점검 담당 subagent: architect 모델: gpt 5.5 reasoning: high 시작: 2026 05 13 12:27 KST 종료: 2026 05 13 12:35 KST 상태: 완료 판단 근거 KTD 15만 의도한 판단 근거/계획/결과 형태로 보인 이유는 snapshot에 적은 수의 curated artifact가 들어가 있었기 때문"
+        },
+        {
+          "kind": "subagent",
+          "label": "subagents/02-ui-designer-robot-feedback-result.md",
+          "path": ".omx/artifacts/KTD-17/run-001/subagents/02-ui-designer-robot-feedback-result.md",
+          "summary": "KTD 17 ui designer 로봇 아이콘/피드백 검토 담당 subagent: ui designer 모델: gpt 5.4 reasoning: high 시작: 2026 05 13 12:36 KST 종료: 2026 05 13 12:45 KST 상태: 완료 판단 근거 표 stage cell은 폭이 좁기 때문에 agent 이름과 아이콘이 같은 줄에서 말줄임 처리되어야 한다. 상세 패널은 선택 s"
+        },
+        {
+          "kind": "evidence",
+          "label": "evidence/frontend-visual-audit.md",
+          "path": ".omx/artifacts/KTD-17/run-001/evidence/frontend-visual-audit.md",
+          "summary": "KTD 17 frontend visual audit 실행 전 기준 dashboard 기본 필터에서 KTD 17, KTD 16, KTD 11이 표시되어야 한다. 증거 열은 gate proof가 아니라 subagent 판단 근거로 보이도록 판단 근거 제목과 설명을 가진다. agent 이름 옆 robot icon이 표와 상세 패널에 표시되어야 한다. 따봉/역따봉 버튼은 stage별로 독립 토글되어"
+        },
+        {
+          "kind": "summary",
+          "label": "run-summary.md",
+          "path": ".omx/artifacts/KTD-17/run-001/run-summary.md",
+          "summary": "KTD 17 run summary 이슈 Linear: KTD 17 제목: AIDD dashboard artifact 의미와 agent 피드백 UI 보정 프로젝트: MA Hub 마일스톤: 환경 구성하기 라벨: dashboard, Improvement 범위 artifact 상세 화면에서 증거 가 gate proof처럼 보이지 않도록 판단 근거 의미로 재정렬한다. agent 이름 옆에 robot "
+        }
+      ],
+      "completedAt": "2026-05-13T13:12:00+09:00",
+      "completedStageCount": 12,
+      "currentStage": 11,
+      "currentStageName": "MR/Wiki/Graph 환류",
+      "issueId": "KTD-17",
+      "labels": [
+        "dashboard",
+        "Improvement"
+      ],
+      "repoPath": "workflow/mahub-aidd-flow",
+      "runs": [
+        "run-001"
+      ],
+      "stageStates": {},
+      "stages": [
+        {
+          "agent": "analyst",
+          "artifactPath": ".omx/artifacts/KTD-17/run-001/run-summary.md",
+          "completedAt": "2026-05-13T12:24:28+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "요구사항 정리",
+          "reasoning": "medium",
+          "stage": 1,
+          "startedAt": "2026-05-13T12:24:28+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 188
+          }
+        },
+        {
+          "agent": "architect",
+          "artifactPath": ".omx/artifacts/KTD-17/run-001/subagents/01-architect-artifact-semantics-plan.md",
+          "completedAt": "2026-05-13T13:12:00+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "아키텍처 정리",
+          "reasoning": "high",
+          "stage": 2,
+          "startedAt": "2026-05-13T12:24:28+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 612
+          }
+        },
+        {
+          "agent": "executor",
+          "artifactPath": ".omx/artifacts/KTD-17/run-001/run-summary.md",
+          "completedAt": "2026-05-13T13:12:00+09:00",
+          "model": "gpt-5.5",
+          "nameKo": "최소 구현",
+          "reasoning": "medium",
+          "stage": 7,
+          "startedAt": "2026-05-13T12:24:28+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 548
+          }
+        },
+        {
+          "agent": "ui-designer",
+          "artifactPath": ".omx/artifacts/KTD-17/run-001/subagents/02-ui-designer-robot-feedback-result.md",
+          "completedAt": "2026-05-13T13:12:00+09:00",
+          "model": "gpt-5.4",
+          "nameKo": "검증/리뷰",
+          "reasoning": "high",
+          "stage": 10,
+          "startedAt": "2026-05-13T12:24:28+09:00",
+          "status": "완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 465
+          }
+        },
+        {
+          "agent": "git-master",
+          "artifactPath": ".omx/artifacts/KTD-17/run-001/run-summary.md",
+          "completedAt": "2026-05-13T13:12:00+09:00",
+          "model": "n/a",
+          "nameKo": "MR/Wiki/Graph 환류",
+          "reasoning": "n/a",
+          "stage": 11,
+          "startedAt": "2026-05-13T13:12:00+09:00",
+          "status": "PR #11 merge 완료",
+          "tokenUsage": {
+            "availability": "estimated",
+            "reportedTotalTokens": null,
+            "estimatedVisibleTokens": 190
+          }
+        }
+      ],
+      "startedAt": "2026-05-13T12:24:28+09:00",
+      "status": "Done",
+      "title": "AIDD dashboard artifact 의미와 agent 피드백 UI 보정",
+      "totalStageCount": 12,
+      "url": "https://linear.app/ktds-ai-eng/issue/KTD-17/aidd-dashboard-artifact-의미와-agent-피드백-ui-보정",
+      "linearProject": "MA Hub",
+      "linearMilestone": "환경 구성하기",
+      "pullRequests": [
+        {
+          "number": 11,
+          "repository": "mahub-aidd-flow",
+          "url": "https://github.com/sohwi-noh/mahub-aidd-flow/pull/11"
+        }
+      ]
+    }
+  ],
+  "schemaVersion": 1,
+  "sourceRoot": ".omx/artifacts"
+}

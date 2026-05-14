@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="560" viewBox="0 0 1600 560" role="img" aria-labelledby="title desc">
+  <title id="title">Issue to MR lifecycle with knowledge feedback</title>
+  <desc id="desc">Linear issue to MR flow. Understand and Quality outputs are assetized, then reflected back into Understand Wiki.</desc>
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2f82c8"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#47a064"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#d94545"/>
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#000000" flood-opacity="0.28"/>
+    </filter>
+    <style>
+      .bg { fill: #071019; }
+      .title { fill: #f6fafc; font: 800 34px "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif; letter-spacing: 0; }
+      .subtitle { fill: #9fb4c7; font: 700 17px "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif; letter-spacing: 0; }
+      .lane { fill: #101c29; stroke: #26394c; stroke-width: 2; }
+      .lane-title { fill: #dce8f2; font: 800 18px "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif; letter-spacing: 0; }
+      .node-title { fill: #ffffff; font: 800 19px "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif; letter-spacing: 0; }
+      .node-text { fill: #d5e1eb; font: 700 15px "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif; letter-spacing: 0; }
+      .node-dark { fill: #132131; stroke: #33506a; stroke-width: 2; }
+      .node-blue { fill: #255f91; }
+      .node-orange { fill: #b76625; }
+      .node-purple { fill: #665bc7; }
+      .node-yellow { fill: #a27622; }
+      .node-green { fill: #3d7d51; }
+      .node-red { fill: #a82d2d; }
+      .chip { fill: #0b141f; stroke: #33506a; stroke-width: 2; }
+      .chip-text { fill: #c8d7e4; font: 800 14px "JetBrains Mono", "SFMono-Regular", monospace; letter-spacing: 0; }
+      .flow { fill: none; stroke-width: 5; }
+      .feedback { fill: none; stroke-width: 4; stroke-dasharray: 10 9; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1600" height="560"/>
+  <text class="title" x="800" y="48" text-anchor="middle">이슈 기반 AIDD 실행 흐름</text>
+  <text class="subtitle" x="800" y="78" text-anchor="middle">Issue → Context → Subagent 실행 → Quality Evidence → MR → Understand Wiki 환류</text>
+
+  <g filter="url(#shadow)">
+    <rect class="lane" x="55" y="118" width="175" height="320" rx="8"/>
+    <rect class="lane" x="255" y="118" width="175" height="320" rx="8"/>
+    <rect class="lane" x="455" y="118" width="175" height="320" rx="8"/>
+    <rect class="lane" x="655" y="118" width="135" height="320" rx="8"/>
+    <rect class="lane" x="815" y="118" width="175" height="320" rx="8"/>
+    <rect class="lane" x="1015" y="118" width="175" height="320" rx="8"/>
+    <rect class="lane" x="1215" y="118" width="175" height="320" rx="8"/>
+    <rect class="lane" x="1410" y="118" width="135" height="320" rx="8"/>
+  </g>
+
+  <text class="lane-title" x="142" y="150" text-anchor="middle">Linear</text>
+  <text class="lane-title" x="342" y="150" text-anchor="middle">OMX</text>
+  <text class="lane-title" x="542" y="150" text-anchor="middle">Understand</text>
+  <text class="lane-title" x="722" y="150" text-anchor="middle">Subagents</text>
+  <text class="lane-title" x="902" y="150" text-anchor="middle">Artifacts</text>
+  <text class="lane-title" x="1102" y="150" text-anchor="middle">Quality</text>
+  <text class="lane-title" x="1302" y="150" text-anchor="middle">GitHub MR</text>
+  <text class="lane-title" x="1477" y="150" text-anchor="middle">Wiki</text>
+
+  <g filter="url(#shadow)">
+    <rect class="node-blue" x="78" y="198" width="130" height="82" rx="8"/>
+    <text class="node-title" x="143" y="230" text-anchor="middle">Issue</text>
+    <text class="node-text" x="143" y="256" text-anchor="middle">AC / 로그 / 라벨</text>
+
+    <rect class="node-orange" x="278" y="198" width="130" height="82" rx="8"/>
+    <text class="node-title" x="343" y="230" text-anchor="middle">Run 준비</text>
+    <text class="node-text" x="343" y="256" text-anchor="middle">stage / evidence</text>
+
+    <rect class="node-purple" x="478" y="198" width="130" height="82" rx="8"/>
+    <text class="node-title" x="543" y="230" text-anchor="middle">Graph 조회</text>
+    <text class="node-text" x="543" y="256" text-anchor="middle">impact / domain</text>
+
+    <rect class="node-yellow" x="674" y="198" width="98" height="82" rx="8"/>
+    <text class="node-title" x="723" y="230" text-anchor="middle">실행</text>
+    <text class="node-text" x="723" y="256" text-anchor="middle">역할별</text>
+
+    <rect class="node-dark" x="838" y="198" width="130" height="82" rx="8"/>
+    <text class="node-title" x="903" y="230" text-anchor="middle">Asset화</text>
+    <text class="node-text" x="903" y="256" text-anchor="middle">plan / result</text>
+
+    <rect class="node-green" x="1038" y="198" width="130" height="82" rx="8"/>
+    <text class="node-title" x="1103" y="230" text-anchor="middle">Quality</text>
+    <text class="node-text" x="1103" y="256" text-anchor="middle">test / review</text>
+
+    <rect class="node-red" x="1238" y="198" width="130" height="82" rx="8"/>
+    <text class="node-title" x="1303" y="230" text-anchor="middle">MR</text>
+    <text class="node-text" x="1303" y="256" text-anchor="middle">diff + evidence</text>
+
+    <rect class="node-purple" x="1428" y="198" width="98" height="82" rx="8"/>
+    <text class="node-title" x="1477" y="230" text-anchor="middle">Wiki</text>
+    <text class="node-text" x="1477" y="256" text-anchor="middle">환류</text>
+  </g>
+
+  <path class="flow" d="M 208 239 L 278 239" stroke="#2f82c8" marker-end="url(#arrow-blue)"/>
+  <path class="flow" d="M 408 239 L 478 239" stroke="#2f82c8" marker-end="url(#arrow-blue)"/>
+  <path class="flow" d="M 608 239 L 674 239" stroke="#2f82c8" marker-end="url(#arrow-blue)"/>
+  <path class="flow" d="M 772 239 L 838 239" stroke="#2f82c8" marker-end="url(#arrow-blue)"/>
+  <path class="flow" d="M 968 239 L 1038 239" stroke="#47a064" marker-end="url(#arrow-green)"/>
+  <path class="flow" d="M 1168 239 L 1238 239" stroke="#47a064" marker-end="url(#arrow-green)"/>
+  <path class="flow" d="M 1368 239 L 1428 239" stroke="#d94545" marker-end="url(#arrow-red)"/>
+
+  <g>
+    <rect class="chip" x="474" y="326" width="138" height="42" rx="8"/>
+    <text class="chip-text" x="543" y="352" text-anchor="middle">graph-context.md</text>
+    <rect class="chip" x="819" y="326" width="168" height="42" rx="8"/>
+    <text class="chip-text" x="903" y="352" text-anchor="middle">artifact-summary.json</text>
+    <rect class="chip" x="1025" y="326" width="156" height="42" rx="8"/>
+    <text class="chip-text" x="1103" y="352" text-anchor="middle">quality-evidence.md</text>
+    <rect class="chip" x="1415" y="326" width="124" height="42" rx="8"/>
+    <text class="chip-text" x="1477" y="352" text-anchor="middle">wiki page</text>
+  </g>
+
+  <path class="feedback" d="M 543 326 C 645 396 777 406 903 368" stroke="#8b72f5" marker-end="url(#arrow-blue)"/>
+  <path class="feedback" d="M 1103 326 C 1174 404 1324 416 1477 368" stroke="#47a064" marker-end="url(#arrow-green)"/>
+  <path class="feedback" d="M 1477 326 C 1268 462 789 465 543 368" stroke="#d94545" marker-end="url(#arrow-red)"/>
+
+  <text class="subtitle" x="542" y="412" text-anchor="middle">Understand 결과는 코드/도메인 맥락 asset으로 고정</text>
+  <text class="subtitle" x="1103" y="412" text-anchor="middle">Quality 결과는 통과/실패 근거 asset으로 고정</text>
+  <text class="subtitle" x="800" y="486" text-anchor="middle">반영 원칙: subagent 실행 목록은 작게 유지하고, 다음 이슈가 재사용할 Wiki 지식 환류를 크게 본다.</text>
+</svg>

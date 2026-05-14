@@ -1,0 +1,4 @@
+{"ts":"2026-05-12T10:14:07+09:00","event":"issue_created","issue":"KTD-10","url":"https://linear.app/ktds-ai-eng/issue/KTD-10/aidd-workflow-관제-프론트-baseline-구축","team":"Ktds","status":"Todo","label":"Feature"}
+{"ts":"2026-05-12T10:15:00+09:00","event":"subagent_started","issue":"KTD-10","run":"run-001","role":"analyst","model":"gpt-5.5","reasoning":"medium","artifact":"subagents/01-analyst-intake.md","reportedTotalTokens":null}
+{"ts":"2026-05-12T10:18:00+09:00","event":"subagent_completed","issue":"KTD-10","run":"run-001","role":"analyst","model":"gpt-5.5","reasoning":"medium","artifact":"subagents/01-analyst-intake.md","reportedTotalTokens":null}
+{"ts":"2026-05-12T10:19:00+09:00","event":"stage_index_synced","issue":"KTD-10","run":"run-001","artifact":"stage-index.md","note":"canonical stage-index remains schema-only; run-001 issue/intake details are tracked in run-local summary, ledger, jsonl, subagents, and evidence files"}

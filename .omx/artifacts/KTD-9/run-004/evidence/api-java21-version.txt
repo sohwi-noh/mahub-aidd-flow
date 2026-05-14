@@ -1,0 +1,11 @@
+command: JAVA_HOME=/opt/homebrew/Cellar/openjdk@21/21.0.11/libexec/openjdk.jdk/Contents/Home mvn test
+verified_at_kst: 2026-05-12 09:15:45 KST
+result: PASS
+
+key evidence:
+- Maven enforcer `requireJavaVersion [21,22)` passed.
+- Spring Boot tests started using Java 21.0.11.
+
+note:
+- Shell default `java -version` is Java 8 and Maven default runtime is Java 25 in this desktop session.
+- API verification therefore explicitly sets `JAVA_HOME` to Java 21.

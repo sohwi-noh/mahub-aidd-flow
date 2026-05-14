@@ -1,0 +1,16 @@
+checked_at_kst: 2026-05-12 09:16:00 KST
+result: PASS
+
+mahub-api:
+- No E2E files were created.
+- No Playwright/Cypress/e2e scenario path was added.
+- API tests are environment-baseline smoke/context tests only.
+
+mahub-web:
+- No E2E files were created.
+- No Playwright/Cypress/e2e scenario path was added.
+- Web test is a Vitest rendering baseline test only.
+
+policy:
+- E2E test code, E2E scenarios, and E2E fixture/mock/helper remain human-gated.
+- After Linear `환경구성`, backend feature tests must be DB-backed and mock-object tests are not accepted as completion evidence.

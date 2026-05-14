@@ -1,0 +1,15 @@
+command: JAVA_HOME=/opt/homebrew/Cellar/openjdk@21/21.0.11/libexec/openjdk.jdk/Contents/Home mvn test
+cwd: /Users/so2/workspace-so2/foundary/.worktrees/mahub-api
+exit_code: 0
+verified_at_kst: 2026-05-12 09:15:45 KST
+classification: pass
+
+summary:
+- Spring Boot 3.5.14 application context loaded.
+- `GET /api/health` smoke test passed through Spring MockMvc.
+- Tests run: 2, Failures: 0, Errors: 0, Skipped: 0.
+- BUILD SUCCESS.
+
+mock policy note:
+- No Mockito mock object test is included.
+- The temporary Mockito mock-maker configuration was removed and tests still passed.

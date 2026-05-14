@@ -1,0 +1,30 @@
+first command: npm install
+cwd: /Users/so2/workspace-so2/foundary/.worktrees/mahub-web
+exit_code: 1
+classification: environment/network constraint
+
+first failure summary:
+- Request to https://registry.npmjs.org/@testing-library%2fjest-dom failed.
+- Error: getaddrinfo ENOTFOUND registry.npmjs.org.
+- npm log file could not be written under /Users/so2/.npm/_logs in the sandboxed run.
+
+retry command: npm install --no-audit --no-fund
+retry execution: escalated network permission
+retry_exit_code: 0
+retry_result:
+- added 161 packages in 22s.
+- package-lock.json generated with package name `mahub-web`.
+
+follow-up command: npm install --save-dev @types/node --no-audit --no-fund
+follow-up execution: escalated network permission
+follow-up_exit_code: 0
+follow-up_result:
+- added 3 packages in 1s.
+- fixed missing Node type definitions required by `tsconfig.node.json`.
+
+alignment command: npm install --save-dev @types/node@^20.19.0 --no-audit --no-fund
+alignment execution: escalated network permission
+alignment_exit_code: 0
+alignment_result:
+- changed 2 packages in 971ms.
+- aligned Node type definitions with the repo engine floor `node >=20.19.0`.

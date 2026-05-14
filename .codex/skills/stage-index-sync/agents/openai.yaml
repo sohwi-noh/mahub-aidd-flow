@@ -1,0 +1,4 @@
+interface:
+  display_name: "Stage Index Sync"
+  short_description: "Run-end stage-index reconciliation for AIDD artifacts"
+  default_prompt: "After a workflow run, compare run artifacts against the canonical stage-index and update any missing links or status notes."

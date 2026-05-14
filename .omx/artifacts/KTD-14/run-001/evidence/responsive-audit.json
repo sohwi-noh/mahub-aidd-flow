@@ -1,0 +1,356 @@
+[
+  {
+    "viewport": {
+      "name": "desktop",
+      "width": 2048,
+      "height": 1000
+    },
+    "metrics": {
+      "boardOverflow": true,
+      "pageHorizontalOverflow": 0,
+      "allPrLinksInsideCells": true,
+      "noPrColumnOverlap": true,
+      "prColumnPairs": [
+        {
+          "issue": "KTD-11",
+          "ok": true,
+          "prCell": {
+            "left": 2280,
+            "right": 2432,
+            "top": 457,
+            "bottom": 604,
+            "width": 152,
+            "height": 147
+          },
+          "stage11Cell": {
+            "left": 2432,
+            "right": 2585,
+            "top": 457,
+            "bottom": 604,
+            "width": 152,
+            "height": 147
+          }
+        },
+        {
+          "issue": "KTD-10",
+          "ok": true,
+          "prCell": {
+            "left": 2280,
+            "right": 2432,
+            "top": 604,
+            "bottom": 727,
+            "width": 152,
+            "height": 123
+          },
+          "stage11Cell": {
+            "left": 2432,
+            "right": 2585,
+            "top": 604,
+            "bottom": 727,
+            "width": 152,
+            "height": 123
+          }
+        },
+        {
+          "issue": "KTD-9",
+          "ok": true,
+          "prCell": {
+            "left": 2280,
+            "right": 2432,
+            "top": 727,
+            "bottom": 874,
+            "width": 152,
+            "height": 147
+          },
+          "stage11Cell": {
+            "left": 2432,
+            "right": 2585,
+            "top": 727,
+            "bottom": 874,
+            "width": 152,
+            "height": 147
+          }
+        }
+      ],
+      "prLinks": [
+        {
+          "text": "연결 PR #2 · mahub-aidd-flow",
+          "withinGate": true,
+          "withinCell": true,
+          "visibleWidth": 101,
+          "scrollWidth": 206,
+          "clientWidth": 99
+        },
+        {
+          "text": "연결 PR #3 · mahub-aidd-flow",
+          "withinGate": true,
+          "withinCell": true,
+          "visibleWidth": 101,
+          "scrollWidth": 206,
+          "clientWidth": 99
+        },
+        {
+          "text": "연결 PR #1 · mahub-aidd-flow",
+          "withinGate": true,
+          "withinCell": true,
+          "visibleWidth": 101,
+          "scrollWidth": 204,
+          "clientWidth": 99
+        },
+        {
+          "text": "연결 PR #1 · mahub-api",
+          "withinGate": true,
+          "withinCell": true,
+          "visibleWidth": 101,
+          "scrollWidth": 162,
+          "clientWidth": 99
+        },
+        {
+          "text": "연결 PR #1 · mahub-web",
+          "withinGate": true,
+          "withinCell": true,
+          "visibleWidth": 101,
+          "scrollWidth": 169,
+          "clientWidth": 99
+        }
+      ]
+    },
+    "screenshot": "/Users/so2/workspace-so2/foundary/.omx/artifacts/KTD-14/run-001/evidence/desktop.png"
+  },
+  {
+    "viewport": {
+      "name": "tablet",
+      "width": 1024,
+      "height": 900
+    },
+    "metrics": {
+      "boardOverflow": true,
+      "pageHorizontalOverflow": 0,
+      "allPrLinksInsideCells": true,
+      "noPrColumnOverlap": true,
+      "prColumnPairs": [
+        {
+          "issue": "KTD-11",
+          "ok": true,
+          "prCell": {
+            "left": 2280,
+            "right": 2432,
+            "top": 457,
+            "bottom": 604,
+            "width": 152,
+            "height": 147
+          },
+          "stage11Cell": {
+            "left": 2432,
+            "right": 2585,
+            "top": 457,
+            "bottom": 604,
+            "width": 152,
+            "height": 147
+          }
+        },
+        {
+          "issue": "KTD-10",
+          "ok": true,
+          "prCell": {
+            "left": 2280,
+            "right": 2432,
+            "top": 604,
+            "bottom": 727,
+            "width": 152,
+            "height": 123
+          },
+          "stage11Cell": {
+            "left": 2432,
+            "right": 2585,
+            "top": 604,
+            "bottom": 727,
+            "width": 152,
+            "height": 123
+          }
+        },
+        {
+          "issue": "KTD-9",
+          "ok": true,
+          "prCell": {
+            "left": 2280,
+            "right": 2432,
+            "top": 727,
+            "bottom": 874,
+            "width": 152,
+            "height": 147
+          },
+          "stage11Cell": {
+            "left": 2432,
+            "right": 2585,
+            "top": 727,
+            "bottom": 874,
+            "width": 152,
+            "height": 147
+          }
+        }
+      ],
+      "prLinks": [
+        {
+          "text": "연결 PR #2 · mahub-aidd-flow",
+          "withinGate": true,
+          "withinCell": true,
+          "visibleWidth": 101,
+          "scrollWidth": 206,
+          "clientWidth": 99
+        },
+        {
+          "text": "연결 PR #3 · mahub-aidd-flow",
+          "withinGate": true,
+          "withinCell": true,
+          "visibleWidth": 101,
+          "scrollWidth": 206,
+          "clientWidth": 99
+        },
+        {
+          "text": "연결 PR #1 · mahub-aidd-flow",
+          "withinGate": true,
+          "withinCell": true,
+          "visibleWidth": 101,
+          "scrollWidth": 204,
+          "clientWidth": 99
+        },
+        {
+          "text": "연결 PR #1 · mahub-api",
+          "withinGate": true,
+          "withinCell": true,
+          "visibleWidth": 101,
+          "scrollWidth": 162,
+          "clientWidth": 99
+        },
+        {
+          "text": "연결 PR #1 · mahub-web",
+          "withinGate": true,
+          "withinCell": true,
+          "visibleWidth": 101,
+          "scrollWidth": 169,
+          "clientWidth": 99
+        }
+      ]
+    },
+    "screenshot": "/Users/so2/workspace-so2/foundary/.omx/artifacts/KTD-14/run-001/evidence/tablet.png"
+  },
+  {
+    "viewport": {
+      "name": "mobile",
+      "width": 390,
+      "height": 844
+    },
+    "metrics": {
+      "boardOverflow": true,
+      "pageHorizontalOverflow": 0,
+      "allPrLinksInsideCells": true,
+      "noPrColumnOverlap": true,
+      "prColumnPairs": [
+        {
+          "issue": "KTD-11",
+          "ok": true,
+          "prCell": {
+            "left": 2270,
+            "right": 2422,
+            "top": 653,
+            "bottom": 800,
+            "width": 152,
+            "height": 147
+          },
+          "stage11Cell": {
+            "left": 2422,
+            "right": 2575,
+            "top": 653,
+            "bottom": 800,
+            "width": 152,
+            "height": 147
+          }
+        },
+        {
+          "issue": "KTD-10",
+          "ok": true,
+          "prCell": {
+            "left": 2270,
+            "right": 2422,
+            "top": 800,
+            "bottom": 923,
+            "width": 152,
+            "height": 123
+          },
+          "stage11Cell": {
+            "left": 2422,
+            "right": 2575,
+            "top": 800,
+            "bottom": 923,
+            "width": 152,
+            "height": 123
+          }
+        },
+        {
+          "issue": "KTD-9",
+          "ok": true,
+          "prCell": {
+            "left": 2270,
+            "right": 2422,
+            "top": 923,
+            "bottom": 1070,
+            "width": 152,
+            "height": 147
+          },
+          "stage11Cell": {
+            "left": 2422,
+            "right": 2575,
+            "top": 923,
+            "bottom": 1070,
+            "width": 152,
+            "height": 147
+          }
+        }
+      ],
+      "prLinks": [
+        {
+          "text": "연결 PR #2 · mahub-aidd-flow",
+          "withinGate": true,
+          "withinCell": true,
+          "visibleWidth": 101,
+          "scrollWidth": 206,
+          "clientWidth": 99
+        },
+        {
+          "text": "연결 PR #3 · mahub-aidd-flow",
+          "withinGate": true,
+          "withinCell": true,
+          "visibleWidth": 101,
+          "scrollWidth": 206,
+          "clientWidth": 99
+        },
+        {
+          "text": "연결 PR #1 · mahub-aidd-flow",
+          "withinGate": true,
+          "withinCell": true,
+          "visibleWidth": 101,
+          "scrollWidth": 204,
+          "clientWidth": 99
+        },
+        {
+          "text": "연결 PR #1 · mahub-api",
+          "withinGate": true,
+          "withinCell": true,
+          "visibleWidth": 101,
+          "scrollWidth": 162,
+          "clientWidth": 99
+        },
+        {
+          "text": "연결 PR #1 · mahub-web",
+          "withinGate": true,
+          "withinCell": true,
+          "visibleWidth": 101,
+          "scrollWidth": 169,
+          "clientWidth": 99
+        }
+      ]
+    },
+    "screenshot": "/Users/so2/workspace-so2/foundary/.omx/artifacts/KTD-14/run-001/evidence/mobile.png"
+  }
+]

@@ -1,0 +1,120 @@
+[
+  {
+    "step": "default dashboard + improvement",
+    "state": {
+      "pageHorizontalOverflow": 0,
+      "count": "3 / 7 이슈",
+      "visibleIssueIds": [
+        "KTD-17",
+        "KTD-16",
+        "KTD-11"
+      ],
+      "chipLabels": [
+        "dashboard",
+        "mahub-api",
+        "mahub-web",
+        "all",
+        "bug",
+        "improvement",
+        "feature"
+      ],
+      "hasLegacyAllLabel": false,
+      "hasFirstLevel": true,
+      "hasSecondLevel": true
+    }
+  },
+  {
+    "step": "dashboard + bug",
+    "state": {
+      "pageHorizontalOverflow": 0,
+      "count": "2 / 7 이슈",
+      "visibleIssueIds": [
+        "KTD-15",
+        "KTD-14"
+      ],
+      "chipLabels": [
+        "dashboard",
+        "mahub-api",
+        "mahub-web",
+        "all",
+        "bug",
+        "improvement",
+        "feature"
+      ],
+      "hasLegacyAllLabel": false,
+      "hasFirstLevel": true,
+      "hasSecondLevel": true
+    }
+  },
+  {
+    "step": "dashboard + all",
+    "state": {
+      "pageHorizontalOverflow": 0,
+      "count": "6 / 7 이슈",
+      "visibleIssueIds": [
+        "KTD-17",
+        "KTD-16",
+        "KTD-15",
+        "KTD-14",
+        "KTD-11",
+        "KTD-10"
+      ],
+      "chipLabels": [
+        "dashboard",
+        "mahub-api",
+        "mahub-web",
+        "all",
+        "bug",
+        "improvement",
+        "feature"
+      ],
+      "hasLegacyAllLabel": false,
+      "hasFirstLevel": true,
+      "hasSecondLevel": true
+    }
+  },
+  {
+    "step": "mahub-api + all",
+    "state": {
+      "pageHorizontalOverflow": 0,
+      "count": "1 / 7 이슈",
+      "visibleIssueIds": [
+        "KTD-9"
+      ],
+      "chipLabels": [
+        "dashboard",
+        "mahub-api",
+        "mahub-web",
+        "all",
+        "bug",
+        "improvement",
+        "feature"
+      ],
+      "hasLegacyAllLabel": false,
+      "hasFirstLevel": true,
+      "hasSecondLevel": true
+    }
+  },
+  {
+    "step": "mahub-web + all",
+    "state": {
+      "pageHorizontalOverflow": 0,
+      "count": "1 / 7 이슈",
+      "visibleIssueIds": [
+        "KTD-9"
+      ],
+      "chipLabels": [
+        "dashboard",
+        "mahub-api",
+        "mahub-web",
+        "all",
+        "bug",
+        "improvement",
+        "feature"
+      ],
+      "hasLegacyAllLabel": false,
+      "hasFirstLevel": true,
+      "hasSecondLevel": true
+    }
+  }
+]
