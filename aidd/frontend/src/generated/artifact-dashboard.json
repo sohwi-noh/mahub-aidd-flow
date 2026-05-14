@@ -2367,7 +2367,7 @@
           "reasoning": "high",
           "stage": 11,
           "startedAt": "2026-05-12T12:51:00+09:00",
-          "status": "완료",
+          "status": "완료, Linear Done 반영",
           "tokenUsage": {
             "availability": "estimated",
             "reportedTotalTokens": null,
@@ -2776,8 +2776,8 @@
           "summary": "KTD 17 run summary 이슈 Linear: KTD 17 제목: AIDD dashboard artifact 의미와 agent 피드백 UI 보정 프로젝트: MA Hub 마일스톤: 환경 구성하기 라벨: dashboard, Improvement 범위 artifact 상세 화면에서 증거 가 gate proof처럼 보이지 않도록 판단 근거 의미로 재정렬한다. agent 이름 옆에 robot "
         }
       ],
-      "completedAt": "2026-05-13T13:12:00+09:00",
-      "completedStageCount": 12,
+      "completedAt": null,
+      "completedStageCount": 11,
       "currentStage": 11,
       "currentStageName": "MR/Wiki/Graph 환류",
       "issueId": "KTD-17",
@@ -2858,13 +2858,13 @@
         {
           "agent": "git-master",
           "artifactPath": ".omx/artifacts/KTD-17/run-001/run-summary.md",
-          "completedAt": "2026-05-13T13:12:00+09:00",
+          "completedAt": null,
           "model": "n/a",
           "nameKo": "MR/Wiki/Graph 환류",
           "reasoning": "n/a",
           "stage": 11,
           "startedAt": "2026-05-13T13:12:00+09:00",
-          "status": "PR #11 merge 완료",
+          "status": "PR #11 merge 완료, Linear Done 미반영",
           "tokenUsage": {
             "availability": "estimated",
             "reportedTotalTokens": null,
@@ -2873,7 +2873,7 @@
         }
       ],
       "startedAt": "2026-05-13T12:24:28+09:00",
-      "status": "Done",
+      "status": "In Progress",
       "title": "AIDD dashboard artifact 의미와 agent 피드백 UI 보정",
       "totalStageCount": 12,
       "url": "https://linear.app/ktds-ai-eng/issue/KTD-17/aidd-dashboard-artifact-의미와-agent-피드백-ui-보정",

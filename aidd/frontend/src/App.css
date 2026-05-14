@@ -29,6 +29,9 @@ body {
 .summary-bar,
 .filter-bar,
 .detail-panel {
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
   padding: 18px;
 }
 
@@ -38,7 +41,13 @@ body {
 }
 
 .summary-controls {
+  min-width: 0;
   padding-bottom: 2px;
+}
+
+.summary-controls > * {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .lifecycle-figure {
@@ -72,6 +81,7 @@ body {
 .label-filter-group {
   display: grid;
   min-width: 260px;
+  max-width: 100%;
   gap: 6px;
 }
 
@@ -416,10 +426,38 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  min-width: 0;
   border: 1px solid #d8e2ee;
   border-radius: 8px;
   padding: 10px 12px;
   background: #fbfdff;
+}
+
+.feedback-button-group {
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 6px;
+  border: 1px solid #d8e2ee;
+  border-radius: 999px;
+  padding: 3px;
+  background: #ffffff;
+}
+
+.feedback-button-group .MuiIconButton-root {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+}
+
+.feedback-thumb-icon {
+  display: block;
+  font-size: 1.15rem;
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
+.feedback-thumb-icon-down {
+  transform: translateY(1px);
 }
 
 .detail-meta-row {
@@ -488,7 +526,9 @@ body {
 .artifact-row {
   display: grid;
   gap: 8px;
+  max-width: 100%;
   min-width: 0;
+  overflow: hidden;
   border: 1px solid #d8e2ee;
   border-radius: 8px;
   padding: 10px;
@@ -500,13 +540,18 @@ body {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: start;
   gap: 12px;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .artifact-column {
   display: grid;
   align-content: start;
   gap: 10px;
+  max-width: 100%;
   min-width: 0;
+  overflow: hidden;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
   padding: 12px;
@@ -528,14 +573,46 @@ body {
 .artifact-meta-block {
   display: grid;
   gap: 4px;
+  max-width: 100%;
   min-width: 0;
+  overflow: hidden;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
   padding: 10px;
   background: #ffffff;
 }
 
+.artifact-row-head {
+  align-items: center;
+  gap: 8px;
+  justify-content: space-between;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.artifact-row-tags {
+  flex: 0 1 auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 4px;
+  min-width: 0;
+  max-width: 52%;
+}
+
+.artifact-row-tags .MuiChip-root {
+  max-width: 100%;
+}
+
+.artifact-row-tags .MuiChip-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .artifact-label {
+  flex: 1 1 auto;
+  display: block;
+  max-width: 100%;
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -543,6 +620,9 @@ body {
 }
 
 .artifact-path {
+  display: block;
+  max-width: 100%;
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -570,6 +650,37 @@ body {
     padding: 14px;
   }
 
+  .summary-bar,
+  .filter-bar,
+  .detail-panel {
+    padding: 14px;
+  }
+
+  .dashboard-shell > .summary-bar,
+  .dashboard-shell > .filter-bar,
+  .dashboard-shell > .board-scroll,
+  .dashboard-shell > .empty-state,
+  .dashboard-shell > .MuiCollapse-root {
+    justify-self: center;
+    width: calc(100vw - 28px);
+    max-width: calc(100vw - 28px);
+  }
+
+  .dashboard-shell > .MuiCollapse-root,
+  .dashboard-shell > .MuiCollapse-root .MuiCollapse-wrapper,
+  .dashboard-shell > .MuiCollapse-root .MuiCollapse-wrapperInner,
+  .dashboard-shell > .MuiCollapse-root .detail-panel {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .project-anchor,
+  .label-filter-group,
+  .summary-controls .MuiFormControl-root {
+    width: 100%;
+    min-width: 0;
+  }
+
   .board-scroll {
     max-width: 100%;
   }
@@ -585,5 +696,19 @@ body {
   .agent-feedback {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .feedback-button-group {
+    align-self: flex-start;
+  }
+
+  .artifact-row-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .artifact-row-tags {
+    justify-content: flex-start;
+    max-width: 100%;
   }
 }

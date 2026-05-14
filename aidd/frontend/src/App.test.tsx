@@ -1,5 +1,9 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import { App } from "./App";
+import snapshot from "./generated/artifact-dashboard.json";
+import type { DashboardSnapshot } from "./domain/dashboard";
+
+const dashboardSnapshot = snapshot as DashboardSnapshot;
 
 const expectedBoardHeaders = [
   "0이슈",
@@ -19,6 +23,20 @@ const expectedBoardHeaders = [
 ];
 
 describe("AIDD workflow dashboard", () => {
+  it("requires final-stage Linear Done evidence before showing an issue as Done", () => {
+    for (const issue of dashboardSnapshot.issues) {
+      const finalStage = issue.stages.find((stage) => stage.stage === 11);
+      const finalStageStatus = finalStage?.status ?? "";
+      const hasLinearDoneEvidence = !finalStageStatus.includes("미반영") && /Linear Done|Linear 완료/.test(finalStageStatus);
+
+      if (issue.status === "Done") {
+        expect(hasLinearDoneEvidence).toBe(true);
+      } else {
+        expect(hasLinearDoneEvidence).toBe(false);
+      }
+    }
+  });
+
   it("renders the dashboard improvement lane by default", () => {
     render(<App />);
 
@@ -161,10 +179,13 @@ describe("AIDD workflow dashboard", () => {
     expect(within(details).getByText(/model gpt-5.5/)).toBeInTheDocument();
     expect(within(details).getByText(/token 예측/)).toBeInTheDocument();
     expect(within(details).getByText(/시작 2026-05-12 12:51 · 종료 2026-05-12 12:55 \(4분 45초 소요\)/)).toBeInTheDocument();
-    expect(within(details).getByRole("heading", { name: "판단 근거" })).toBeInTheDocument();
-    expect(within(details).getByText("subagent 판단에 사용된 관측 자료")).toBeInTheDocument();
+    const basisColumn = within(details).getByRole("heading", { name: "판단 근거" }).closest(".artifact-column");
+    expect(basisColumn).not.toBeNull();
+    expect(within(details).getByText("agent가 계획/결과를 낼 때 참고한 사용자 요청, 이전 agent 흔적, 검색/관측/검증 자료")).toBeInTheDocument();
     expect(within(details).getByRole("heading", { name: "계획" })).toBeInTheDocument();
+    expect(within(details).getByText("선택 stage agent가 근거를 바탕으로 직접 세운 실행/검토 계획")).toBeInTheDocument();
     expect(within(details).getByRole("heading", { name: "결과" })).toBeInTheDocument();
+    expect(within(details).getByText("선택 stage agent가 계획을 실행하거나 검토해 남긴 판단과 후속 결론")).toBeInTheDocument();
     expect(within(details).getByText("agent 실행결과 피드백")).toBeInTheDocument();
     expect(within(details).getByText(/따봉은 판단 적합/)).toBeInTheDocument();
     expect(within(details).getByRole("button", { name: "따봉" })).toHaveAttribute("aria-pressed", "false");
@@ -173,7 +194,8 @@ describe("AIDD workflow dashboard", () => {
     expect(within(details).getAllByText("선택 stage").length).toBeGreaterThan(0);
     expect(within(details).getAllByText("위치").length).toBeGreaterThan(0);
     expect(within(details).getAllByText("요약내용").length).toBeGreaterThan(0);
-    expect(within(details).getByText(".omx/artifacts/KTD-11/run-001/subagents/03-tdd-plan.md")).toBeInTheDocument();
+    expect(within(basisColumn as HTMLElement).getByText(".omx/artifacts/KTD-11/run-001/subagents/03-tdd-plan.md")).toBeInTheDocument();
+    expect(within(basisColumn as HTMLElement).getAllByText("이전 agent 흔적").length).toBeGreaterThan(0);
     expect(
       within(details).getByText(/요약 생성 기준은 markdown 제목과 본문 앞부분을 deterministic하게 추출한다/),
     ).toBeInTheDocument();
