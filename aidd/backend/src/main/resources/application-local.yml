@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: ${AIDD_DB_URL:jdbc:postgresql://127.0.0.1:5432/aidd}
+    username: ${AIDD_DB_USERNAME:admin}
+    password: ${AIDD_DB_PASSWORD:new1234!}
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+aidd:
+  admin:
+    username: ${AIDD_DEFAULT_ADMIN_USERNAME:admin}
+    password: ${AIDD_DEFAULT_ADMIN_PASSWORD:new1234!}
+    display-name: ${AIDD_DEFAULT_ADMIN_DISPLAY_NAME:AIDD Admin}
+  linear:
+    api-url: ${LINEAR_API_URL:https://api.linear.app/graphql}
+    api-key: ${LINEAR_API_KEY:}
+    project-id: ${LINEAR_PROJECT_ID:3343822b-769f-4f7e-83b8-c14c55af5572}
+    project-name: ${LINEAR_PROJECT_NAME:MA Hub}
+    active-milestone-name: ${LINEAR_ACTIVE_MILESTONE_NAME:환경 구성하기}
+    issue-first: ${LINEAR_ISSUE_FIRST:100}

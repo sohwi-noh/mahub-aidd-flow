@@ -22,8 +22,9 @@
 
 ## 데이터 경계
 
-- 초기 입력은 `.omx/artifacts/<ISSUE-ID>/run-*`에서 export한 JSON/Markdown metadata를 기준으로 한다.
-- 실제 Linear/GitHub API 연동은 별도 adapter/API 계층을 통해 추가한다.
+- 화면의 기본 입력은 `aidd/backend` API와 PostgreSQL `aidd` DB를 기준으로 한다.
+- `.omx/artifacts/<ISSUE-ID>/run-*` JSON/Markdown metadata는 backend가 저장한 실행 증거와 맞춰 보는 참조 자료로만 취급하고, frontend가 직접 읽지 않는다.
+- 실제 Linear/GitHub API 연동은 backend adapter/API 계층을 통해 추가한다.
 - 토큰 사용량이 Codex/OMX에서 노출되지 않으면 `unavailable` 또는 `null`을 그대로 표시하고 추정값을 실제값처럼 표현하지 않는다.
 
 ## 완료 증거
