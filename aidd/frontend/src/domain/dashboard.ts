@@ -48,7 +48,7 @@ export type DashboardIssue = {
   artifacts: ArtifactRef[];
 };
 
-export type DashboardSnapshot = {
+export type DashboardResponse = {
   schemaVersion: 1;
   generatedBy: string;
   issues: DashboardIssue[];

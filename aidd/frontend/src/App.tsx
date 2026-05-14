@@ -1,12 +1,15 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
+  Alert,
   Box,
+  Button,
+  ButtonGroup,
   Chip,
   Collapse,
+  CircularProgress,
   CssBaseline,
   Divider,
   FormControl,
-  IconButton,
   InputLabel,
   Link as MuiLink,
   LinearProgress,
@@ -27,12 +30,9 @@ import {
 } from "@mui/material";
 import type { SelectChangeEvent } from "@mui/material/Select";
 import "./App.css";
-import snapshot from "./generated/artifact-dashboard.json";
-import linearProject from "./generated/linear-project.json";
-import type { ArtifactRef, DashboardIssue, DashboardSnapshot, LifecycleStage, PullRequestRef } from "./domain/dashboard";
+import type { ArtifactRef, DashboardIssue, DashboardResponse, LifecycleStage, PullRequestRef } from "./domain/dashboard";
 import { formatDateTime, formatTokenUsage } from "./domain/dashboard";
 
-const dashboardSnapshot = snapshot as DashboardSnapshot;
 const issueToMrLifecycleUrl = new URL("./assets/issue-to-mr-lifecycle.svg", import.meta.url).href;
 
 type LinearMilestone = {
@@ -44,10 +44,7 @@ type LinearMilestone = {
   targetDate?: string;
 };
 
-type LinearProjectSnapshot = {
-  schemaVersion: 1;
-  generatedBy: string;
-  generatedAt: string;
+type LinearProjectView = {
   project: {
     id: string;
     name: string;
@@ -56,7 +53,58 @@ type LinearProjectSnapshot = {
   milestones: LinearMilestone[];
 };
 
-const linearProjectSnapshot = linearProject as LinearProjectSnapshot;
+type BackendLinearProject = {
+  id: string;
+  name: string;
+  activeMilestoneName: string;
+  milestones: LinearMilestone[];
+};
+
+type DashboardState =
+  | { status: "loading"; dashboard: null; linearProject: LinearProjectView }
+  | { status: "ready"; dashboard: DashboardResponse; linearProject: LinearProjectView }
+  | { status: "error"; dashboard: null; linearProject: LinearProjectView; message: string };
+
+const fallbackLinearProjectView: LinearProjectView = {
+  project: {
+    id: "",
+    name: "MA Hub",
+  },
+  activeMilestoneName: "환경 구성하기",
+  milestones: [
+    {
+      id: "environment-setup",
+      name: "환경 구성하기",
+      progress: 0,
+      sortOrder: 0,
+    },
+  ],
+};
+
+async function readJson<T>(path: string): Promise<T> {
+  const response = await fetch(path);
+  if (!response.ok) {
+    throw new Error(`${path} returned ${response.status}`);
+  }
+
+  return response.json() as Promise<T>;
+}
+
+function normalizeLinearProject(project: BackendLinearProject | null): LinearProjectView {
+  if (!project) {
+    return fallbackLinearProjectView;
+  }
+
+  const milestones = project.milestones.length > 0 ? project.milestones : fallbackLinearProjectView.milestones;
+  return {
+    project: {
+      id: project.id,
+      name: project.name,
+    },
+    activeMilestoneName: project.activeMilestoneName || milestones[0]?.name || fallbackLinearProjectView.activeMilestoneName,
+    milestones,
+  };
+}
 
 const canonicalStages = [
   { stage: 0, nameKo: "이슈 발행", shortKo: "이슈" },
@@ -101,8 +149,8 @@ type Filters = {
   milestone: string;
 };
 
-const activeProjectName = linearProjectSnapshot.project.name;
-const activeMilestoneName = linearProjectSnapshot.activeMilestoneName;
+const activeProjectName = fallbackLinearProjectView.project.name;
+const activeMilestoneName = fallbackLinearProjectView.activeMilestoneName;
 const areaFilterOptions: Filters["area"][] = ["dashboard", "mahub-api", "mahub-web"];
 const typeFilterOptions: Filters["type"][] = ["all", "bug", "improvement", "feature"];
 
@@ -270,8 +318,8 @@ function issueProject(issue: DashboardIssue): string {
   return issue.linearProject ?? activeProjectName;
 }
 
-function milestoneSummary(milestoneName: string): string {
-  const milestone = linearProjectSnapshot.milestones.find((item) => item.name === milestoneName);
+function milestoneSummary(milestoneName: string, milestones: LinearMilestone[]): string {
+  const milestone = milestones.find((item) => item.name === milestoneName);
   if (!milestone) {
     return milestoneName;
   }
@@ -314,6 +362,10 @@ function issueAreas(issue: DashboardIssue): Filters["area"][] {
   }
   if (labels.includes("mahub-web") || repositories.includes("mahub-web")) {
     values.add("mahub-web");
+  }
+
+  if (values.size === 0) {
+    values.add("dashboard");
   }
 
   return Array.from(values);
@@ -366,7 +418,7 @@ function synthesizedStageArtifact(stage: LifecycleStage | undefined): ArtifactRe
     kind: inferredArtifactKind(stage.artifactPath),
     label: "선택 stage 산출물",
     path: stage.artifactPath,
-    summary: `${stage.nameKo} 단계에서 ${stage.agent}가 남긴 대표 산출물이다. snapshot에 요약이 없으면 위치만 연결한다.`,
+    summary: `${stage.nameKo} 단계에서 ${stage.agent}가 남긴 대표 산출물이다. DB 응답에 요약이 없으면 위치만 연결한다.`,
   };
 }
 
@@ -394,78 +446,42 @@ type ArtifactGroup = {
   artifacts: ArtifactRef[];
 };
 
-function artifactSource(artifact: ArtifactRef): string {
-  return `${artifact.kind} ${artifact.label} ${artifact.path}`.toLowerCase();
-}
-
-function isPlanArtifact(artifact: ArtifactRef): boolean {
-  const source = artifactSource(artifact);
-  return source.includes("plan") || source.includes("tdd") || source.includes("strategy");
-}
-
-function isResultArtifact(artifact: ArtifactRef): boolean {
-  const source = artifactSource(artifact);
-  return artifact.kind === "result" || artifact.kind === "summary" || source.includes("run-summary") || source.includes("implementation") || source.includes("review") || source.includes("mr");
-}
-
-function artifactGroupId(artifact: ArtifactRef, selectedStage: LifecycleStage | undefined): ArtifactGroup["id"] {
-  const source = artifactSource(artifact);
-  const isSelectedStageArtifact = artifact.path === selectedStage?.artifactPath;
-
-  if (isSelectedStageArtifact && isPlanArtifact(artifact)) {
-    return "plan";
-  }
-  if (isSelectedStageArtifact && isResultArtifact(artifact)) {
-    return "result";
-  }
+function artifactGroupId(artifact: ArtifactRef): ArtifactGroup["id"] {
+  const source = `${artifact.kind} ${artifact.label} ${artifact.path}`.toLowerCase();
   if (artifact.kind === "evidence" || source.includes("/evidence/") || source.includes("audit") || source.includes("검증")) {
     return "evidence";
   }
-  if (isPlanArtifact(artifact) || artifact.kind === "plan" || source.includes("requirements") || source.includes("architecture") || source.includes("spec") || source.includes("/subagents/")) {
-    return "evidence";
+  if (artifact.kind === "plan" || source.includes("plan") || source.includes("requirements") || source.includes("architecture") || source.includes("spec")) {
+    return "plan";
   }
   return "result";
 }
 
-function artifactDisplayLabel(artifact: ArtifactRef, selectedStage: LifecycleStage | undefined): string {
-  return artifactGroupId(artifact, selectedStage) === "evidence" && artifact.label === "증거" ? "판단 근거" : artifact.label;
+function artifactDisplayLabel(artifact: ArtifactRef): string {
+  return artifactGroupId(artifact) === "evidence" && artifact.label === "증거" ? "판단 근거" : artifact.label;
 }
 
-function artifactKindLabel(artifact: ArtifactRef, selectedStage: LifecycleStage | undefined): string {
-  const groupId = artifactGroupId(artifact, selectedStage);
-  if (groupId === "evidence") {
-    const source = artifactSource(artifact);
-    if (source.includes("raw-linear") || source.includes("requirements")) {
-      return "사용자 요청";
-    }
-    if (source.includes("search") || source.includes("web")) {
-      return "검색";
-    }
-    if (source.includes("/subagents/") || source.includes("architecture") || source.includes("spec") || isPlanArtifact(artifact)) {
-      return "이전 agent 흔적";
-    }
-    if (source.includes("/evidence/") || source.includes("audit") || source.includes("검증")) {
-      return "관측/검증";
-    }
-    return "입력 근거";
+function artifactKindLabel(artifact: ArtifactRef): string {
+  if (artifactGroupId(artifact) === "evidence") {
+    return "근거";
   }
-  if (groupId === "plan") {
+  if (artifact.kind === "plan") {
     return "계획";
   }
-  if (groupId === "result" || artifact.kind === "result" || artifact.kind === "summary") {
+  if (artifact.kind === "result" || artifact.kind === "summary") {
     return "결과";
   }
   return artifact.kind;
 }
 
-function artifactGroups(artifacts: ArtifactRef[], selectedStage: LifecycleStage | undefined): ArtifactGroup[] {
+function artifactGroups(artifacts: ArtifactRef[]): ArtifactGroup[] {
   const groups: ArtifactGroup[] = [
-    { id: "evidence", title: "판단 근거", description: "agent가 계획/결과를 낼 때 참고한 사용자 요청, 이전 agent 흔적, 검색/관측/검증 자료", artifacts: [] },
-    { id: "plan", title: "계획", description: "선택 stage agent가 근거를 바탕으로 직접 세운 실행/검토 계획", artifacts: [] },
-    { id: "result", title: "결과", description: "선택 stage agent가 계획을 실행하거나 검토해 남긴 판단과 후속 결론", artifacts: [] },
+    { id: "evidence", title: "판단 근거", description: "subagent 판단에 사용된 관측 자료", artifacts: [] },
+    { id: "plan", title: "계획", description: "subagent가 세운 실행/검토 방향", artifacts: [] },
+    { id: "result", title: "결과", description: "subagent 판단과 실행 결론", artifacts: [] },
   ];
   const byId = new Map(groups.map((group) => [group.id, group]));
-  artifacts.forEach((artifact) => byId.get(artifactGroupId(artifact, selectedStage))?.artifacts.push(artifact));
+  artifacts.forEach((artifact) => byId.get(artifactGroupId(artifact))?.artifacts.push(artifact));
   return groups;
 }
 
@@ -473,11 +489,13 @@ function SummaryBar({
   issues,
   milestone,
   milestones,
+  projectName,
   onMilestoneChange,
 }: {
   issues: DashboardIssue[];
   milestone: string;
   milestones: LinearMilestone[];
+  projectName: string;
   onMilestoneChange: (value: string) => void;
 }) {
   const completed = issues.filter((issue) => issue.status === "Done" || issue.completedStageCount >= issue.totalStageCount).length;
@@ -491,7 +509,7 @@ function SummaryBar({
             프로젝트
           </Typography>
           <Typography sx={{ fontWeight: 900 }} variant="body1">
-            {activeProjectName}
+            {projectName}
           </Typography>
         </Box>
         <FormControl size="small" sx={{ minWidth: 240 }}>
@@ -499,7 +517,7 @@ function SummaryBar({
           <Select
             label="마일스톤"
             labelId="milestone-filter-label"
-            renderValue={(value) => milestoneSummary(value)}
+            renderValue={(value) => milestoneSummary(value, milestones)}
             value={milestone}
             onChange={(event: SelectChangeEvent) => onMilestoneChange(event.target.value)}
           >
@@ -809,7 +827,7 @@ function IssueDetailPanel({
   onFeedback: (next: Exclude<AgentFeedback, null>) => void;
 }) {
   const artifacts = relevantArtifacts(issue, stage);
-  const groups = artifactGroups(artifacts, stage);
+  const groups = artifactGroups(artifacts);
   const detailAgent = stage?.agent ?? "n/a";
   const detailModel = stage?.model ?? "n/a";
   const shouldShowModel = isKnownValue(detailAgent) && isKnownValue(detailModel);
@@ -872,35 +890,27 @@ function IssueDetailPanel({
                 따봉은 판단 적합, 역따봉은 판단 보강 필요야. 같은 버튼을 다시 누르면 해제돼.
               </Typography>
             </Box>
-            <Box aria-label="agent result feedback" className="feedback-button-group" role="group">
+            <ButtonGroup aria-label="agent result feedback" size="small" variant="outlined">
               <Tooltip arrow describeChild title="이 stage의 subagent 판단이 적합함">
-                <IconButton
-                  aria-label="따봉"
+                <Button
                   aria-pressed={feedback === "up"}
                   className={feedback === "up" ? "feedback-button-selected" : ""}
-                  size="small"
                   onClick={() => onFeedback("up")}
                 >
-                  <Box aria-hidden="true" className="feedback-thumb-icon" component="span">
-                    👍
-                  </Box>
-                </IconButton>
+                  따봉
+                </Button>
               </Tooltip>
               <Tooltip arrow describeChild title="이 stage의 subagent 판단에 보강이 필요함">
-                <IconButton
-                  aria-label="역따봉"
+                <Button
                   aria-pressed={feedback === "down"}
                   className={feedback === "down" ? "feedback-button-selected feedback-button-down" : ""}
                   color="error"
-                  size="small"
                   onClick={() => onFeedback("down")}
                 >
-                  <Box aria-hidden="true" className="feedback-thumb-icon feedback-thumb-icon-down" component="span">
-                    👎
-                  </Box>
-                </IconButton>
+                  역따봉
+                </Button>
               </Tooltip>
-            </Box>
+            </ButtonGroup>
           </Box>
 
           <Box className="stage-artifact-callout">
@@ -913,7 +923,7 @@ function IssueDetailPanel({
               </Typography>
             </Tooltip>
             <Typography color="text.secondary" variant="caption">
-              아래 3열은 agent가 참고한 근거, 직접 세운 계획, 실행/검토 결과를 분리해서 보여줘. 다른 agent 산출물은 다음 판단의 근거로 취급해.
+              아래 3열은 선택 stage 직접 산출물을 먼저 보여주고, 나머지는 이슈 참고자료로 함께 묶어 보여줘.
             </Typography>
           </Box>
 
@@ -935,20 +945,20 @@ function IssueDetailPanel({
                   {group.artifacts.length > 0 ? (
                     group.artifacts.map((artifact) => (
                       <Box key={artifact.path} className="artifact-row">
-                        <Stack className="artifact-row-head" direction="row">
-                          <Tooltip arrow describeChild title={artifactDisplayLabel(artifact, stage)}>
+                        <Stack direction="row" sx={{ alignItems: "center", gap: 1, justifyContent: "space-between" }}>
+                          <Tooltip arrow describeChild title={artifactDisplayLabel(artifact)}>
                             <Typography className="artifact-label" sx={{ fontWeight: 800 }} variant="body2">
-                              {artifactDisplayLabel(artifact, stage)}
+                              {artifactDisplayLabel(artifact)}
                             </Typography>
                           </Tooltip>
-                          <Stack className="artifact-row-tags" direction="row">
+                          <Stack direction="row" sx={{ flex: "0 0 auto", gap: 0.5 }}>
                             <Chip
                               color={artifact.path === stage?.artifactPath ? "primary" : "default"}
                               label={artifact.path === stage?.artifactPath ? "선택 stage" : "이슈 참고"}
                               size="small"
                               variant={artifact.path === stage?.artifactPath ? "filled" : "outlined"}
                             />
-                            <Chip label={artifactKindLabel(artifact, stage)} size="small" variant="outlined" />
+                            <Chip label={artifactKindLabel(artifact)} size="small" variant="outlined" />
                           </Stack>
                         </Stack>
                         <Box className="artifact-meta-block">
@@ -989,14 +999,80 @@ function IssueDetailPanel({
 }
 
 export function App() {
-  const issues = useMemo(
-    () => [...dashboardSnapshot.issues].sort((left, right) => issueNumber(right.issueId) - issueNumber(left.issueId)),
-    [],
-  );
-  const [filters, setFilters] = useState<Filters>({ area: "dashboard", type: "improvement", milestone: activeMilestoneName });
+  const [dashboardState, setDashboardState] = useState<DashboardState>({
+    status: "loading",
+    dashboard: null,
+    linearProject: fallbackLinearProjectView,
+  });
+  const [filters, setFilters] = useState<Filters>({ area: "dashboard", type: "all", milestone: activeMilestoneName });
   const [agentFeedback, setAgentFeedback] = useState<Record<string, AgentFeedback>>({});
-  const milestones = useMemo(() => [...linearProjectSnapshot.milestones].sort((left, right) => left.sortOrder - right.sortOrder), []);
+  const [selected, setSelected] = useState<Selection>({
+    issueId: "",
+    stage: 0,
+  });
+  const linearProjectView = dashboardState.linearProject;
+  const issues = useMemo(() => {
+    const dashboard = dashboardState.status === "ready" ? dashboardState.dashboard : null;
+    return [...(dashboard?.issues ?? [])].sort((left, right) => issueNumber(right.issueId) - issueNumber(left.issueId));
+  }, [dashboardState]);
+  const milestones = useMemo(
+    () => [...linearProjectView.milestones].sort((left, right) => left.sortOrder - right.sortOrder),
+    [linearProjectView.milestones],
+  );
   const visibleIssues = useMemo(() => issues.filter((issue) => issueMatchesFilters(issue, filters)), [filters, issues]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    async function loadDashboard() {
+      try {
+        const [dashboard, linearProject] = await Promise.all([
+          readJson<DashboardResponse>("/api/dashboard"),
+          readJson<BackendLinearProject>("/api/linear/project").catch(() => null),
+        ]);
+        if (!isMounted) {
+          return;
+        }
+
+        const normalizedProject = normalizeLinearProject(linearProject);
+        setDashboardState({ status: "ready", dashboard, linearProject: normalizedProject });
+        const milestoneNames = new Set(normalizedProject.milestones.map((item) => item.name));
+        setFilters((current) => ({
+          ...current,
+          milestone: milestoneNames.has(current.milestone) ? current.milestone : normalizedProject.activeMilestoneName,
+        }));
+      } catch (error) {
+        if (!isMounted) {
+          return;
+        }
+
+        setDashboardState({
+          status: "error",
+          dashboard: null,
+          linearProject: fallbackLinearProjectView,
+          message: error instanceof Error ? error.message : "backend API 연결 실패",
+        });
+      }
+    }
+
+    void loadDashboard();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (selected.issueId || visibleIssues.length === 0) {
+      return;
+    }
+
+    setSelected({
+      issueId: visibleIssues[0].issueId,
+      stage: visibleIssues[0].currentStage ?? 0,
+    });
+  }, [selected.issueId, visibleIssues]);
+
   const handleAreaChange = (area: Filters["area"]) => {
     setFilters((current) => {
       const next = { ...current, area };
@@ -1005,10 +1081,6 @@ export function App() {
     });
   };
   const handleTypeChange = (type: Filters["type"]) => setFilters({ ...filters, type });
-  const [selected, setSelected] = useState<Selection>({
-    issueId: issues[0]?.issueId ?? "",
-    stage: issues[0]?.currentStage ?? 0,
-  });
   const selectedIssue = visibleIssues.find((issue) => issue.issueId === selected.issueId) ?? visibleIssues[0];
   const selectedStage = selectedIssue ? findStage(selectedIssue, selected.stage) : undefined;
   const selectedFeedbackKey = selectedIssue ? `${selectedIssue.issueId}:${selectedStage?.stage ?? selectedIssue.currentStage ?? "issue"}` : "";
@@ -1032,8 +1104,20 @@ export function App() {
           issues={issues}
           milestone={filters.milestone}
           milestones={milestones}
+          projectName={linearProjectView.project.name}
           onMilestoneChange={(milestone) => setFilters({ ...filters, milestone })}
         />
+        {dashboardState.status === "loading" ? (
+          <Paper className="empty-state" variant="outlined">
+            <Stack direction="row" sx={{ alignItems: "center", gap: 1.5 }}>
+              <CircularProgress size={18} />
+              <Typography sx={{ fontWeight: 900 }}>backend dashboard를 읽는 중</Typography>
+            </Stack>
+          </Paper>
+        ) : null}
+        {dashboardState.status === "error" ? (
+          <Alert severity="error">backend API 연결 실패: {dashboardState.message}</Alert>
+        ) : null}
         <FilterBar
           filters={filters}
           totalCount={issues.length}
@@ -1041,17 +1125,17 @@ export function App() {
           onAreaChange={handleAreaChange}
           onTypeChange={handleTypeChange}
         />
-        {visibleIssues.length > 0 ? (
+        {dashboardState.status === "ready" && visibleIssues.length > 0 ? (
           <IssueLifecycleBoard issues={visibleIssues} selected={selected} onSelect={setSelected} />
-        ) : (
+        ) : dashboardState.status === "ready" ? (
           <Paper className="empty-state" variant="outlined">
             <Typography sx={{ fontWeight: 900 }}>필터 결과 없음</Typography>
             <Typography color="text.secondary" variant="body2">
               현재 조합에 해당하는 이슈가 없어. 2레벨을 all로 바꾸거나 다른 1레벨, milestone을 선택해줘.
             </Typography>
           </Paper>
-        )}
-        {selectedIssue ? (
+        ) : null}
+        {selectedIssue && dashboardState.status === "ready" ? (
           <IssueDetailPanel issue={selectedIssue} stage={selectedStage} feedback={selectedFeedback} onFeedback={handleAgentFeedback} />
         ) : null}
       </Box>
