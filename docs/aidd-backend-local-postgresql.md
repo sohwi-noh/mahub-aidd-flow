@@ -6,6 +6,17 @@ KTD-20부터 AIDD dashboard의 snapshot 갱신 부담을 줄이기 위해 `aidd/
 
 이 DB는 MA Hub 제품 DB가 아니다. AIDD가 이슈, subagent, evidence, token, PR, graph/wiki 환류를 추적하기 위한 control-plane DB다.
 
+## Linear 이슈 요약
+
+- Linear: [KTD-22 AIDD DB schema 기반 backend 구성으로 snapshot 의존 제거](https://linear.app/ktds-ai-eng/issue/KTD-22/aidd-db-schema-%EA%B8%B0%EB%B0%98-backend-%EA%B5%AC%EC%84%B1%EC%9C%BC%EB%A1%9C-snapshot-%EC%9D%98%EC%A1%B4-%EC%A0%9C%EA%B1%B0)
+- 상태: `In Progress`
+- 마일스톤: `환경 구성하기`
+- 우선순위: `High`
+- 라벨: `dashboard`, `Feature`
+- 선행 기준선: [KTD-20](https://linear.app/ktds-ai-eng/issue/KTD-20/foundary-backend%EC%99%80-%EB%A1%9C%EC%BB%AC-postgresql-%EA%B8%B0%EC%A4%80%EC%84%A0-%EA%B3%84%ED%9A%8D), [GitHub PR #13](https://github.com/sohwi-noh/mahub-aidd-flow/pull/13)
+
+KTD-22의 목표는 KTD-20에서 시작한 로컬 PostgreSQL + Spring Boot backend 기준을 이어받아 AIDD control-plane 데이터를 DB/JPA 기준으로 구성하고, frontend가 build-time snapshot JSON 대신 backend API를 읽도록 전환하는 것이다.
+
 ## 결정
 
 - 설치 방식: 각 개발자가 Homebrew로 PostgreSQL을 설치한다.
