@@ -3,6 +3,7 @@ tracker:
   kind: linear
   project_slug: "ma-hub-2f076b86e186"
   api_key: $LINEAR_API_KEY
+  assignee: $LINEAR_ASSIGNEE
   active_states:
     - Symphony Ready
   terminal_states:
